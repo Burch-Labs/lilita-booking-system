@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacts App</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: #f5f5f5;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      color: #2c3e50;
+    }
+
+    .stats {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="text"],
+    textarea {
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+      font-family: inherit;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="tel"]:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #0066cc;
+      box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    button {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: #0066cc;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #0052a3;
+    }
+
+    .btn-secondary {
+      background: #f0f0f0;
+      color: #333;
+    }
+
+    .btn-secondary:hover {
+      background: #e0e0e0;
+    }
+
+    .btn-danger {
+      background: #dc3545;
+      color: white;
+    }
+
+    .btn-danger:hover {
+      background: #c82333;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .modal-content h2 {
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      justify-content: flex-end;
+    }
+
+    .contacts-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 15px;
+    }
+
+    .contact-card {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .contact-card:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transform: translateY(-2px);
+    }
+
+    .contact-name {
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 8px;
+      color: #2c3e50;
+    }
+
+    .contact-field {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 5px;
+      word-break: break-all;
+    }
+
+    .contact-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .contact-actions button {
+      flex: 1;
+      padding: 6px 10px;
+      font-size: 12px;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 40px 20px;
+      color: #999;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 20px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>📇 Contacts Manager</h1>
+      <div class="stats">
+        Total contacts: <strong id="total-count">0</strong>
+      </div>
+    </header>
+
+    <div class="controls">
+      <input type="text" id="search-input" class="search-box" placeholder="Search by name, email, or phone...">
+      <button class="btn-primary" onclick="openAddModal()">+ Add Contact</button>
+      <button class="btn-secondary" onclick="exportContacts()">Export CSV</button>
+    </div>
+
+    <div id="contacts-container" class="contacts-list"></div>
+
+    <!-- Add/Edit Modal -->
+    <div id="contact-modal" class="modal">
+      <div class="modal-content">
+        <h2 id="modal-title">Add Contact</h2>
+        <form id="contact-form">
+          <div class="form-group">
+            <label>First Name *</label>
+            <input type="text" id="firstName" required>
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" id="lastName">
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="email">
+          </div>
+          <div class="form-group">
+            <label>Phone</label>
+            <input type="tel" id="phone">
+          </div>
+          <div class="form-group">
+            <label>Company</label>
+            <input type="text" id="company">
+          </div>
+          <div class="form-group">
+            <label>Notes</label>
+            <textarea id="notes" rows="3"></textarea>
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="btn-secondary" onclick="closeModal()">Cancel</button>
+            <button type="submit" class="btn-primary">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API_URL = 'http://localhost:3001/api';
+    let contacts = [];
+    let currentEditId = null;
+
+    // Load contacts on page load
+    async function loadContacts(search = '') {
+      try {
+        const url = search
+          ? `${API_URL}/contacts?search=${encodeURIComponent(search)}`
+          : `${API_URL}/contacts`;
+
+        const response = await fetch(url);
+        contacts = await response.json();
+        renderContacts();
+        updateStats();
+      } catch (err) {
+        console.error('Error loading contacts:', err);
+      }
+    }
+
+    function renderContacts() {
+      const container = document.getElementById('contacts-container');
+
+      if (contacts.length === 0) {
+        container.innerHTML = '<div class="empty">No contacts found. Add one to get started!</div>';
+        return;
+      }
+
+      container.innerHTML = contacts.map(contact => `
+        <div class="contact-card">
+          <div class="contact-name">${contact.firstName} ${contact.lastName || ''}</div>
+          ${contact.email ? `<div class="contact-field">📧 ${contact.email}</div>` : ''}
+          ${contact.phone ? `<div class="contact-field">📱 ${contact.phone}</div>` : ''}
+          ${contact.company ? `<div class="contact-field">🏢 ${contact.company}</div>` : ''}
+          <div class="contact-actions">
+            <button class="btn-secondary" onclick="editContact(${contact.id})">Edit</button>
+            <button class="btn-danger" onclick="deleteContact(${contact.id})">Delete</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    async function updateStats() {
+      try {
+        const response = await fetch(`${API_URL}/stats`);
+        const data = await response.json();
+        document.getElementById('total-count').textContent = data.total;
+      } catch (err) {
+        console.error('Error fetching stats:', err);
+      }
+    }
+
+    function openAddModal() {
+      currentEditId = null;
+      document.getElementById('modal-title').textContent = 'Add Contact';
+      document.getElementById('contact-form').reset();
+      document.getElementById('contact-modal').classList.add('active');
+    }
+
+    async function editContact(id) {
+      const contact = contacts.find(c => c.id === id);
+      if (!contact) return;
+
+      currentEditId = id;
+      document.getElementById('modal-title').textContent = 'Edit Contact';
+      document.getElementById('firstName').value = contact.firstName;
+      document.getElementById('lastName').value = contact.lastName || '';
+      document.getElementById('email').value = contact.email || '';
+      document.getElementById('phone').value = contact.phone || '';
+      document.getElementById('company').value = contact.company || '';
+      document.getElementById('notes').value = contact.notes || '';
+      document.getElementById('contact-modal').classList.add('active');
+    }
+
+    async function deleteContact(id) {
+      if (!confirm('Delete this contact?')) return;
+
+      try {
+        await fetch(`${API_URL}/contacts/${id}`, { method: 'DELETE' });
+        loadContacts();
+      } catch (err) {
+        console.error('Error deleting contact:', err);
+      }
+    }
+
+    function closeModal() {
+      document.getElementById('contact-modal').classList.remove('active');
+      currentEditId = null;
+    }
+
+    document.getElementById('contact-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const data = {
+        firstName: document.getElementById('firstName').value,
+        lastName: document.getElementById('lastName').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        company: document.getElementById('company').value,
+        notes: document.getElementById('notes').value,
+      };
+
+      try {
+        const url = currentEditId
+          ? `${API_URL}/contacts/${currentEditId}`
+          : `${API_URL}/contacts`;
+
+        const method = currentEditId ? 'PUT' : 'POST';
+
+        await fetch(url, {
+          method,
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+
+        loadContacts();
+        closeModal();
+      } catch (err) {
+        console.error('Error saving contact:', err);
+        alert('Error saving contact');
+      }
+    });
+
+    document.getElementById('search-input').addEventListener('input', (e) => {
+      loadContacts(e.target.value);
+    });
+
+    function exportContacts() {
+      if (contacts.length === 0) {
+        alert('No contacts to export');
+        return;
+      }
+
+      const headers = ['First Name', 'Last Name', 'Email', 'Phone', 'Company', 'Notes'];
+      const rows = contacts.map(c => [
+        c.firstName,
+        c.lastName || '',
+        c.email || '',
+        c.phone || '',
+        c.company || '',
+        c.notes || '',
+      ]);
+
+      const csv = [headers, ...rows]
+        .map(row => row.map(cell => `"${cell}"`).join(','))
+        .join('\n');
+
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'contacts.csv';
+      a.click();
+    }
+
+    // Initial load
+    loadContacts();
+  </script>
+</body>
+</html>
