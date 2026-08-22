@@ -584,10 +584,10 @@
       </div>
 
       <div class="upload-area" id="upload-area" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
-        <input type="file" id="csv-file" accept=".csv" style="display: none;" onchange="handleFileSelect(event)">
+        <input type="file" id="csv-file" accept=".csv,.xlsx,.xls" style="display: none;" onchange="handleFileSelect(event)">
         <div onclick="document.getElementById('csv-file').click()" style="cursor: pointer;">
-          <h3>📁 Drop CSV here or click to select</h3>
-          <p style="color: #666; margin-top: 10px;">Supports Google Contacts export, Outlook, or any CSV with Name/Email columns</p>
+          <h3>📁 Drop CSV or Excel here or click to select</h3>
+          <p style="color: #666; margin-top: 10px;">Supports CSV, Excel (.xlsx, .xls), Google Contacts export, or Outlook</p>
         </div>
       </div>
 
@@ -719,6 +719,7 @@
   </div>
 
   <script src="https://unpkg.com/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="https://unpkg.com/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <script>
     const API_URL = 'http://localhost:3001/api';
     let allContacts = [];
@@ -895,7 +896,31 @@
 
     function handleFileSelect(e) {
       const file = e.target.files[0];
-      if (file) uploadCSV(file);
+      if (file) {
+        if (file.name.endsWith('.xlsx') || file.name.endsWith('.xls')) {
+          convertExcelToCSV(file);
+        } else {
+          uploadCSV(file);
+        }
+      }
+    }
+
+    function convertExcelToCSV(file) {
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        try {
+          const data = new Uint8Array(e.target.result);
+          const workbook = XLSX.read(data, { type: 'array' });
+          const sheetName = workbook.SheetNames[0];
+          const worksheet = workbook.Sheets[sheetName];
+          const csv = XLSX.utils.sheet_to_csv(worksheet);
+          const csvFile = new File([csv], file.name.replace(/\.xlsx?$/i, '.csv'), { type: 'text/csv' });
+          uploadCSV(csvFile);
+        } catch (err) {
+          alert('Error reading Excel file: ' + err.message);
+        }
+      };
+      reader.readAsArrayBuffer(file);
     }
 
     function uploadCSV(file) {
