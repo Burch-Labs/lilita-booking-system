@@ -724,6 +724,32 @@
     let allContacts = [];
     let currentPage = 1;
     let currentFilter = { search: '', company: '', domain: '' };
+    let statsCache = { data: null, timestamp: 0, ttl: 5000 };
+    let searchTimeout = null;
+
+    // Debounced search
+    function searchContacts() {
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(() => {
+        currentFilter.search = document.getElementById('search-input').value;
+        loadContacts(1);
+      }, 300);
+    }
+
+    // Cached stats fetch
+    function fetchStats() {
+      const now = Date.now();
+      if (statsCache.data && now - statsCache.timestamp < statsCache.ttl) {
+        return Promise.resolve(statsCache.data);
+      }
+      return fetch(`${API_URL}/stats`)
+        .then(r => r.json())
+        .then(data => {
+          statsCache.data = data;
+          statsCache.timestamp = now;
+          return data;
+        });
+    }
 
     // Load contacts on page load
     function loadContacts(page = 1) {
@@ -736,13 +762,25 @@
       });
 
       fetch(`${API_URL}/contacts?${params}`)
-        .then(r => r.json())
+        .then(r => {
+          if (!r.ok) throw new Error(`API error: ${r.status}`);
+          return r.json();
+        })
         .then(data => {
+          if (!data || !data.rows) {
+            throw new Error('Invalid response format');
+          }
           renderContactsTable(data.rows);
           renderPagination(data.totalPages, page);
           updateStats();
         })
-        .catch(err => console.error('Error loading contacts:', err));
+        .catch(err => {
+          console.error('Error loading contacts:', err);
+          const tbody = document.getElementById('contacts-tbody');
+          if (tbody) {
+            tbody.innerHTML = `<tr><td colspan="6" class="empty">Error loading contacts. Please refresh the page.</td></tr>`;
+          }
+        });
     }
 
     function renderContactsTable(contacts) {
@@ -753,13 +791,14 @@
         return;
       }
 
-      tbody.innerHTML = contacts.map(c => `
+      tbody.innerHTML = contacts.map(c => {
+        const emailDomain = c.email ? c.email.split('@')[1] : 'unknown';
+        return `
         <tr>
           <td><strong>${c.firstName}</strong></td>
           <td>${c.lastName || '-'}</td>
           <td>
-            <span class="email-domain">${c.email.split('@')[1]}</span>
-            <br><small>${c.email}</small>
+            ${c.email ? `<span class="email-domain">${emailDomain}</span><br><small>${c.email}</small>` : '<span style="color: #999;">-</span>'}
           </td>
           <td><span class="company-badge">${c.company || 'Unknown'}</span></td>
           <td>
@@ -769,7 +808,8 @@
             <button class="btn-secondary" onclick="editContact(${c.id})" style="padding: 4px 8px; font-size: 12px;">Edit</button>
           </td>
         </tr>
-      `).join('');
+      `;
+      }).join('');
     }
 
     function renderPagination(totalPages, currentPage) {
@@ -789,12 +829,6 @@
       }
 
       pagination.innerHTML = html;
-    }
-
-    function searchContacts() {
-      const search = document.getElementById('search-input').value;
-      currentFilter.search = search;
-      loadContacts(1);
     }
 
     function filterByCompany() {
@@ -934,26 +968,16 @@
     }
 
     function loadWebsites() {
-      fetch(`${API_URL}/contacts`)
+      fetch(`${API_URL}/websites`)
         .then(r => r.json())
-        .then(data => {
-          const websites = {};
-          data.rows.forEach(c => {
-            if (c.website) {
-              if (!websites[c.website]) {
-                websites[c.website] = { domain: c.website, contacts: 0, company: c.company };
-              }
-              websites[c.website].contacts++;
-            }
-          });
-
+        .then(websites => {
           const tbody = document.getElementById('websites-tbody');
-          if (Object.keys(websites).length === 0) {
+          if (!websites || websites.length === 0) {
             tbody.innerHTML = '<tr><td colspan="5" class="empty">No websites found. Upload contacts with website data.</td></tr>';
             return;
           }
 
-          tbody.innerHTML = Object.values(websites).map(w => `
+          tbody.innerHTML = websites.map(w => `
             <tr>
               <td><a href="https://${w.domain}" target="_blank" class="website-link">🔗 ${w.domain}</a></td>
               <td><span class="company-badge">${w.company || 'Multiple'}</span></td>
@@ -970,89 +994,37 @@
     }
 
     function exportForMeta(type) {
-      fetch(`${API_URL}/contacts?pageSize=10000`)
-        .then(r => r.json())
-        .then(data => {
-          let csvContent = '';
-
-          if (type === 'audience') {
-            csvContent = 'Email\nFirst Name\nLast Name\n' + data.rows.map(c =>
-              `${c.email}\n${c.firstName}\n${c.lastName || ''}`
-            ).join('\n');
-          } else if (type === 'lookalike') {
-            csvContent = 'Email,First Name,Last Name,Company\n' + data.rows.map(c =>
-              `"${c.email}","${c.firstName}","${c.lastName || ''}","${c.company || ''}"`
-            ).join('\n');
-          }
-
-          downloadCSV(csvContent, `meta-${type}-${Date.now()}.csv`);
-        });
+      const endpoint = type === 'audience' ? 'meta-audience' : 'meta-lookalike';
+      window.location.href = `${API_URL}/export/${endpoint}`;
     }
 
     function exportForEmail() {
-      fetch(`${API_URL}/contacts?pageSize=10000`)
-        .then(r => r.json())
-        .then(data => {
-          const csvContent = 'Email,First Name,Last Name,Company\n' + data.rows.map(c =>
-            `"${c.email}","${c.firstName}","${c.lastName || ''}","${c.company || ''}"`
-          ).join('\n');
-          downloadCSV(csvContent, `email-campaign-${Date.now()}.csv`);
-        });
+      window.location.href = `${API_URL}/export/email-campaign`;
     }
 
     function exportForOutreach() {
-      fetch(`${API_URL}/contacts?pageSize=10000`)
-        .then(r => r.json())
-        .then(data => {
-          const csvContent = 'First Name,Last Name,Email,Company,Website\n' + data.rows.map(c =>
-            `"${c.firstName}","${c.lastName || ''}","${c.email}","${c.company || ''}","${c.website || ''}"`
-          ).join('\n');
-          downloadCSV(csvContent, `outreach-${Date.now()}.csv`);
-        });
+      window.location.href = `${API_URL}/export/outreach`;
     }
 
     function exportWebsitesList() {
-      fetch(`${API_URL}/contacts?pageSize=10000`)
-        .then(r => r.json())
-        .then(data => {
-          const websites = [...new Set(data.rows.map(c => c.website).filter(w => w))];
-          const csvContent = 'Website\n' + websites.join('\n');
-          downloadCSV(csvContent, `websites-list-${Date.now()}.csv`);
-        });
-    }
-
-    function downloadCSV(content, filename) {
-      const blob = new Blob([content], { type: 'text/csv' });
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = filename;
-      a.click();
+      window.location.href = `${API_URL}/export/websites`;
     }
 
     function updateStats() {
-      fetch(`${API_URL}/contacts?pageSize=10000`)
-        .then(r => r.json())
-        .then(data => {
-          const total = data.total;
-          const withWeb = data.rows.filter(c => c.website).length;
-          const companies = new Set(data.rows.map(c => c.company).filter(c => c)).size;
-
-          document.getElementById('total-contacts').textContent = total;
-          document.getElementById('with-websites').textContent = withWeb;
-          document.getElementById('unique-companies').textContent = companies;
-          document.getElementById('business-emails').textContent = total; // All are business emails now
-        });
+      fetchStats().then(data => {
+        document.getElementById('total-contacts').textContent = data.total;
+        document.getElementById('with-websites').textContent = data.withWebsites;
+        document.getElementById('unique-companies').textContent = data.uniqueCompanies;
+        document.getElementById('business-emails').textContent = data.businessEmails;
+      });
     }
 
     function updateExportStats() {
-      fetch(`${API_URL}/contacts?pageSize=10000`)
-        .then(r => r.json())
-        .then(data => {
-          document.getElementById('export-ready').textContent = data.total;
-          document.getElementById('meta-compatible').textContent = data.total;
-          document.getElementById('emails-valid').textContent = data.total;
-        });
+      fetchStats().then(data => {
+        document.getElementById('export-ready').textContent = data.total;
+        document.getElementById('meta-compatible').textContent = data.total;
+        document.getElementById('emails-valid').textContent = data.businessEmails;
+      });
     }
 
     // Initial load

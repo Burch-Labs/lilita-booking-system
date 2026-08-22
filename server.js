@@ -244,36 +244,40 @@ let db;
     }
   }
 
-  // Get stats
+  // Get stats — fast, single query
   app.get('/api/stats', (req, res) => {
-    db.get('SELECT COUNT(*) as total FROM contacts', (err, contactRow) => {
+    db.get(`
+      SELECT
+        COUNT(*) as total,
+        SUM(CASE WHEN email IS NOT NULL AND email != '' THEN 1 ELSE 0 END) as businessEmails,
+        SUM(CASE WHEN website IS NOT NULL AND website != '' THEN 1 ELSE 0 END) as withWebsites,
+        COUNT(DISTINCT company) as uniqueCompanies
+      FROM contacts
+    `, (err, row) => {
       if (err) return res.status(500).json({ error: err.message });
-      db.get('SELECT COUNT(*) as total FROM websites', (err, websiteRow) => {
-        if (err) return res.status(500).json({ error: err.message });
-        res.json({ total: contactRow.total, contacts: contactRow.total, websites: websiteRow.total });
+      res.json({
+        total: row.total || 0,
+        businessEmails: row.businessEmails || 0,
+        withWebsites: row.withWebsites || 0,
+        uniqueCompanies: row.uniqueCompanies || 0
       });
     });
   });
 
-  // GET all websites with optional search
+  // GET all websites — from contacts, grouped with contact counts (replaces loadWebsites logic)
   app.get('/api/websites', (req, res) => {
-    const { search } = req.query;
-    let query = 'SELECT * FROM websites ORDER BY name';
-    let params = [];
-
-    if (search) {
-      query = `
-        SELECT * FROM websites
-        WHERE name LIKE ? OR url LIKE ? OR category LIKE ?
-        ORDER BY name
-      `;
-      const searchTerm = `%${search}%`;
-      params = [searchTerm, searchTerm, searchTerm];
-    }
-
-    db.all(query, params, (err, rows) => {
+    db.all(`
+      SELECT
+        website as domain,
+        company,
+        COUNT(*) as contacts
+      FROM contacts
+      WHERE website IS NOT NULL AND website != ''
+      GROUP BY website
+      ORDER BY contacts DESC
+    `, (err, rows) => {
       if (err) return res.status(500).json({ error: err.message });
-      res.json(rows);
+      res.json(rows || []);
     });
   });
 
@@ -386,10 +390,22 @@ let db;
     }
   });
 
+  // List all spreadsheets in user's Google Drive
   app.get('/api/sheets/list', async (req, res) => {
     try {
       const sheets = await googleSheets.getSheetsList();
       res.json(sheets);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  // List tabs (sheets) within a specific spreadsheet
+  app.get('/api/sheets/tabs/:spreadsheetId', async (req, res) => {
+    try {
+      const { spreadsheetId } = req.params;
+      const tabs = await googleSheets.getSheetMetadata(spreadsheetId);
+      res.json(tabs);
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
@@ -431,17 +447,29 @@ let db;
       for (let i = 0; i < spreadsheetIds.length; i++) {
         const spreadsheetId = spreadsheetIds[i];
         const sheetName = sheetNames[i];
-        const mapping = columnMappings[i] || {};
+        const mapping = (columnMappings && columnMappings[i]) || { email: 'email', firstName: 'firstName', lastName: 'lastName', company: 'company' };
 
         console.log(`\n📥 Importing from: ${sheetName}`);
 
-        // Fetch data from Google Sheet
-        const data = await googleSheets.getSheetData(spreadsheetId, sheetName);
-        console.log(`   Retrieved ${data.length} rows`);
+        try {
+          // Fetch data from Google Sheet
+          const data = await googleSheets.getSheetData(spreadsheetId, sheetName);
+          console.log(`   Retrieved ${data.length} rows`);
+
+          if (data.length === 0) {
+            console.log(`   ⚠️  Sheet is empty, skipping`);
+            continue;
+          }
+        } catch (err) {
+          console.log(`   ⚠️  Sheet not found or error reading: ${err.message}`);
+          console.log(`   ⏭️  Skipping and continuing to next sheet...`);
+          continue;
+        }
 
         // Map columns and filter
         const contacts = data
           .map(row => {
+            if (!row || typeof row !== 'object') return null;
             const email = row[mapping.email] || '';
             if (!email) return null;
 
@@ -547,6 +575,57 @@ let db;
     }
     return domain;
   }
+
+  // CSV Export endpoints — server-side generation for speed
+  app.get('/api/export/meta-audience', (req, res) => {
+    db.all('SELECT email, firstName, lastName FROM contacts WHERE email IS NOT NULL AND email != ""', (err, rows) => {
+      if (err) return res.status(500).json({ error: err.message });
+      const csv = 'Email,First Name,Last Name\n' + rows.map(c => `"${c.email}","${c.firstName}","${c.lastName || ''}"`).join('\n');
+      res.setHeader('Content-Type', 'text/csv');
+      res.setHeader('Content-Disposition', 'attachment; filename="meta-audience.csv"');
+      res.send(csv);
+    });
+  });
+
+  app.get('/api/export/meta-lookalike', (req, res) => {
+    db.all('SELECT email, firstName, lastName, company FROM contacts WHERE email IS NOT NULL AND email != ""', (err, rows) => {
+      if (err) return res.status(500).json({ error: err.message });
+      const csv = 'Email,First Name,Last Name,Company\n' + rows.map(c => `"${c.email}","${c.firstName}","${c.lastName || ''}","${c.company || ''}"`).join('\n');
+      res.setHeader('Content-Type', 'text/csv');
+      res.setHeader('Content-Disposition', 'attachment; filename="meta-lookalike.csv"');
+      res.send(csv);
+    });
+  });
+
+  app.get('/api/export/email-campaign', (req, res) => {
+    db.all('SELECT email, firstName, lastName, company FROM contacts WHERE email IS NOT NULL AND email != ""', (err, rows) => {
+      if (err) return res.status(500).json({ error: err.message });
+      const csv = 'Email,First Name,Last Name,Company\n' + rows.map(c => `"${c.email}","${c.firstName}","${c.lastName || ''}","${c.company || ''}"`).join('\n');
+      res.setHeader('Content-Type', 'text/csv');
+      res.setHeader('Content-Disposition', 'attachment; filename="email-campaign.csv"');
+      res.send(csv);
+    });
+  });
+
+  app.get('/api/export/outreach', (req, res) => {
+    db.all('SELECT firstName, lastName, email, company, website FROM contacts WHERE email IS NOT NULL AND email != ""', (err, rows) => {
+      if (err) return res.status(500).json({ error: err.message });
+      const csv = 'First Name,Last Name,Email,Company,Website\n' + rows.map(c => `"${c.firstName}","${c.lastName || ''}","${c.email}","${c.company || ''}","${c.website || ''}"`).join('\n');
+      res.setHeader('Content-Type', 'text/csv');
+      res.setHeader('Content-Disposition', 'attachment; filename="outreach.csv"');
+      res.send(csv);
+    });
+  });
+
+  app.get('/api/export/websites', (req, res) => {
+    db.all('SELECT DISTINCT website FROM contacts WHERE website IS NOT NULL AND website != "" ORDER BY website', (err, rows) => {
+      if (err) return res.status(500).json({ error: err.message });
+      const csv = 'Website\n' + rows.map(r => r.website).join('\n');
+      res.setHeader('Content-Type', 'text/csv');
+      res.setHeader('Content-Disposition', 'attachment; filename="websites-list.csv"');
+      res.send(csv);
+    });
+  });
 
   app.listen(PORT, () => {
     console.log(`\n✓ Server running at http://localhost:${PORT}`);

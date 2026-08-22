@@ -136,9 +136,31 @@ class GoogleSheetsConnector {
     console.log(`📥 Fetching data from ${sheetName}...`);
 
     try {
+      // First get sheet metadata to find the sheet ID
+      const metadata = await this.sheets.spreadsheets.get({
+        spreadsheetId,
+        fields: 'sheets(properties(sheetId,title))'
+      });
+
+      console.log(`   Available sheets: ${metadata.data.sheets.map(s => s.properties.title).join(', ')}`);
+
+      // Try exact match first, then case-insensitive
+      let sheet = metadata.data.sheets.find(s => s.properties.title === sheetName);
+      if (!sheet) {
+        sheet = metadata.data.sheets.find(s => s.properties.title.toLowerCase() === sheetName.toLowerCase());
+      }
+      if (!sheet) throw new Error(`Sheet "${sheetName}" not found. Available: ${metadata.data.sheets.map(s => s.properties.title).join(', ')}`);
+
+      const sheetId = sheet.properties.sheetId;
+
+      // Use sheetId in range notation (more reliable than sheet names)
+      const range = `${sheetId}!A:Z`;
+
+      console.log(`   Using range: ${range}`);
+
       const res = await this.sheets.spreadsheets.values.get({
         spreadsheetId,
-        range: `'${sheetName}'!A:Z`
+        range
       });
 
       const rows = res.data.values || [];

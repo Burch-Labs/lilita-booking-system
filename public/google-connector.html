@@ -471,6 +471,7 @@
 
   <script>
     let selectedSheets = [];
+    let allSheets = []; // Store all sheets data
     let sheetData = {};
     let columnMappings = {};
     let currentTab = 0;
@@ -506,6 +507,7 @@
           return;
         }
 
+        allSheets = sheets; // Store sheets data
         const list = document.getElementById('sheetsList');
         list.innerHTML = '';
 
@@ -513,7 +515,7 @@
           const div = document.createElement('div');
           div.className = 'sheet-item';
           div.innerHTML = `
-            <input type="checkbox" id="sheet_${i}" onchange="updateSelectedSheets()">
+            <input type="checkbox" id="sheet_${i}" data-sheet-id="${sheet.id}" data-sheet-name="${sheet.name}" onchange="updateSelectedSheets()">
             <div class="sheet-info">
               <div class="sheet-name">${sheet.name}</div>
               <div class="sheet-meta">ID: ${sheet.id}</div>
@@ -529,8 +531,10 @@
     function updateSelectedSheets() {
       selectedSheets = [];
       document.querySelectorAll('input[id^="sheet_"]:checked').forEach(cb => {
-        const idx = parseInt(cb.id.split('_')[1]);
-        selectedSheets.push(idx);
+        selectedSheets.push({
+          id: cb.getAttribute('data-sheet-id'),
+          name: cb.getAttribute('data-sheet-name')
+        });
       });
     }
 
@@ -566,11 +570,16 @@
         const progressContainer = document.getElementById('progressContainer');
         progressContainer.classList.remove('hidden');
 
+        // Format data for backend
+        const spreadsheetIds = selectedSheets.map(s => s.id);
+        const sheetNames = selectedSheets.map(s => s.name);
+
         const response = await fetch('/api/sheets/import', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            selectedSheets,
+            spreadsheetIds,
+            sheetNames,
             columnMappings,
             syncSettings: getSyncSettings()
           })
