@@ -1,0 +1,61 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                  🚀 AGENT PLATFORM 2.0 - DEPLOYMENT                       ║
+║                          READY TO LAUNCH                                  ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+COPY & PASTE THIS COMMAND INTO YOUR POWERSHELL:
+══════════════════════════════════════════════════════════════════════════════
+
+.\DEPLOY-VERCEL.ps1
+
+
+WHAT HAPPENS NEXT:
+══════════════════════════════════════════════════════════════════════════════
+
+1. BUILDING
+   └─ Frontend build runs (462ms)
+   └─ Optimized output: 74 KB gzipped
+   └─ 32 modules transformed
+
+2. AUTHENTICATION
+   └─ Browser opens (Vercel login)
+   └─ Click "Authorize" with GitHub
+   └─ Deployment continues automatically
+
+3. UPLOADING
+   └─ Frontend files upload to Vercel
+   └─ Build runs on Vercel servers
+
+4. DEPLOYMENT
+   └─ Domain assigned: lilita-agent-platform.vercel.app
+   └─ Live URL provided
+
+5. SUCCESS
+   └─ ✅ Frontend is LIVE
+   └─ ✅ Ready for backend connection
+
+
+EXPECTED TIME: 5-10 minutes
+
+Current Status:
+  ✓ Build verified
+  ✓ Deployment script ready
+  ✓ Vercel CLI configured
+  ✓ Frontend optimized
+
+
+AFTER DEPLOYMENT:
+══════════════════════════════════════════════════════════════════════════════
+
+1. Go to: https://vercel.com/dashboard
+2. Find project: lilita-agent-platform
+3. Settings → Environment Variables
+4. Add: VITE_API_URL = https://your-railway-backend.railway.app
+5. Redeploy
+6. Test at: https://lilita-agent-platform.vercel.app
+
+
+COPY THIS COMMAND NOW AND PASTE IN POWERSHELL:
+
+.\DEPLOY-VERCEL.ps1
+
