@@ -5,7 +5,7 @@
  * Tests API endpoints, database, and integration
  */
 
-const http = require('http');
+import http from 'http';
 
 const API_URL = process.env.API_URL || 'http://localhost:3002';
 
