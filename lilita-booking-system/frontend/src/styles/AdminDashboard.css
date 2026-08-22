@@ -1,0 +1,381 @@
+.admin-dashboard h2 {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  color: #2c5f8d;
+}
+
+/* Stats Grid */
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.admin-stats .stat-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  border-top: 4px solid #2c5f8d;
+  transition: all 0.3s ease;
+}
+
+.admin-stats .stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.admin-stats .stat-card h4 {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.admin-stats .amount {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2c5f8d;
+  margin: 0.5rem 0;
+}
+
+.admin-stats .stat-meta {
+  display: block;
+  font-size: 0.8rem;
+  color: #999;
+}
+
+/* Recent Data */
+.recent-data {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.data-section {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.data-section h3 {
+  color: #2c5f8d;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.booking-card,
+.agent-card {
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 1rem;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.booking-card:last-child,
+.agent-card:last-child {
+  border-bottom: none;
+}
+
+.booking-card .ref,
+.booking-card .name {
+  font-weight: 600;
+  color: #2c5f8d;
+}
+
+.booking-card .status {
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.booking-card .status.status-confirmed {
+  background: #d4edda;
+  color: #155724;
+}
+
+.booking-card .status.status-on_hold {
+  background: #cfe2ff;
+  color: #084298;
+}
+
+.booking-card .status.status-pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.booking-card .amount {
+  text-align: right;
+  color: #d4a574;
+  font-weight: 600;
+}
+
+.agent-card {
+  grid-template-columns: 2fr 1fr 1fr;
+}
+
+.agent-card .name {
+  font-weight: 600;
+  color: #2c5f8d;
+}
+
+.agent-card .bookings {
+  color: #666;
+}
+
+.agent-card .commission {
+  color: #27ae60;
+  font-weight: 600;
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-select,
+.search-input {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-family: inherit;
+}
+
+.filter-select {
+  min-width: 150px;
+  background: white;
+  cursor: pointer;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 200px;
+}
+
+.search-input:focus,
+.filter-select:focus {
+  outline: none;
+  border-color: #2c5f8d;
+  box-shadow: 0 0 0 3px rgba(44, 95, 141, 0.1);
+}
+
+/* Tables */
+.bookings-table-container,
+.payments-table-container {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table thead {
+  background: #f8f9fa;
+  border-bottom: 2px solid #ddd;
+}
+
+.admin-table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: #2c5f8d;
+  font-size: 0.95rem;
+}
+
+.admin-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+  color: #666;
+}
+
+.admin-table tr:hover {
+  background: #f8f9fa;
+}
+
+.admin-table .ref {
+  font-weight: 600;
+  color: #2c5f8d;
+}
+
+.admin-table .amount {
+  color: #d4a574;
+  font-weight: 600;
+}
+
+.admin-table .dates {
+  font-size: 0.9rem;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.status-badge.status-confirmed {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-badge.status-on_hold {
+  background: #cfe2ff;
+  color: #084298;
+}
+
+.status-badge.status-pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status-badge.status-completed {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-badge.status-active {
+  background: #d4edda;
+  color: #155724;
+}
+
+/* Agents Grid */
+.agents-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.agent-card-large {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-top: 4px solid #2c5f8d;
+  transition: all 0.3s ease;
+}
+
+.agent-card-large:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.agent-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: 1rem;
+}
+
+.agent-header h4 {
+  color: #2c5f8d;
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.agent-card-large .company {
+  color: #666;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.agent-stats {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.agent-stats .stat {
+  text-align: center;
+}
+
+.agent-stats .stat span {
+  display: block;
+  font-size: 0.8rem;
+  color: #999;
+  margin-bottom: 0.25rem;
+}
+
+.agent-stats .stat strong {
+  display: block;
+  font-size: 1.1rem;
+  color: #2c5f8d;
+}
+
+.btn-small {
+  width: 100%;
+  padding: 0.6rem;
+  background: #2c5f8d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-small:hover {
+  background: #1e4b6f;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .admin-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .recent-data {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-card,
+  .agent-card {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .controls {
+    flex-direction: column;
+  }
+
+  .filter-select,
+  .search-input {
+    width: 100%;
+  }
+
+  .admin-table {
+    font-size: 0.85rem;
+  }
+
+  .admin-table th,
+  .admin-table td {
+    padding: 0.75rem 0.5rem;
+  }
+
+  .agents-grid {
+    grid-template-columns: 1fr;
+  }
+}
