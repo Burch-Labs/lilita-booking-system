@@ -18,6 +18,7 @@ import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import crypto from 'crypto';
+import { setupAgentPlatformRoutes } from './agent-platform-api.js';
 
 dotenv.config();
 
@@ -106,19 +107,37 @@ app.post('/api/auth/admin-login', async (req, res) => {
   res.status(501).json({ error: 'Not implemented' });
 });
 
-// Agent registration
+// Agent registration (Agent Platform 2.0)
 app.post('/api/auth/agent-register', async (req, res) => {
-  const { email, first_name, last_name, company, phone, country, password } = req.body;
+  const { email, first_name, last_name, company, phone, country, password, agent_type, referrer_code } = req.body;
 
   try {
     const passwordHash = await bcrypt.hash(password, 10);
     const apiKey = crypto.randomBytes(32).toString('hex');
 
+    // Generate unique referral code
+    const referralCode = `AGENT_${first_name.toUpperCase()}_${last_name.toUpperCase()}_${Math.random().toString(36).substring(7)}`;
+
+    // Check if referrer code is valid (for sub-agents)
+    let referrerId = null;
+    if (referrer_code) {
+      const referrerResult = await pool.query(
+        'SELECT id FROM agents WHERE referral_code = $1',
+        [referrer_code]
+      );
+      if (referrerResult.rows.length > 0) {
+        referrerId = referrerResult.rows[0].id;
+      }
+    }
+
     const result = await pool.query(
-      `INSERT INTO agents (email, first_name, last_name, company, phone, country, password_hash, api_key, is_active)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
-       RETURNING id, email, first_name, last_name, company, commission_rate`,
-      [email, first_name, last_name, company, phone, country, passwordHash, apiKey, true]
+      `INSERT INTO agents (
+        email, first_name, last_name, company, phone, country, password_hash, api_key,
+        is_active, agent_type, referrer_agent_id, referral_code, tier
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
+       RETURNING id, email, first_name, last_name, company, referral_code, tier, agent_type`,
+      [email, first_name, last_name, company, phone, country, passwordHash, apiKey, true,
+       agent_type || 'direct', referrerId, referralCode, 'bronze']
     );
 
     const agent = result.rows[0];
@@ -128,9 +147,28 @@ app.post('/api/auth/agent-register', async (req, res) => {
       { expiresIn: '30d' }
     );
 
+    // If sub-agent, create referral relationship
+    if (referrerId) {
+      await pool.query(
+        `INSERT INTO agent_referrals (referrer_agent_id, referred_agent_id, referral_code, status, commission_rate)
+         VALUES ($1, $2, $3, $4, $5)`,
+        [referrerId, agent.id, referrer_code, 'active', 0.03]
+      );
+
+      // Award sign-up bonus to referrer
+      await pool.query(
+        `INSERT INTO agent_payouts (agent_id, payout_type, amount, description, status)
+         VALUES ($1, $2, $3, $4, $5)`,
+        [referrerId, 'referral_bonus', 50, `Referral bonus for ${agent.first_name}`, 'earned']
+      );
+    }
+
     res.status(201).json({
       token,
-      user: agent
+      user: {
+        ...agent,
+        message: 'Welcome! Your account is ready. Use your referral code to recruit sub-agents and earn 3% commission.'
+      }
     });
   } catch (err) {
     console.error('Registration error:', err);
@@ -383,10 +421,10 @@ app.post('/api/bookings/:id/confirm', authenticateToken, async (req, res) => {
       ['CONFIRMED', bookingData.suite_id, bookingData.check_in_date, bookingData.check_out_date]
     );
 
-    // Calculate and record commission (if agent)
+    // Calculate and record commission (if agent) - Agent Platform 2.0
     if (bookingData.agent_id) {
       const agent = await client.query(
-        'SELECT commission_rate FROM agents WHERE id = $1',
+        'SELECT commission_rate, parent_agent_id FROM agents WHERE id = $1',
         [bookingData.agent_id]
       );
       const commissionRate = agent.rows[0].commission_rate;
@@ -397,6 +435,51 @@ app.post('/api/bookings/:id/confirm', authenticateToken, async (req, res) => {
          VALUES ($1, $2, $3, $4, $5)`,
         [id, bookingData.agent_id, amount, commissionRate, commissionAmount]
       );
+
+      // Agent Platform 2.0: Create payout for direct booking
+      const agentMargin = commissionAmount; // Agent earns commission on this booking
+      await client.query(
+        `INSERT INTO agent_payouts (agent_id, booking_id, payout_type, amount, description, status)
+         VALUES ($1, $2, $3, $4, $5, $6)`,
+        [bookingData.agent_id, id, 'direct_booking', agentMargin, `Booking commission for ${bookingData.booking_reference}`, 'earned']
+      );
+
+      // Update agent's total bookings and earnings
+      await client.query(
+        `UPDATE agents
+         SET total_bookings = total_bookings + 1,
+             total_earnings = total_earnings + $2,
+             updated_at = NOW()
+         WHERE id = $1`,
+        [bookingData.agent_id, agentMargin]
+      );
+
+      // If this is a sub-agent, give parent agent 3% commission
+      if (agent.rows[0].parent_agent_id) {
+        const parentCommission = amount * 0.03;
+        await client.query(
+          `INSERT INTO agent_payouts (agent_id, booking_id, payout_type, amount, description, status)
+           VALUES ($1, $2, $3, $4, $5, $6)`,
+          [agent.rows[0].parent_agent_id, id, 'sub_agent_commission', parentCommission, `Commission from sub-agent booking`, 'earned']
+        );
+
+        // Update parent agent earnings
+        await client.query(
+          `UPDATE agents
+           SET total_earnings = total_earnings + $2,
+               updated_at = NOW()
+           WHERE id = $1`,
+          [agent.rows[0].parent_agent_id, parentCommission]
+        );
+
+        // Update referral total commission
+        await client.query(
+          `UPDATE agent_referrals
+           SET total_commission_earned = total_commission_earned + $2
+           WHERE referrer_agent_id = $1 AND referred_agent_id = $3`,
+          [agent.rows[0].parent_agent_id, parentCommission, bookingData.agent_id]
+        );
+      }
     }
 
     await client.query('COMMIT');
@@ -982,6 +1065,15 @@ app.post('/api/admin/campaigns', authenticateToken, async (req, res) => {
     res.status(500).json({ error: 'Failed to create campaign' });
   }
 });
+
+// ============================================================================
+// AGENT PLATFORM 2.0 ROUTES
+// ============================================================================
+setupAgentPlatformRoutes(app, pool, jwt, JWT_SECRET, authenticateToken);
+
+// ============================================================================
+// HEALTH CHECK
+// ============================================================================
 
 app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', timestamp: new Date() });
