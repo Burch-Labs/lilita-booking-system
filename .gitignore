@@ -1,7 +1,23 @@
-node_modules/
-*.db
-.DS_Store
+﻿# Environment & Credentials
 .env
-*.log
-dist/
-build/
+.env.local
+google-token.json
+google-credentials.json
+
+# Node modules
+node_modules/
+
+# Database
+*.db
+*.db-shm
+*.db-wal
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

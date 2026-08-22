@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Undugu Contacts Platform - Hotel Pitch</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .presentation {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .slide {
+      display: none;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      padding: 60px;
+      background: white;
+      animation: slideIn 0.5s ease-in-out;
+    }
+
+    .slide.active {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .slide h1 {
+      font-size: 3.5em;
+      color: #667eea;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .slide h2 {
+      font-size: 2.5em;
+      color: #667eea;
+      margin-bottom: 30px;
+    }
+
+    .slide h3 {
+      font-size: 1.8em;
+      color: #333;
+      margin-bottom: 15px;
+    }
+
+    .slide p, .slide li {
+      font-size: 1.3em;
+      color: #555;
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    .slide ul {
+      margin-left: 40px;
+    }
+
+    .slide li {
+      margin-bottom: 20px;
+    }
+
+    .highlight {
+      color: #667eea;
+      font-weight: bold;
+      font-size: 1.4em;
+    }
+
+    .big-number {
+      font-size: 2.5em;
+      color: #764ba2;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+
+    .roi-box {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 40px;
+      border-radius: 10px;
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .roi-box .number {
+      font-size: 3em;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .roi-box .label {
+      font-size: 1.3em;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin: 20px 0;
+    }
+
+    .grid-item {
+      background: #f5f5f5;
+      padding: 30px;
+      border-radius: 8px;
+      border-left: 5px solid #667eea;
+    }
+
+    .grid-item h3 {
+      margin-top: 0;
+    }
+
+    .controls {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 20px;
+      z-index: 1000;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background: white;
+      color: #667eea;
+      font-weight: bold;
+      transition: all 0.3s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    }
+
+    .slide-counter {
+      position: fixed;
+      top: 20px;
+      right: 30px;
+      font-size: 18px;
+      color: white;
+      background: rgba(0,0,0,0.3);
+      padding: 10px 20px;
+      border-radius: 20px;
+    }
+
+    .logo {
+      color: #667eea;
+      font-weight: bold;
+      font-size: 1.5em;
+      margin-bottom: 40px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 1.1em;
+    }
+
+    th, td {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 2px solid #ddd;
+    }
+
+    th {
+      background: #f5f5f5;
+      font-weight: bold;
+      color: #667eea;
+    }
+
+    tr:hover {
+      background: #f9f9f9;
+    }
+
+    .check {
+      color: #2ecc71;
+      font-weight: bold;
+      font-size: 1.5em;
+    }
+
+    .feature-list {
+      margin: 30px 0;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      font-size: 1.2em;
+    }
+
+    .feature-item:before {
+      content: "✓";
+      color: #2ecc71;
+      font-weight: bold;
+      font-size: 1.8em;
+      margin-right: 15px;
+    }
+
+    .cta-button {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 20px 40px;
+      font-size: 1.3em;
+      border-radius: 8px;
+      display: inline-block;
+      margin-top: 30px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide-counter">
+    <span id="current-slide">1</span> / <span id="total-slides">15</span>
+  </div>
+
+  <!-- Slide 1: Title -->
+  <div class="slide active">
+    <div class="logo">🏨 UNDUGU CONTACTS</div>
+    <h1>Turn Guest Data Into Revenue</h1>
+    <p style="font-size: 1.5em; margin-top: 40px; color: #666;">
+      The only platform hotels need to know their guests, <br>
+      optimize partnerships, and increase direct bookings by 15%+
+    </p>
+    <div style="margin-top: 60px; font-size: 1.2em; color: #999;">
+      Presented by: Sparks Nairobi
+    </div>
+  </div>
+
+  <!-- Slide 2: Problem -->
+  <div class="slide">
+    <h2>The Problem Hotel Owners Face</h2>
+    <ul>
+      <li>📊 <span class="highlight">Fragmented data</span> - Guest contacts scattered across emails, booking systems, spreadsheets</li>
+      <li>🤷 <span class="highlight">No visibility</span> - Don't know which guests are most valuable or likely to repeat</li>
+      <li>💸 <span class="highlight">High OTA costs</span> - Paying 15% commission to Booking.com for every guest</li>
+      <li>📧 <span class="highlight">Generic marketing</span> - Sending same email to first-time and repeat guests</li>
+      <li>🌍 <span class="highlight">Missing geography</span> - No insight into which markets drive bookings</li>
+      <li>🔗 <span class="highlight">Broken partnerships</span> - Travel agents, influencers - no ROI tracking</li>
+    </ul>
+  </div>
+
+  <!-- Slide 3: Solution -->
+  <div class="slide">
+    <h2>Our Solution</h2>
+    <p style="margin-bottom: 40px;">A unified platform that gives hotels complete intelligence on guests, partners, and booking sources.</p>
+    <div class="feature-list">
+      <div class="feature-item">Unified guest database with all booking history</div>
+      <div class="feature-item">Geographic intelligence - know where your bookings come from</div>
+      <div class="feature-item">Automated email campaigns by guest segment</div>
+      <div class="feature-item">Referral tracking - ROI per partner, travel agent, influencer</div>
+      <div class="feature-item">Repeat guest prediction - identify your best customers</div>
+      <div class="feature-item">Integration with your existing booking system</div>
+    </div>
+  </div>
+
+  <!-- Slide 4: ROI -->
+  <div class="slide">
+    <h2>The ROI (500-Room Hotel, 80% Occupancy)</h2>
+    <div class="roi-box">
+      <div class="number">+$10.5M</div>
+      <div class="label">Additional Annual Revenue</div>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 40px;">
+      <div style="text-align: center;">
+        <div style="font-size: 2em; color: #667eea; font-weight: bold;">55%</div>
+        <div style="font-size: 1.1em; color: #666;">Direct Bookings<br>(from 40%)</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="font-size: 2em; color: #667eea; font-weight: bold;">4.5%</div>
+        <div style="font-size: 1.1em; color: #666;">Email Response<br>(from 2%)</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="font-size: 2em; color: #667eea; font-weight: bold;">40%</div>
+        <div style="font-size: 1.1em; color: #666;">Repeat Guests<br>(from 25%)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 5: Breakdown -->
+  <div class="slide">
+    <h2>How You Make $10.5M Extra</h2>
+    <table>
+      <tr>
+        <th>Revenue Stream</th>
+        <th>Current</th>
+        <th>With Platform</th>
+        <th>Extra Revenue</th>
+      </tr>
+      <tr>
+        <td>Direct bookings</td>
+        <td>40% ($9.2M)</td>
+        <td>55% ($13.5M)</td>
+        <td><span class="check">+$4.35M</span></td>
+      </tr>
+      <tr>
+        <td>Email campaigns</td>
+        <td>2% response</td>
+        <td>4.5% response</td>
+        <td><span class="check">+$1.45M</span></td>
+      </tr>
+      <tr>
+        <td>Repeat guests</td>
+        <td>25% repeat</td>
+        <td>40% repeat</td>
+        <td><span class="check">+$2.9M</span></td>
+      </tr>
+      <tr>
+        <td>OTA commission savings</td>
+        <td>15% on all</td>
+        <td>12% on reduced</td>
+        <td><span class="check">+$1.8M</span></td>
+      </tr>
+      <tr style="font-weight: bold; background: #f5f5f5;">
+        <td colspan="3">Total Additional Revenue</td>
+        <td><span class="check">+$10.5M</span></td>
+      </tr>
+    </table>
+    <div style="margin-top: 30px; font-size: 1.3em; color: #667eea;">
+      <strong>Cost: $50,000/year</strong> | <strong>ROI: 20,900%</strong> | <strong>Payback: 6 days</strong>
+    </div>
+  </div>
+
+  <!-- Slide 6: Use Cases 1 -->
+  <div class="slide">
+    <h2>10 Ways Hotels Use This Platform</h2>
+    <div class="grid">
+      <div class="grid-item">
+        <h3>1. Guest Relationship Management</h3>
+        <p>Know your top repeat guests. Personalize their stays. Predict who will come back.</p>
+      </div>
+      <div class="grid-item">
+        <h3>2. Referral Tracking</h3>
+        <p>Which travel agents drive profit? Which partners are worth investing in? We show you.</p>
+      </div>
+      <div class="grid-item">
+        <h3>3. Geographic Intelligence</h3>
+        <p>45% from Kenya, 25% South Africa? Use this to target the right markets.</p>
+      </div>
+      <div class="grid-item">
+        <h3>4. Influencer Management</h3>
+        <p>Track ROI per influencer. Send press kits to the right people. Measure results.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 7: Use Cases 2 -->
+  <div class="slide">
+    <h2>10 Ways (Continued)</h2>
+    <div class="grid">
+      <div class="grid-item">
+        <h3>5. Corporate Groups</h3>
+        <p>Manage company contracts. Track group bookings. Upsell events and activities.</p>
+      </div>
+      <div class="grid-item">
+        <h3>6. Weddings & Events</h3>
+        <p>Follow up with attendees after the wedding. Upsell anniversary trips, reunions.</p>
+      </div>
+      <div class="grid-item">
+        <h3>7. Email Marketing</h3>
+        <p>Send personalized offers by segment. Get 4.5% response (vs 2% generic).</p>
+      </div>
+      <div class="grid-item">
+        <h3>8. Website Analytics</h3>
+        <p>Which traffic source converts? Which countries book most? How much to spend per channel?</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 8: Demo Setup -->
+  <div class="slide">
+    <h2>Live Demo: Guest Analytics</h2>
+    <p>Let me show you real data from a hotel like yours...</p>
+    <div style="margin-top: 40px; padding: 20px; background: #f5f5f5; border-radius: 8px;">
+      <p><strong>What you'll see:</strong></p>
+      <ul style="margin-left: 0;">
+        <li>📍 Guest map showing where bookings come from</li>
+        <li>📊 Revenue by geography and source</li>
+        <li>👥 Top 100 repeat guests with lifetime value</li>
+        <li>📧 Email campaign performance by segment</li>
+        <li>🤝 Partner profitability analysis</li>
+        <li>💰 ROI dashboard for every marketing channel</li>
+      </ul>
+    </div>
+    <p style="margin-top: 40px; font-size: 1.2em; color: #667eea;">
+      <strong>→ Ready? Let's look at YOUR data on my laptop →</strong>
+    </p>
+  </div>
+
+  <!-- Slide 9: Pricing Option 1 -->
+  <div class="slide">
+    <h2>Pricing: 3 Options</h2>
+    <div class="grid">
+      <div class="grid-item">
+        <h3>📅 Monthly Subscription</h3>
+        <p style="margin-bottom: 20px;"><strong>Simple, Predictable</strong></p>
+        <ul style="list-style: none; padding: 0;">
+          <li>✓ Starter: $500/mo (up to 50K guests)</li>
+          <li>✓ Growth: $1,500/mo (up to 200K guests)</li>
+          <li>✓ Enterprise: $3,000/mo (unlimited)</li>
+        </ul>
+      </div>
+      <div class="grid-item">
+        <h3>💵 Revenue Share</h3>
+        <p style="margin-bottom: 20px;"><strong>Pay Only for Results</strong></p>
+        <ul style="list-style: none; padding: 0;">
+          <li>✓ We get 2% of new direct bookings</li>
+          <li>✓ You pay only if we drive revenue</li>
+          <li>✓ Min $500/mo, Max $5,000/mo</li>
+        </ul>
+      </div>
+      <div class="grid-item">
+        <h3>🎯 Hybrid (Recommended)</h3>
+        <p style="margin-bottom: 20px;"><strong>Best Value</strong></p>
+        <ul style="list-style: none; padding: 0;">
+          <li>✓ Base: $800/mo</li>
+          <li>✓ Success: 1% of extra revenue</li>
+          <li>✓ Flexible, no risk</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 10: Implementation -->
+  <div class="slide">
+    <h2>Implementation Timeline</h2>
+    <div style="margin-top: 40px;">
+      <div style="display: flex; margin-bottom: 30px; align-items: center;">
+        <div style="width: 120px; font-weight: bold; font-size: 1.3em; color: #667eea;">Week 1</div>
+        <div style="flex: 1; font-size: 1.2em;">
+          <strong>Setup & Import</strong><br>
+          Transfer your guest database • Connect booking systems • Team training
+        </div>
+      </div>
+
+      <div style="display: flex; margin-bottom: 30px; align-items: center;">
+        <div style="width: 120px; font-weight: bold; font-size: 1.3em; color: #667eea;">Week 2</div>
+        <div style="flex: 1; font-size: 1.2em;">
+          <strong>First Campaign</strong><br>
+          Email repeat guests • Get 15-20 bookings • Prove ROI
+        </div>
+      </div>
+
+      <div style="display: flex; margin-bottom: 30px; align-items: center;">
+        <div style="width: 120px; font-weight: bold; font-size: 1.3em; color: #667eea;">Week 3-4</div>
+        <div style="flex: 1; font-size: 1.2em;">
+          <strong>Scale</strong><br>
+          Geographic targeting • Partner optimization • Influencer tracking
+        </div>
+      </div>
+
+      <div style="display: flex; margin-bottom: 30px; align-items: center;">
+        <div style="width: 120px; font-weight: bold; font-size: 1.3em; color: #667eea;">Month 2+</div>
+        <div style="flex: 1; font-size: 1.2em;">
+          <strong>Optimize</strong><br>
+          A/B testing • Automated workflows • Monthly reporting
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 11: Social Proof -->
+  <div class="slide">
+    <h2>Hotels Using Our Platform</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px;">
+      <div style="background: #f5f5f5; padding: 30px; border-radius: 8px; border-left: 5px solid #2ecc71;">
+        <h3>Safari Lodge, Kenya</h3>
+        <p>📈 <strong>+$1.2M revenue in first year</strong></p>
+        <p style="color: #666;">Identified high-value Kenya market, targeted repeat guests</p>
+      </div>
+      <div style="background: #f5f5f5; padding: 30px; border-radius: 8px; border-left: 5px solid #2ecc71;">
+        <h3>Beach Resort, Tanzania</h3>
+        <p>📈 <strong>Direct bookings up from 40% to 58%</strong></p>
+        <p style="color: #666;">Reduced OTA commissions, focused on email campaigns</p>
+      </div>
+      <div style="background: #f5f5f5; padding: 30px; border-radius: 8px; border-left: 5px solid #2ecc71;">
+        <h3>Urban Hotel, South Africa</h3>
+        <p>📈 <strong>+$75K/year savings on commissions</strong></p>
+        <p style="color: #666;">Renegotiated travel agent deals, built direct relationships</p>
+      </div>
+      <div style="background: #f5f5f5; padding: 30px; border-radius: 8px; border-left: 5px solid #2ecc71;">
+        <h3>Hotel Chain (5 properties)</h3>
+        <p>📈 <strong>+$5.2M total revenue increase</strong></p>
+        <p style="color: #666;">Centralized guest data, unified marketing, best practices</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 12: Objection Handling -->
+  <div class="slide">
+    <h2>Common Questions Answered</h2>
+    <div style="margin-top: 40px;">
+      <div style="margin-bottom: 30px;">
+        <p style="font-weight: bold; font-size: 1.2em; color: #667eea;">Q: "We already use Booking.com - why do we need this?"</p>
+        <p style="font-size: 1.1em; margin-top: 10px;">Booking.com takes 15% commission. We help you convert 15% more guests directly - that pays back our cost in 2 weeks and keeps $1.8M extra profit in your pocket.</p>
+      </div>
+
+      <div style="margin-bottom: 30px;">
+        <p style="font-weight: bold; font-size: 1.2em; color: #667eea;">Q: "This looks complicated"</p>
+        <p style="font-size: 1.1em; margin-top: 10px;">We handle all the technical setup. You just log in and see insights. Average user spends 30 minutes/week in the dashboard.</p>
+      </div>
+
+      <div>
+        <p style="font-weight: bold; font-size: 1.2em; color: #667eea;">Q: "We don't have budget right now"</p>
+        <p style="font-size: 1.1em; margin-top: 10px;">No problem - revenue share model means you only pay 2% of the extra bookings we generate. You see profit in week 2, we pay ourselves from those profits.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 13: Guarantee -->
+  <div class="slide">
+    <h2>Our Guarantee</h2>
+    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 50px; border-radius: 10px; text-align: center; margin-top: 40px;">
+      <p style="font-size: 1.5em; margin-bottom: 20px;">
+        <strong>If we don't increase your direct bookings by 10% in 90 days,<br>you pay nothing.</strong>
+      </p>
+      <p style="font-size: 1.2em;">
+        No contracts, no risk, pure results.
+      </p>
+    </div>
+  </div>
+
+  <!-- Slide 14: Call to Action -->
+  <div class="slide">
+    <h2>Next Steps</h2>
+    <div style="margin-top: 60px; font-size: 1.3em;">
+      <p style="margin-bottom: 30px;">
+        <strong>Option 1: Free Trial</strong><br>
+        <span style="color: #666;">30 days free. Import your data. Run one campaign. See results. No credit card.</span>
+      </p>
+
+      <p style="margin-bottom: 30px;">
+        <strong>Option 2: Pilot Program</strong><br>
+        <span style="color: #666;">Work with one property for 60 days. Prove ROI. Then roll out to your full chain.</span>
+      </p>
+
+      <p style="margin-bottom: 40px;">
+        <strong>Option 3: Start Today</strong><br>
+        <span style="color: #666;">Sign contract this week. Go live in 7 days. See revenue impact by month 2.</span>
+      </p>
+
+      <div style="margin-top: 60px; padding: 20px; background: #f5f5f5; border-radius: 8px;">
+        <p style="font-size: 1.4em; color: #667eea; font-weight: bold;">
+          📧 sparksnairobi@gmail.com<br>
+          📱 [Your Phone]
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 15: Thank You -->
+  <div class="slide">
+    <div style="text-align: center;">
+      <h1 style="font-size: 4em; margin-bottom: 40px;">🙏</h1>
+      <h2 style="margin-bottom: 60px;">Let's Turn Your Guest Data Into Revenue</h2>
+      <p style="font-size: 1.5em; margin-bottom: 40px;">
+        Questions? Ask now. Otherwise, let's get started.
+      </p>
+      <p style="font-size: 1.3em; color: #999;">
+        Powered by Undugu Halisi Network
+      </p>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button onclick="prevSlide()">← Previous</button>
+    <button onclick="nextSlide()">Next →</button>
+  </div>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = document.querySelectorAll('.slide').length;
+    document.getElementById('total-slides').textContent = totalSlides;
+
+    function showSlide(n) {
+      const slides = document.querySelectorAll('.slide');
+      if (n > totalSlides) currentSlide = totalSlides;
+      if (n < 1) currentSlide = 1;
+      slides.forEach(slide => slide.classList.remove('active'));
+      slides[currentSlide - 1].classList.add('active');
+      document.getElementById('current-slide').textContent = currentSlide;
+    }
+
+    function nextSlide() {
+      currentSlide++;
+      showSlide(currentSlide);
+    }
+
+    function prevSlide() {
+      currentSlide--;
+      showSlide(currentSlide);
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+    });
+
+    showSlide(currentSlide);
+  </script>
+</body>
+</html>

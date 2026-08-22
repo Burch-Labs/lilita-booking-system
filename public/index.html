@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contacts App</title>
+  <script src="https://unpkg.com/papaparse@5.4.1/papaparse.min.js"></script>
   <style>
     * {
       margin: 0;
@@ -221,26 +222,171 @@
       padding: 20px;
       color: #666;
     }
+
+    .tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 20px;
+    }
+
+    .tab-btn {
+      background: #f0f0f0;
+      color: #555;
+      border-radius: 6px 6px 0 0;
+    }
+
+    .tab-btn.active {
+      background: #0066cc;
+      color: white;
+    }
+
+    .tab-panel {
+      display: none;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    .website-link {
+      color: #0066cc;
+      text-decoration: none;
+    }
+
+    .website-link:hover {
+      text-decoration: underline;
+    }
+
+    .category-badge {
+      display: inline-block;
+      background: #eef4ff;
+      color: #0052a3;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-bottom: 8px;
+    }
+
+    .status-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-left: 6px;
+    }
+
+    .status-valid { background: #e6f7ec; color: #1a7f3c; }
+    .status-invalid { background: #fdeaea; color: #c82333; }
+    .status-unknown { background: #f0f0f0; color: #777; }
+
+    .contact-card {
+      position: relative;
+    }
+
+    .contact-select {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+
+    .select-all-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      font-size: 13px;
+      color: #555;
+    }
+
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+      font-size: 13px;
+      color: #555;
+    }
+
+    .pagination button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .import-progress {
+      font-size: 13px;
+      color: #0066cc;
+      margin-bottom: 10px;
+    }
+
+    #csv-file-input {
+      display: none;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
-      <h1>📇 Contacts Manager</h1>
+      <h1>📇 Contacts &amp; Websites</h1>
       <div class="stats">
-        Total contacts: <strong id="total-count">0</strong>
+        Contacts: <strong id="total-count">0</strong> &nbsp;·&nbsp; Websites: <strong id="website-count">0</strong>
       </div>
     </header>
 
-    <div class="controls">
-      <input type="text" id="search-input" class="search-box" placeholder="Search by name, email, or phone...">
-      <button class="btn-primary" onclick="openAddModal()">+ Add Contact</button>
-      <button class="btn-secondary" onclick="exportContacts()">Export CSV</button>
+    <div class="tabs">
+      <button class="tab-btn active" id="tab-btn-contacts" onclick="switchTab('contacts')">Contacts</button>
+      <button class="tab-btn" id="tab-btn-websites" onclick="switchTab('websites')">Websites</button>
     </div>
 
-    <div id="contacts-container" class="contacts-list"></div>
+    <div id="panel-contacts" class="tab-panel active">
+      <div class="controls">
+        <input type="text" id="search-input" class="search-box" placeholder="Search by name, email, phone, or website...">
+        <select id="status-filter" onchange="loadContacts(document.getElementById('search-input').value, 1)">
+          <option value="">All email statuses</option>
+          <option value="valid">Valid</option>
+          <option value="invalid">Invalid</option>
+          <option value="unknown">Unchecked</option>
+        </select>
+        <button class="btn-primary" onclick="openAddModal()">+ Add Contact</button>
+        <button class="btn-secondary" onclick="document.getElementById('csv-file-input').click()">Import CSV</button>
+        <input type="file" id="csv-file-input" accept=".csv" onchange="importCsv(event)">
+      </div>
 
-    <!-- Add/Edit Modal -->
+      <div class="controls">
+        <button class="btn-secondary" onclick="verifySelectedOrPage()">✓ Verify emails on this page</button>
+        <button class="btn-secondary" onclick="exportSelected()">Export selected (name + email)</button>
+        <button class="btn-secondary" onclick="exportContacts()">Export this page (CSV)</button>
+      </div>
+
+      <div id="import-progress" class="import-progress" style="display:none;"></div>
+
+      <div class="select-all-row">
+        <input type="checkbox" id="select-all-checkbox" onchange="toggleSelectAll(this.checked)">
+        <label for="select-all-checkbox">Select all on this page</label>
+        <span id="selected-count" style="margin-left:auto;"></span>
+      </div>
+
+      <div id="contacts-container" class="contacts-list"></div>
+
+      <div class="pagination" id="pagination-controls"></div>
+    </div>
+
+    <div id="panel-websites" class="tab-panel">
+      <div class="controls">
+        <input type="text" id="website-search-input" class="search-box" placeholder="Search by name, URL, or category...">
+        <button class="btn-primary" onclick="openAddWebsiteModal()">+ Add Website</button>
+        <button class="btn-secondary" onclick="exportWebsites()">Export CSV</button>
+      </div>
+
+      <div id="websites-container" class="contacts-list"></div>
+    </div>
+
+    <!-- Add/Edit Contact Modal -->
     <div id="contact-modal" class="modal">
       <div class="modal-content">
         <h2 id="modal-title">Add Contact</h2>
@@ -266,6 +412,10 @@
             <input type="text" id="company">
           </div>
           <div class="form-group">
+            <label>Website</label>
+            <input type="text" id="contact-website" placeholder="https://example.com">
+          </div>
+          <div class="form-group">
             <label>Notes</label>
             <textarea id="notes" rows="3"></textarea>
           </div>
@@ -276,27 +426,87 @@
         </form>
       </div>
     </div>
+
+    <!-- Add/Edit Website Modal -->
+    <div id="website-modal" class="modal">
+      <div class="modal-content">
+        <h2 id="website-modal-title">Add Website</h2>
+        <form id="website-form">
+          <div class="form-group">
+            <label>Name *</label>
+            <input type="text" id="website-name" required>
+          </div>
+          <div class="form-group">
+            <label>URL *</label>
+            <input type="text" id="website-url" placeholder="https://example.com" required>
+          </div>
+          <div class="form-group">
+            <label>Category</label>
+            <input type="text" id="website-category" placeholder="e.g. Reference, Tool, Client">
+          </div>
+          <div class="form-group">
+            <label>Notes</label>
+            <textarea id="website-notes" rows="3"></textarea>
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="btn-secondary" onclick="closeWebsiteModal()">Cancel</button>
+            <button type="submit" class="btn-primary">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 
   <script>
     const API_URL = 'http://localhost:3001/api';
     let contacts = [];
+    let websites = [];
     let currentEditId = null;
+    let currentWebsiteEditId = null;
+    let currentPage = 1;
+    let totalPages = 1;
+    let currentSearch = '';
+    const selectedIds = new Set();
 
-    // Load contacts on page load
-    async function loadContacts(search = '') {
+    function switchTab(tab) {
+      document.getElementById('panel-contacts').classList.toggle('active', tab === 'contacts');
+      document.getElementById('panel-websites').classList.toggle('active', tab === 'websites');
+      document.getElementById('tab-btn-contacts').classList.toggle('active', tab === 'contacts');
+      document.getElementById('tab-btn-websites').classList.toggle('active', tab === 'websites');
+      if (tab === 'websites' && websites.length === 0) loadWebsites();
+    }
+
+    function normalizeUrl(url) {
+      return /^https?:\/\//i.test(url) ? url : `https://${url}`;
+    }
+
+    // Load one page of contacts (70k+ rows can't be rendered as DOM cards all at once)
+    async function loadContacts(search = '', page = 1) {
       try {
-        const url = search
-          ? `${API_URL}/contacts?search=${encodeURIComponent(search)}`
-          : `${API_URL}/contacts`;
+        currentSearch = search;
+        currentPage = page;
+        const status = document.getElementById('status-filter').value;
+        const params = new URLSearchParams({ page, pageSize: 50 });
+        if (search) params.set('search', search);
+        if (status) params.set('emailStatus', status);
 
-        const response = await fetch(url);
-        contacts = await response.json();
+        const response = await fetch(`${API_URL}/contacts?${params}`);
+        const data = await response.json();
+        contacts = data.rows;
+        totalPages = data.totalPages;
+        currentPage = data.page;
         renderContacts();
+        renderPagination(data.total);
         updateStats();
+        updateSelectedCount();
       } catch (err) {
         console.error('Error loading contacts:', err);
       }
+    }
+
+    function statusBadge(status) {
+      const label = status === 'valid' ? 'Valid' : status === 'invalid' ? 'Invalid' : 'Unchecked';
+      return `<span class="status-badge status-${status || 'unknown'}">${label}</span>`;
     }
 
     function renderContacts() {
@@ -309,10 +519,14 @@
 
       container.innerHTML = contacts.map(contact => `
         <div class="contact-card">
+          <input type="checkbox" class="contact-select" data-id="${contact.id}"
+                 ${selectedIds.has(contact.id) ? 'checked' : ''}
+                 onchange="toggleSelect(${contact.id}, this.checked)">
           <div class="contact-name">${contact.firstName} ${contact.lastName || ''}</div>
-          ${contact.email ? `<div class="contact-field">📧 ${contact.email}</div>` : ''}
+          ${contact.email ? `<div class="contact-field">📧 ${contact.email} ${statusBadge(contact.emailStatus)}</div>` : ''}
           ${contact.phone ? `<div class="contact-field">📱 ${contact.phone}</div>` : ''}
           ${contact.company ? `<div class="contact-field">🏢 ${contact.company}</div>` : ''}
+          ${contact.website ? `<div class="contact-field">🔗 <a class="website-link" href="${normalizeUrl(contact.website)}" target="_blank" rel="noopener noreferrer">${contact.website}</a></div>` : ''}
           <div class="contact-actions">
             <button class="btn-secondary" onclick="editContact(${contact.id})">Edit</button>
             <button class="btn-danger" onclick="deleteContact(${contact.id})">Delete</button>
@@ -321,11 +535,37 @@
       `).join('');
     }
 
+    function renderPagination(total) {
+      const el = document.getElementById('pagination-controls');
+      el.innerHTML = `
+        <button class="btn-secondary" ${currentPage <= 1 ? 'disabled' : ''} onclick="loadContacts(currentSearch, currentPage - 1)">Prev</button>
+        <span>Page ${currentPage} of ${totalPages} (${total.toLocaleString()} contacts)</span>
+        <button class="btn-secondary" ${currentPage >= totalPages ? 'disabled' : ''} onclick="loadContacts(currentSearch, currentPage + 1)">Next</button>
+      `;
+    }
+
+    function toggleSelect(id, checked) {
+      if (checked) selectedIds.add(id); else selectedIds.delete(id);
+      updateSelectedCount();
+    }
+
+    function toggleSelectAll(checked) {
+      contacts.forEach(c => checked ? selectedIds.add(c.id) : selectedIds.delete(c.id));
+      renderContacts();
+      updateSelectedCount();
+    }
+
+    function updateSelectedCount() {
+      document.getElementById('selected-count').textContent =
+        selectedIds.size > 0 ? `${selectedIds.size} selected` : '';
+    }
+
     async function updateStats() {
       try {
         const response = await fetch(`${API_URL}/stats`);
         const data = await response.json();
-        document.getElementById('total-count').textContent = data.total;
+        document.getElementById('total-count').textContent = data.contacts;
+        document.getElementById('website-count').textContent = data.websites;
       } catch (err) {
         console.error('Error fetching stats:', err);
       }
@@ -349,6 +589,7 @@
       document.getElementById('email').value = contact.email || '';
       document.getElementById('phone').value = contact.phone || '';
       document.getElementById('company').value = contact.company || '';
+      document.getElementById('contact-website').value = contact.website || '';
       document.getElementById('notes').value = contact.notes || '';
       document.getElementById('contact-modal').classList.add('active');
     }
@@ -358,7 +599,8 @@
 
       try {
         await fetch(`${API_URL}/contacts/${id}`, { method: 'DELETE' });
-        loadContacts();
+        selectedIds.delete(id);
+        loadContacts(currentSearch, currentPage);
       } catch (err) {
         console.error('Error deleting contact:', err);
       }
@@ -378,6 +620,7 @@
         email: document.getElementById('email').value,
         phone: document.getElementById('phone').value,
         company: document.getElementById('company').value,
+        website: document.getElementById('contact-website').value,
         notes: document.getElementById('notes').value,
       };
 
@@ -394,7 +637,7 @@
           body: JSON.stringify(data),
         });
 
-        loadContacts();
+        loadContacts(currentSearch, currentPage);
         closeModal();
       } catch (err) {
         console.error('Error saving contact:', err);
@@ -402,25 +645,131 @@
       }
     });
 
+    let searchDebounce;
     document.getElementById('search-input').addEventListener('input', (e) => {
-      loadContacts(e.target.value);
+      clearTimeout(searchDebounce);
+      const value = e.target.value;
+      searchDebounce = setTimeout(() => loadContacts(value, 1), 250);
     });
 
-    function exportContacts() {
-      if (contacts.length === 0) {
-        alert('No contacts to export');
+    // --- Websites ---
+
+    async function loadWebsites(search = '') {
+      try {
+        const url = search
+          ? `${API_URL}/websites?search=${encodeURIComponent(search)}`
+          : `${API_URL}/websites`;
+
+        const response = await fetch(url);
+        websites = await response.json();
+        renderWebsites();
+        updateStats();
+      } catch (err) {
+        console.error('Error loading websites:', err);
+      }
+    }
+
+    function renderWebsites() {
+      const container = document.getElementById('websites-container');
+
+      if (websites.length === 0) {
+        container.innerHTML = '<div class="empty">No websites found. Add one to get started!</div>';
         return;
       }
 
-      const headers = ['First Name', 'Last Name', 'Email', 'Phone', 'Company', 'Notes'];
-      const rows = contacts.map(c => [
-        c.firstName,
-        c.lastName || '',
-        c.email || '',
-        c.phone || '',
-        c.company || '',
-        c.notes || '',
-      ]);
+      container.innerHTML = websites.map(site => `
+        <div class="contact-card">
+          ${site.category ? `<div class="category-badge">${site.category}</div>` : ''}
+          <div class="contact-name">${site.name}</div>
+          <div class="contact-field">🔗 <a class="website-link" href="${normalizeUrl(site.url)}" target="_blank" rel="noopener noreferrer">${site.url}</a></div>
+          ${site.notes ? `<div class="contact-field">${site.notes}</div>` : ''}
+          <div class="contact-actions">
+            <button class="btn-secondary" onclick="editWebsite(${site.id})">Edit</button>
+            <button class="btn-danger" onclick="deleteWebsite(${site.id})">Delete</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function openAddWebsiteModal() {
+      currentWebsiteEditId = null;
+      document.getElementById('website-modal-title').textContent = 'Add Website';
+      document.getElementById('website-form').reset();
+      document.getElementById('website-modal').classList.add('active');
+    }
+
+    function editWebsite(id) {
+      const site = websites.find(s => s.id === id);
+      if (!site) return;
+
+      currentWebsiteEditId = id;
+      document.getElementById('website-modal-title').textContent = 'Edit Website';
+      document.getElementById('website-name').value = site.name;
+      document.getElementById('website-url').value = site.url;
+      document.getElementById('website-category').value = site.category || '';
+      document.getElementById('website-notes').value = site.notes || '';
+      document.getElementById('website-modal').classList.add('active');
+    }
+
+    async function deleteWebsite(id) {
+      if (!confirm('Delete this website?')) return;
+
+      try {
+        await fetch(`${API_URL}/websites/${id}`, { method: 'DELETE' });
+        loadWebsites();
+      } catch (err) {
+        console.error('Error deleting website:', err);
+      }
+    }
+
+    function closeWebsiteModal() {
+      document.getElementById('website-modal').classList.remove('active');
+      currentWebsiteEditId = null;
+    }
+
+    document.getElementById('website-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const data = {
+        name: document.getElementById('website-name').value,
+        url: document.getElementById('website-url').value,
+        category: document.getElementById('website-category').value,
+        notes: document.getElementById('website-notes').value,
+      };
+
+      try {
+        const url = currentWebsiteEditId
+          ? `${API_URL}/websites/${currentWebsiteEditId}`
+          : `${API_URL}/websites`;
+
+        const method = currentWebsiteEditId ? 'PUT' : 'POST';
+
+        await fetch(url, {
+          method,
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+
+        loadWebsites();
+        closeWebsiteModal();
+      } catch (err) {
+        console.error('Error saving website:', err);
+        alert('Error saving website');
+      }
+    });
+
+    document.getElementById('website-search-input').addEventListener('input', (e) => {
+      loadWebsites(e.target.value);
+    });
+
+    function exportWebsites() {
+      if (websites.length === 0) {
+        alert('No websites to export');
+        return;
+      }
+
+      const headers = ['Name', 'URL', 'Category', 'Notes'];
+      const rows = websites.map(s => [s.name, s.url, s.category || '', s.notes || '']);
 
       const csv = [headers, ...rows]
         .map(row => row.map(cell => `"${cell}"`).join(','))
@@ -430,12 +779,138 @@
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'contacts.csv';
+      a.download = 'websites.csv';
       a.click();
+    }
+
+    function downloadCsv(headers, rows, filename) {
+      const csv = [headers, ...rows]
+        .map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(','))
+        .join('\n');
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      a.click();
+      window.URL.revokeObjectURL(url);
+    }
+
+    function exportContacts() {
+      if (contacts.length === 0) {
+        alert('No contacts on this page to export');
+        return;
+      }
+
+      const headers = ['First Name', 'Last Name', 'Email', 'Phone', 'Company', 'Website', 'Email Status', 'Notes'];
+      const rows = contacts.map(c => [
+        c.firstName, c.lastName || '', c.email || '', c.phone || '',
+        c.company || '', c.website || '', c.emailStatus || 'unknown', c.notes || '',
+      ]);
+      downloadCsv(headers, rows, 'contacts-page.csv');
+    }
+
+    // Mailchimp-style merge list: just first name + email for whoever is checked, from the pages you've viewed.
+    function exportSelected() {
+      const rows = contacts
+        .filter(c => selectedIds.has(c.id))
+        .map(c => [c.firstName, c.email || '']);
+
+      if (rows.length === 0) {
+        alert('No selected contacts on this page. Select rows first (selection only tracks contacts you have loaded/viewed).');
+        return;
+      }
+      downloadCsv(['First Name', 'Email'], rows, 'mailing-list.csv');
+    }
+
+    // Checks syntax + whether the domain has mail servers (MX record). NOT full mailbox-level
+    // deliverability — that needs a paid verification API (ZeroBounce/NeverBounce/etc.) we don't have.
+    async function verifySelectedOrPage() {
+      const ids = selectedIds.size > 0 ? Array.from(selectedIds) : contacts.map(c => c.id);
+      const progressEl = document.getElementById('import-progress');
+      progressEl.style.display = 'block';
+      progressEl.textContent = `Verifying ${ids.length} email(s)...`;
+
+      try {
+        const response = await fetch(`${API_URL}/contacts/verify-emails`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ids }),
+        });
+        const data = await response.json();
+        progressEl.textContent = `Checked ${data.checked}: ${data.valid} valid, ${data.invalid} invalid.`;
+        loadContacts(currentSearch, currentPage);
+      } catch (err) {
+        console.error('Error verifying emails:', err);
+        progressEl.textContent = 'Verification failed — see console.';
+      }
+    }
+
+    // --- CSV import (handles 70k+ rows via PapaParse + batched inserts) ---
+
+    function importCsv(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const progressEl = document.getElementById('import-progress');
+      progressEl.style.display = 'block';
+      progressEl.textContent = `Parsing ${file.name}...`;
+
+      Papa.parse(file, {
+        header: true,
+        skipEmptyLines: true,
+        complete: async (results) => {
+          const rows = results.data.map(r => ({
+            firstName: r.firstName || r.FirstName || r['First Name'] || r.name || r.Name || '',
+            lastName: r.lastName || r.LastName || r['Last Name'] || '',
+            email: r.email || r.Email || '',
+            phone: r.phone || r.Phone || '',
+            company: r.company || r.Company || '',
+            website: r.website || r.Website || r.url || r.URL || '',
+            notes: r.notes || r.Notes || '',
+          })).filter(r => r.firstName || r.email);
+
+          await bulkImport(rows, progressEl);
+          event.target.value = '';
+        },
+        error: (err) => {
+          progressEl.textContent = `Failed to parse CSV: ${err.message}`;
+        },
+      });
+    }
+
+    async function bulkImport(rows, progressEl) {
+      const BATCH_SIZE = 2000;
+      let inserted = 0, skipped = 0;
+
+      for (let i = 0; i < rows.length; i += BATCH_SIZE) {
+        const batch = rows.slice(i, i + BATCH_SIZE);
+        progressEl.textContent = `Importing ${Math.min(i + BATCH_SIZE, rows.length).toLocaleString()} / ${rows.length.toLocaleString()}...`;
+
+        try {
+          const response = await fetch(`${API_URL}/contacts/bulk`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ contacts: batch }),
+          });
+          const data = await response.json();
+          if (!response.ok) throw new Error(data.error || 'Import batch failed');
+          inserted += data.inserted;
+          skipped += data.skipped;
+        } catch (err) {
+          console.error('Import batch failed:', err);
+          progressEl.textContent = `Import stopped after ${inserted.toLocaleString()} rows — batch error: ${err.message}`;
+          return;
+        }
+      }
+
+      progressEl.textContent = `Done: ${inserted.toLocaleString()} imported, ${skipped.toLocaleString()} skipped (duplicates or missing name).`;
+      loadContacts('', 1);
     }
 
     // Initial load
     loadContacts();
+    updateStats();
   </script>
 </body>
 </html>
