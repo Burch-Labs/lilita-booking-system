@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import '../styles/AgentOnboarding.css';
+import { api } from '../config/api.js';
 
 export default function AgentOnboarding({ onComplete }) {
   const [step, setStep] = useState(1);
+  const [error, setError] = useState('');
   const [formData, setFormData] = useState({
     email: '',
     name: '',
@@ -17,34 +19,32 @@ export default function AgentOnboarding({ onComplete }) {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    setError('');
   };
 
   const handleCreateAccount = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setError('');
 
     try {
-      const response = await fetch('http://localhost:3002/api/auth/agent-register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: formData.email,
-          first_name: formData.name.split(' ')[0],
-          last_name: formData.name.split(' ')[1] || '',
-          company: formData.company,
-          password: formData.password,
-          agent_type: 'direct'
-        })
+      const data = await api.register({
+        email: formData.email,
+        first_name: formData.name.split(' ')[0],
+        last_name: formData.name.split(' ')[1] || '',
+        company: formData.company,
+        password: formData.password,
+        agent_type: 'direct'
       });
 
-      const data = await response.json();
       if (data.token) {
         localStorage.setItem('token', data.token);
         localStorage.setItem('user', JSON.stringify(data.user));
-        setReferralCode(`AGENT_${formData.name.toUpperCase().replace(/\s/g, '_')}_${Date.now()}`);
+        setReferralCode(data.user.referral_code);
         setStep(2);
       }
     } catch (err) {
+      setError(err.message || 'Registration failed. Please try again.');
       console.error('Registration failed:', err);
     }
     setLoading(false);
@@ -53,29 +53,23 @@ export default function AgentOnboarding({ onComplete }) {
   const handleCreateOffer = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setError('');
 
     try {
-      const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:3002/api/agent-offers', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({
-          title: formData.offerName,
-          base_price: 499.00,
-          agent_selling_price: parseFloat(formData.sellingPrice),
-          valid_from: new Date(),
-          valid_to: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
-          status: 'published'
-        })
+      const today = new Date();
+      const ninetyDaysLater = new Date(today.getTime() + 90 * 24 * 60 * 60 * 1000);
+
+      await api.createOffer({
+        title: formData.offerName,
+        base_price: 499.00,
+        agent_selling_price: parseFloat(formData.sellingPrice),
+        valid_from: today.toISOString().split('T')[0],
+        valid_to: ninetyDaysLater.toISOString().split('T')[0]
       });
 
-      if (response.ok) {
-        setStep(3);
-      }
+      setStep(3);
     } catch (err) {
+      setError(err.message || 'Failed to create offer. Please try again.');
       console.error('Offer creation failed:', err);
     }
     setLoading(false);
@@ -88,6 +82,8 @@ export default function AgentOnboarding({ onComplete }) {
         <div className="onboarding-card">
           <h2>🎯 Join the Agent Network</h2>
           <p>Create your account in 60 seconds</p>
+
+          {error && <div style={{ color: '#e74c3c', marginBottom: '1rem', padding: '0.75rem', backgroundColor: '#fadbd8', borderRadius: '6px' }}>{error}</div>}
 
           <form onSubmit={handleCreateAccount}>
             <div className="form-group">

@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import '../styles/AgentDashboard.css';
+import { authApi, api } from '../config/api.js';
 
 export default function AgentDashboard({ user, token }) {
   const [activeTab, setActiveTab] = useState('earnings');
+  const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState({
     totalEarnings: 0,
     thisMonthEarnings: 0,
@@ -13,18 +15,8 @@ export default function AgentDashboard({ user, token }) {
     rating: 4.9,
   });
 
-  const [referrals, setReferrals] = useState([
-    { id: 1, name: 'Ahmed Hassan', bookings: 5, earnings: 1375, status: 'Active ✅' },
-    { id: 2, name: 'Sophia Kowalski', bookings: 3, earnings: 825, status: 'Active ✅' },
-  ]);
-
-  const [leaderboard, setLeaderboard] = useState([
-    { rank: 1, name: 'John Smith', company: 'Safari Elite', bookings: 45, earnings: 12375 },
-    { rank: 2, name: 'Maria Lopez', company: 'African Adventures', bookings: 42, earnings: 11550 },
-    { rank: 3, name: 'Ahmed Hassan', company: 'Desert Explorer', bookings: 38, earnings: 10450 },
-    { rank: 4, name: user?.first_name || 'You', company: user?.company, bookings: 12, earnings: 3300 },
-  ]);
-
+  const [referrals, setReferrals] = useState([]);
+  const [leaderboard, setLeaderboard] = useState([]);
   const [missions, setMissions] = useState([
     { id: 1, title: 'Create Offer', completed: true, reward: 50, icon: '✓' },
     { id: 2, title: 'Share on Social', progress: 1, total: 3, reward: 25, icon: '📱' },
@@ -33,17 +25,46 @@ export default function AgentDashboard({ user, token }) {
   ]);
 
   useEffect(() => {
-    // Simulate real-time earnings
-    setStats({
-      totalEarnings: 3847.50,
-      thisMonthEarnings: 1257.50,
-      pendingPayout: 825.00,
-      leaderboardRank: 47,
-      bookings: 12,
-      subAgents: 2,
-      rating: 4.9,
-    });
-  }, []);
+    const loadDashboardData = async () => {
+      try {
+        setLoading(true);
+
+        // Load user metrics
+        const metricsData = await api.getAgentMetrics(user?.id);
+        if (metricsData) {
+          setStats({
+            totalEarnings: metricsData.agent?.total_earnings || 0,
+            thisMonthEarnings: metricsData.thisMonth?.earnings || 0,
+            pendingPayout: 0, // Calculate from payouts
+            leaderboardRank: metricsData.thisMonth?.leaderboard_rank || 'N/A',
+            bookings: metricsData.agent?.total_bookings || 0,
+            subAgents: metricsData.agent?.sub_agents_count || 0,
+            rating: metricsData.agent?.rating || 4.9,
+          });
+        }
+
+        // Load referrals
+        const referralsData = await authApi.getReferrals();
+        if (referralsData && Array.isArray(referralsData)) {
+          setReferrals(referralsData);
+        }
+
+        // Load leaderboard
+        const leaderboardData = await api.getLeaderboard();
+        if (leaderboardData?.leaders) {
+          setLeaderboard(leaderboardData.leaders);
+        }
+      } catch (err) {
+        console.error('Error loading dashboard:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (user?.id) {
+      loadDashboardData();
+    }
+  }, [user?.id]);
 
   return (
     <div className="agent-dashboard">
