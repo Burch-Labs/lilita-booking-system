@@ -70,13 +70,12 @@ Duration: 3 nights
 
 **What's Included:**
 - Luxury tent accommodation
-- Twice-daily game drives
-- All meals & beverages (premium included)
+- Twice-daily game drives with expert guides
+- All meals (breakfast, lunch, dinner)
+- Standard beverages (non-premium)
 - Airstrip transfers
-- WiFi
-- Hot air balloon safari
-- Community tours
-- Spa treatment
+- Complimentary WiFi
+- All taxes and levies
 
 ### Offer 2: Q1 2027 Pre-Season - 40% Off
 ```
@@ -245,9 +244,10 @@ POST /api/admin/offers
 - Spa & wellness treatments
 - Kids programs
 
-### Amenities Included
+### Amenities Included (in Offers)
 - Luxury tent accommodation
-- All meals & beverages (premium brands)
+- All meals (breakfast, lunch, dinner)
+- Standard beverages (non-premium)
 - Twice-daily game drives
 - Airstrip transfers
 - Complimentary WiFi
