@@ -1,0 +1,637 @@
+.agent-dashboard {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #f8f9fa;
+  min-height: 100vh;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #2c5f8d 0%, #1e4b6f 100%);
+  color: white;
+  border-radius: 12px;
+}
+
+.dashboard-header h1 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.dashboard-header p {
+  margin: 0.5rem 0 0 0;
+  opacity: 0.9;
+}
+
+.tier-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.tier-level {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.rank {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid #d4a574;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.stat-amount {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2c5f8d;
+  margin-bottom: 0.5rem;
+}
+
+.stat-detail {
+  font-size: 0.85rem;
+  color: #999;
+}
+
+/* Tier Progress */
+.tier-progress {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tier-progress h3 {
+  color: #2c5f8d;
+  margin: 0 0 1rem 0;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 24px;
+  background: #e0e1e5;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #27ae60, #2ecc71);
+  border-radius: 12px;
+  transition: width 0.3s;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.reward {
+  font-weight: 600;
+  color: #27ae60;
+}
+
+/* Tab Navigation */
+.tab-navigation {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  border-bottom: 2px solid #e0e1e5;
+}
+
+.tab-btn {
+  padding: 1rem 1.5rem;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: #666;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+
+.tab-btn:hover {
+  color: #2c5f8d;
+}
+
+.tab-btn.active {
+  color: #2c5f8d;
+  border-bottom-color: #d4a574;
+}
+
+/* Tab Content */
+.tab-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tab-content h2 {
+  color: #2c5f8d;
+  margin: 0 0 0.5rem 0;
+}
+
+.leaderboard-subtitle {
+  color: #999;
+  margin-bottom: 1.5rem;
+}
+
+/* Earnings Breakdown */
+.earnings-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.earning-item {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 4px solid #2c5f8d;
+}
+
+.earning-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.label {
+  font-weight: 600;
+  color: #2c5f8d;
+}
+
+.icon {
+  font-size: 1.5rem;
+}
+
+.earning-amount {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #27ae60;
+  margin-bottom: 0.5rem;
+}
+
+.earning-detail {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Referral Cards */
+.referral-header {
+  margin-bottom: 1.5rem;
+}
+
+.referral-header h2 {
+  margin: 0 0 0.5rem 0;
+}
+
+.referral-header p {
+  margin: 0;
+  color: #666;
+}
+
+.referral-card {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  border: 1px solid #e0e1e5;
+}
+
+.referral-info {
+  flex: 1;
+}
+
+.referral-info .name {
+  font-weight: 600;
+  color: #2c5f8d;
+  margin-bottom: 0.25rem;
+}
+
+.status {
+  font-size: 0.9rem;
+  color: #27ae60;
+}
+
+.referral-stats {
+  display: flex;
+  gap: 2rem;
+}
+
+.referral-stats .stat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.referral-stats .label {
+  font-size: 0.85rem;
+  color: #999;
+  margin-bottom: 0.25rem;
+}
+
+.referral-stats .value {
+  font-weight: 700;
+  color: #2c5f8d;
+}
+
+.referral-stats .value.highlight {
+  color: #27ae60;
+  font-size: 1.1rem;
+}
+
+/* Invite Section */
+.invite-section {
+  background: #d4f1d4;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 2px solid #27ae60;
+  margin-top: 2rem;
+}
+
+.invite-section h3 {
+  color: #2c5f8d;
+  margin: 0 0 1rem 0;
+}
+
+.referral-code {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.referral-code input {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid #27ae60;
+  border-radius: 6px;
+  font-family: monospace;
+  background: white;
+  color: #2c5f8d;
+  font-weight: 600;
+}
+
+.btn-copy {
+  background: #27ae60;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background 0.3s;
+}
+
+.btn-copy:hover {
+  background: #229954;
+}
+
+.invite-section p {
+  margin: 0;
+  color: #27ae60;
+  font-size: 0.9rem;
+}
+
+/* Leaderboard */
+.leaderboard {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.leaderboard-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #e0e1e5;
+  transition: all 0.3s;
+}
+
+.leaderboard-row.top-performer {
+  background: linear-gradient(90deg, #fef9e7, #fff);
+  border-left-color: #d4a574;
+  box-shadow: 0 2px 8px rgba(212, 165, 116, 0.2);
+}
+
+.leaderboard-row .rank {
+  font-size: 1.8rem;
+  font-weight: 700;
+  min-width: 50px;
+}
+
+.agent-info {
+  flex: 1;
+}
+
+.agent-info .name {
+  font-weight: 600;
+  color: #2c5f8d;
+  margin-bottom: 0.25rem;
+}
+
+.agent-info .company {
+  font-size: 0.9rem;
+  color: #999;
+}
+
+.stats {
+  display: flex;
+  gap: 2rem;
+}
+
+.stat-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-box .label {
+  font-size: 0.85rem;
+  color: #999;
+  margin-bottom: 0.25rem;
+}
+
+.stat-box .value {
+  font-weight: 700;
+  color: #2c5f8d;
+}
+
+.prize-info {
+  background: #e8ecf1;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+.prize-info h4 {
+  margin: 0 0 0.75rem 0;
+  color: #2c5f8d;
+}
+
+.prize-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.prize-info li {
+  padding: 0.5rem 0;
+  color: #666;
+}
+
+/* Mission Cards */
+.mission-card {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  border-left: 4px solid #d4a574;
+  opacity: 0.7;
+  transition: all 0.3s;
+}
+
+.mission-card.completed {
+  background: #d4f1d4;
+  border-left-color: #27ae60;
+  opacity: 1;
+}
+
+.mission-icon {
+  font-size: 2rem;
+}
+
+.mission-info {
+  flex: 1;
+}
+
+.mission-name {
+  font-weight: 600;
+  color: #2c5f8d;
+  margin-bottom: 0.5rem;
+}
+
+.progress-mini {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.progress-bar-mini {
+  flex: 1;
+  height: 6px;
+  background: #e0e1e5;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill-mini {
+  height: 100%;
+  background: #27ae60;
+}
+
+.completed-badge {
+  background: #27ae60;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.mission-reward {
+  font-weight: 700;
+  color: #27ae60;
+  font-size: 1.1rem;
+}
+
+.bonus-info {
+  background: linear-gradient(135deg, #fef9e7, #fff);
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 4px solid #d4a574;
+  margin-top: 1.5rem;
+}
+
+.bonus-info h3 {
+  margin: 0 0 0.5rem 0;
+  color: #2c5f8d;
+}
+
+.bonus-info p {
+  margin: 0;
+  color: #666;
+}
+
+/* Quick Actions */
+.quick-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  flex: 1;
+  min-width: 150px;
+  padding: 1rem;
+  background: #2c5f8d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.action-btn:hover {
+  background: #1e4b6f;
+  transform: translateY(-2px);
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.btn-primary, .btn-secondary {
+  padding: 1rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  flex: 1;
+  min-width: 150px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #2c5f8d, #1e4b6f);
+  color: white;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background: white;
+  color: #2c5f8d;
+  border: 2px solid #2c5f8d;
+}
+
+.btn-secondary:hover {
+  background: #f0f1f3;
+}
+
+@media (max-width: 768px) {
+  .agent-dashboard {
+    padding: 1rem;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .tier-badge {
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tab-navigation {
+    overflow-x: auto;
+  }
+
+  .referral-card,
+  .leaderboard-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .referral-stats {
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .stats {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .referral-code {
+    flex-direction: column;
+  }
+
+  .action-btn {
+    min-width: 100%;
+  }
+}
