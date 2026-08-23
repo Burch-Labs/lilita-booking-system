@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lilita Keper - Agent Contract and Rates</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f5f5;
+      color: #333;
+      line-height: 1.8;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      padding: 40px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+      border-bottom: 2px solid #2c5f8d;
+      padding-bottom: 30px;
+    }
+    .logo {
+      margin-bottom: 20px;
+    }
+    .logo img {
+      height: 80px;
+      width: auto;
+    }
+    h1 {
+      color: #2c5f8d;
+      font-size: 28px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .subtitle {
+      color: #666;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .location {
+      color: #2c5f8d;
+      font-weight: 600;
+      margin-top: 10px;
+    }
+    .section {
+      margin-bottom: 40px;
+    }
+    .section h2 {
+      color: #2c5f8d;
+      font-size: 18px;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-bottom: 2px solid #d4a574;
+      padding-bottom: 10px;
+    }
+    .section h3 {
+      color: #2c5f8d;
+      font-size: 14px;
+      margin-top: 20px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    th {
+      background: #f8f9fa;
+      color: #2c5f8d;
+      padding: 12px;
+      text-align: left;
+      font-weight: 600;
+      border-bottom: 2px solid #d4a574;
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #e0e0e0;
+      font-size: 14px;
+    }
+    tr:hover {
+      background: #f9f9f9;
+    }
+    .terms {
+      background: #f9f9f9;
+      padding: 15px;
+      border-left: 4px solid #2c5f8d;
+      margin-bottom: 15px;
+      font-size: 13px;
+    }
+    .terms strong {
+      color: #2c5f8d;
+      display: block;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+    ul {
+      margin-left: 20px;
+      margin-bottom: 15px;
+    }
+    li {
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+    .highlight {
+      background: #fff8f5;
+      padding: 15px;
+      border-radius: 4px;
+      margin-bottom: 15px;
+      border: 1px solid #e6d4c5;
+    }
+    .highlight strong {
+      color: #2c5f8d;
+    }
+    .footer {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 2px solid #d4a574;
+      text-align: center;
+      font-size: 12px;
+      color: #666;
+    }
+    .currency-note {
+      background: #e8f4f8;
+      border-left: 4px solid #2c5f8d;
+      padding: 12px;
+      margin-bottom: 20px;
+      font-size: 13px;
+    }
+    @media (max-width: 768px) {
+      .container { padding: 20px; }
+      h1 { font-size: 22px; }
+      table { font-size: 12px; }
+      th, td { padding: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="logo">
+        <img src="/lilita-logo.avif" alt="Lilita Keper">
+      </div>
+      <h1>Agent Contract & Rates</h1>
+      <p class="subtitle">2026 - 2028 Pricing</p>
+      <p class="location">Maasai Mara, Enonkishu Conservancy</p>
+      <p class="location" style="font-size: 12px; font-weight: normal; margin-top: 15px;">Access: Ngerende Airstrip</p>
+    </header>
+
+    <!-- Commission Structure -->
+    <div class="section">
+      <h2>Commission Structure</h2>
+      <div class="terms">
+        <strong>Standard Agent Rate (STO)</strong>
+        20% commission on all bookings
+      </div>
+      <div class="terms">
+        <strong>Premium Partner Tier</strong>
+        40% commission for agents achieving 100+ bed nights annually
+      </div>
+    </div>
+
+    <!-- Payment Terms -->
+    <div class="section">
+      <h2>Payment Terms</h2>
+      <div class="terms">
+        <strong>Deposit</strong>
+        30% of total booking value at confirmation
+      </div>
+      <div class="terms">
+        <strong>Final Payment</strong>
+        Balance due 45 days prior to guest arrival
+      </div>
+    </div>
+
+    <!-- 2026 Rates -->
+    <div class="section">
+      <h2>2026 Rates</h2>
+      <div class="currency-note">
+        All rates quoted in USD per person, sharing accommodation
+      </div>
+
+      <h3>Full Board Package</h3>
+      <p>Accommodation, meals, game drives, transfers, internet, taxes</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Season</th>
+            <th>Dates</th>
+            <th>Rate (USD)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Peak</td>
+            <td>June - September</td>
+            <td>1,600</td>
+          </tr>
+          <tr>
+            <td>Shoulder</td>
+            <td>October - May</td>
+            <td>1,280</td>
+          </tr>
+          <tr>
+            <td>Low</td>
+            <td>April - May</td>
+            <td>960</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>All Inclusive Package</h3>
+      <p>Full Board plus drinks, enhanced activities, spa access</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Season</th>
+            <th>Dates</th>
+            <th>Rate (USD)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Peak</td>
+            <td>June - September</td>
+            <td>2,240</td>
+          </tr>
+          <tr>
+            <td>Shoulder</td>
+            <td>October - May</td>
+            <td>1,792</td>
+          </tr>
+          <tr>
+            <td>Low</td>
+            <td>April - May</td>
+            <td>1,344</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 2027 Rates -->
+    <div class="section">
+      <h2>2027 Rates</h2>
+      <p style="margin-bottom: 15px; color: #666;">15% increase from 2026</p>
+
+      <h3>Full Board Package</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Season</th>
+            <th>Dates</th>
+            <th>Rate (USD)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Peak</td>
+            <td>June - September</td>
+            <td>1,840</td>
+          </tr>
+          <tr>
+            <td>Shoulder</td>
+            <td>October - May</td>
+            <td>1,472</td>
+          </tr>
+          <tr>
+            <td>Low</td>
+            <td>April - May</td>
+            <td>1,104</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>All Inclusive Package</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Season</th>
+            <th>Dates</th>
+            <th>Rate (USD)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Peak</td>
+            <td>June - September</td>
+            <td>2,576</td>
+          </tr>
+          <tr>
+            <td>Shoulder</td>
+            <td>October - May</td>
+            <td>2,060.80</td>
+          </tr>
+          <tr>
+            <td>Low</td>
+            <td>April - May</td>
+            <td>1,545.60</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 2028 Rates -->
+    <div class="section">
+      <h2>2028 Rates - Projection</h2>
+      <p style="margin-bottom: 15px; color: #666;">15% increase from 2027 (32.25% total from 2026). Subject to confirmation Q4 2027.</p>
+
+      <h3>Full Board Package</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Season</th>
+            <th>Dates</th>
+            <th>Rate (USD)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Peak</td>
+            <td>June - September</td>
+            <td>2,116</td>
+          </tr>
+          <tr>
+            <td>Shoulder</td>
+            <td>October - May</td>
+            <td>1,693</td>
+          </tr>
+          <tr>
+            <td>Low</td>
+            <td>April - May</td>
+            <td>1,270</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>All Inclusive Package</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Season</th>
+            <th>Dates</th>
+            <th>Rate (USD)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Peak</td>
+            <td>June - September</td>
+            <td>2,963</td>
+          </tr>
+          <tr>
+            <td>Shoulder</td>
+            <td>October - May</td>
+            <td>2,370</td>
+          </tr>
+          <tr>
+            <td>Low</td>
+            <td>April - May</td>
+            <td>1,777</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Standard Terms -->
+    <div class="section">
+      <h2>Standard Terms & Conditions</h2>
+
+      <h3>Child Policy</h3>
+      <p>Minimum age 6 years. Child rates available for children 12 and under. Children over 12 pay adult rates.</p>
+
+      <h3>Accommodation</h3>
+      <p>12 luxury tented suites. Twin and king configurations available. Rooming requests accommodated subject to availability.</p>
+
+      <h3>Check-in / Check-out</h3>
+      <p>Check-in: 12:00 hrs | Check-out: 10:00 hrs</p>
+
+      <h3>Cancellation Policy</h3>
+      <ul>
+        <li>More than 45 days prior: Deposit refunded (net of bank charges)</li>
+        <li>31-45 days prior: 50% of total value forfeited</li>
+        <li>30 days or less / No-show: 100% of total value forfeited</li>
+      </ul>
+
+      <h3>Park Fees</h3>
+      <p>Park fees payable directly to Kenya Wildlife Service upon entry. Valid for 24 hours from entry time. Additional hours require full 24-hour payment.</p>
+
+      <h3>Insurance</h3>
+      <p>Clients strongly advised to carry comprehensive travel and medical insurance.</p>
+
+      <h3>Access</h3>
+      <p>By Air: Approximately 45 minutes from Wilson Airport to Ngerende Airstrip.</p>
+      <p>By Road: Approximately 4-5 hours from Nairobi (weather dependent).</p>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p>Lilita Keper Safari Lodge</p>
+    </div>
+  </div>
+</body>
+</html>
