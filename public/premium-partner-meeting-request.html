@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meeting Request - Premium Partner Visit</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+      padding: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: linear-gradient(135deg, #a69080 0%, #8b7565 100%);
+      border-radius: 20px;
+      padding: 40px 30px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+      margin-bottom: 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .logo {
+      margin-bottom: 25px;
+    }
+
+    .logo img {
+      height: 75px;
+      width: auto;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+    }
+
+    .greeting {
+      color: #ffffff;
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 15px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .visit-message {
+      color: #f5e6d3;
+      font-size: 15px;
+      line-height: 1.7;
+      margin-bottom: 25px;
+      background: rgba(0,0,0,0.15);
+      padding: 15px;
+      border-radius: 10px;
+      border-left: 3px solid #f5e6d3;
+    }
+
+    .highlight {
+      color: #ffffff;
+      font-weight: 700;
+      display: block;
+      margin: 10px 0 5px 0;
+    }
+
+    .meeting-box {
+      background: rgba(255,255,255,0.15);
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+
+    .meeting-title {
+      color: #f5e6d3;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .meeting-detail {
+      color: #ffffff;
+      font-size: 13px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .meeting-detail strong {
+      color: #f5e6d3;
+      min-width: 80px;
+    }
+
+    .offer-highlight {
+      background: rgba(255,255,255,0.1);
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      color: #f5e6d3;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .offer-highlight strong {
+      color: #ffffff;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .cta-button {
+      background: linear-gradient(135deg, #2c5f8d 0%, #1e4b6f 100%);
+      color: white;
+      padding: 16px 30px;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 15px rgba(44, 95, 141, 0.3);
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(44, 95, 141, 0.4);
+    }
+
+    .whatsapp-btn {
+      background: #25d366;
+      color: white;
+    }
+
+    .whatsapp-btn:hover {
+      background: #1eaa50;
+    }
+
+    .calendar-btn {
+      background: #4285f4;
+      color: white;
+    }
+
+    .calendar-btn:hover {
+      background: #3367d6;
+    }
+
+    .footer {
+      color: rgba(255,255,255,0.85);
+      font-size: 12px;
+      margin-top: 15px;
+      line-height: 1.5;
+    }
+
+    .footer strong {
+      color: #f5e6d3;
+    }
+
+    .whatsapp-text {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+
+    .whatsapp-title {
+      color: #2c5f8d;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .message-content {
+      background: #f9f9f9;
+      padding: 15px;
+      border-radius: 10px;
+      border-left: 4px solid #25d366;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #333;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-family: 'Courier New', monospace;
+    }
+
+    .copy-button {
+      background: #25d366;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .copy-button:hover {
+      background: #1eaa50;
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        padding: 25px 20px;
+      }
+
+      .greeting {
+        font-size: 24px;
+      }
+
+      .meeting-detail {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- VISUAL CARD -->
+    <div class="card">
+      <div class="content">
+        <div class="logo">
+          <img src="/lilita-logo.avif" alt="Lilita Keper">
+        </div>
+
+        <div class="greeting">
+          Hey Anthony! 👋
+        </div>
+
+        <div class="visit-message">
+          <span class="highlight">Hope you've been well!</span>
+          We're excited to visit you next week to personally walk you through Lilita Keper's complete system. Our CEO will be joining me, and we can cover everything in less than 20 minutes.
+
+          <span class="highlight" style="margin-top: 15px;">What we'll cover:</span>
+          ✓ The 40% Premium Partner offer details<br>
+          ✓ Live agent portal demo (mobile & desktop)<br>
+          ✓ Series block booking system<br>
+          ✓ Real-time commission tracking<br>
+          ✓ WhatsApp payment integration<br>
+          ✓ Multi-year rate projections (2026-2028)
+        </div>
+
+        <div class="meeting-box">
+          <div class="meeting-title">📅 Proposed Meeting</div>
+          <div class="meeting-detail">
+            <strong>Date:</strong> Next week (your preference)
+          </div>
+          <div class="meeting-detail">
+            <strong>Time:</strong> 30 minutes (flexible)
+          </div>
+          <div class="meeting-detail">
+            <strong>Location:</strong> Bush & Beyond office
+          </div>
+          <div class="meeting-detail">
+            <strong>Attendees:</strong> CEO + Partnership Lead
+          </div>
+        </div>
+
+        <div class="offer-highlight">
+          <strong>💰 Premium Partner Tier: 40% Commission</strong>
+          Locked in for 2026-2028 | 100+ bed nights annually | ALL rates included
+        </div>
+
+        <a href="https://wa.me/254724167447?text=Perfect%20timing%21%20I%27m%20available%20next%20week.%20Let%20me%20know%20your%20preferred%20day%20and%20time%20for%20the%20demo%20visit.%20Looking%20forward%20to%20meeting%20the%20CEO%20and%20seeing%20the%20system%21" class="cta-button whatsapp-btn">
+          ✅ Confirm Meeting on WhatsApp
+        </a>
+
+        <div class="footer">
+          <strong>Lilita Keper Safari Lodge</strong><br>
+          Maasai Mara, Enonkishu Conservancy<br>
+          <strong>+254 724 167 447</strong><br>
+          sparksnairobi@gmail.com
+        </div>
+      </div>
+    </div>
+
+    <!-- WHATSAPP MESSAGE SECTION -->
+    <div class="whatsapp-text">
+      <div class="whatsapp-title">📱 Copy & Send This Message</div>
+      <div class="message-content">Hi Anthony,
+
+Hope you've been well!
+
+I'm reaching out because we're genuinely impressed with Bush & Beyond's work in the Mara. Your reputation for quality is exactly what we're building with our Premium Partner tier.
+
+I'd love to visit you next week—our CEO will join me—and walk you through the complete system in less than 20 minutes. We can show you:
+
+✓ 40% Commission structure (2026-2028)
+✓ Live agent portal demo
+✓ Series block booking
+✓ Real-time commission tracking
+✓ WhatsApp integration
+✓ Your projected earnings
+
+Your guests deserve the best, and Lilita Keper matches that caliber. Let's explore this together.
+
+When works best for you next week?
+
+Thanks,
+[Your Name]
++254 724 167 447
