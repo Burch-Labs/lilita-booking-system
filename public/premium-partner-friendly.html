@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Partner Offer - Friendly Message</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+      padding: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: linear-gradient(135deg, #a69080 0%, #8b7565 100%);
+      border-radius: 20px;
+      padding: 40px 30px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+      margin-bottom: 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .logo {
+      margin-bottom: 25px;
+    }
+
+    .logo img {
+      height: 75px;
+      width: auto;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+    }
+
+    .friendly-greeting {
+      color: #ffffff;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      line-height: 1.3;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .friendly-text {
+      color: #f5e6d3;
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 25px;
+      font-weight: 500;
+    }
+
+    .highlight-box {
+      background: rgba(255,255,255,0.15);
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .offer-big {
+      color: #f5e6d3;
+      font-size: 36px;
+      font-weight: 800;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .offer-desc {
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .benefits {
+      background: rgba(0,0,0,0.2);
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      color: #f5e6d3;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .benefits strong {
+      color: #ffffff;
+      display: block;
+      margin-top: 8px;
+      margin-bottom: 3px;
+      font-size: 14px;
+    }
+
+    .benefits strong:first-child {
+      margin-top: 0;
+    }
+
+    .cta-button {
+      background: linear-gradient(135deg, #2c5f8d 0%, #1e4b6f 100%);
+      color: white;
+      padding: 16px 30px;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 15px rgba(44, 95, 141, 0.3);
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(44, 95, 141, 0.4);
+    }
+
+    .footer {
+      color: rgba(255,255,255,0.85);
+      font-size: 12px;
+      margin-top: 15px;
+    }
+
+    .footer strong {
+      color: #f5e6d3;
+    }
+
+    .email-section {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+
+    .email-title {
+      color: #2c5f8d;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .email-content {
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 10px;
+      border-left: 4px solid #d4a574;
+      font-size: 14px;
+      line-height: 1.7;
+      color: #333;
+      font-family: 'Courier New', monospace;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      overflow-x: auto;
+    }
+
+    .copy-btn {
+      background: #2c5f8d;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 15px;
+      width: 100%;
+    }
+
+    .copy-btn:hover {
+      background: #1e4b6f;
+    }
+
+    .whatsapp-section {
+      background: #d4edda;
+      padding: 20px;
+      border-radius: 15px;
+      border: 2px solid #28a745;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .whatsapp-title {
+      color: #155724;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .whatsapp-btn {
+      background: #25d366;
+      color: white;
+      padding: 14px 30px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+      transition: all 0.3s;
+    }
+
+    .whatsapp-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        padding: 25px 20px;
+      }
+
+      .friendly-greeting {
+        font-size: 20px;
+      }
+
+      .offer-big {
+        font-size: 32px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- VISUAL WHATSAPP CARD -->
+    <div class="card">
+      <div class="content">
+        <div class="logo">
+          <img src="/lilita-logo.avif" alt="Lilita Keper">
+        </div>
+
+        <div class="friendly-greeting">
+          Hey Anthony! 👋<br>
+          Something Special for Bush & Beyond
+        </div>
+
+        <div class="friendly-text">
+          We've been genuinely impressed by the caliber of guests and experiences Bush & Beyond brings to the Maasai Mara. Your reputation for excellence is exactly what we're looking for.
+        </div>
+
+        <div class="highlight-box">
+          <span class="offer-big">40%</span>
+          <span class="offer-desc">Commission on Every Booking</span>
+        </div>
+
+        <div class="benefits">
+          <strong>✓ Locked in for 2026, 2027 & 2028</strong>
+          Based on 100+ bed nights annually
+
+          <strong>✓ Your Rate Growth</strong>
+          Peak: $640 (2026) → $736 (2027) → $846 (2028)
+
+          <strong>✓ Everything Counts</strong>
+          Rack rates, STO rates—all 40% commission
+
+          <strong>✓ Plus Bonuses</strong>
+          $50 USD per referral, payment tracking, proposals
+        </div>
+
+        <div class="friendly-text" style="margin-bottom: 15px;">
+          Your guests expect nothing less than extraordinary. Lilita Keper matches that—luxury accommodations, seamless WhatsApp integration, real-time commission tracking.
+        </div>
+
+        <a href="https://wa.me/254724167447?text=Hi%20team%2C%20I%27m%20interested%20in%20exploring%20the%2040%25%20Premium%20Partner%20offer%20from%20Lilita%20Keper%20for%202026-2028" class="cta-button">
+          💬 Let's Chat on WhatsApp
+        </a>
+
+        <div class="footer">
+          <strong>Lilita Keper Safari Lodge</strong><br>
+          Maasai Mara, Enonkishu Conservancy<br>
+          <strong>+254 724 167 447</strong><br>
+          sparksnairobi@gmail.com
+        </div>
+      </div>
+    </div>
+
+    <!-- EMAIL CONFIRMATION SECTION -->
+    <div class="email-section">
+      <div class="email-title">📧 Email Confirmation Message</div>
+      <div class="email-content">Subject: Exclusive 40% Premium Partner Opportunity - Lilita Keper
+
+Hi Anthony,
+
+I hope this finds you well! I wanted to personally reach out about an exclusive opportunity we're extending to Bush & Beyond.
+
+Over the years, we've watched your team deliver exceptional experiences to discerning travelers across the Maasai Mara. That's exactly the caliber of partnership we want to build.
+
+We're offering you our Premium Partner tier:
+
+🎯 40% Commission (locked in for 2026-2028)
+   Based on 100+ bed nights annually
+   Applies to ALL bookings—rack rates, STO rates, everything
+
+📈 Your Rates Grow with Value
+   2026: Peak $640 | Shoulder $512 | Low $384
+   2027: Peak $736 | Shoulder $589 | Low $442
+   2028: Peak $846 | Shoulder $677 | Low $508
+
+💰 Additional Revenue
+   $50 USD per referral bonus
+   Real-time commission tracking
+   48-hour proposals with integrated payments
+
+We know your guests' expectations. Lilita Keper's luxury experience, mobile-first agent portal, and WhatsApp integration align perfectly.
+
+Ready to explore? I'm available this week to discuss details.
+
+Looking forward to building something special together.
+
+Warm regards,
+
+Lilita Keper Partnership Team
++254 724 167 447
+sparksnairobi@gmail.com
