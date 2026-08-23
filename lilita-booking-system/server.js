@@ -5,10 +5,13 @@ import pg from 'pg';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { setupAgentPlatformRoutes } from './agent-platform-api.js';
 
 dotenv.config();
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 const PORT = process.env.PORT || 3001;
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
@@ -19,6 +22,9 @@ console.log(`🚀 Agent Platform 2.0 starting on port ${PORT}`);
 app.use(cors());
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
+
+// Serve React frontend from frontend/dist
+app.use(express.static(path.join(__dirname, 'frontend/dist')));
 
 // Database connection - with error handling
 let pool = null;
@@ -89,9 +95,9 @@ try {
   console.error('⚠️ Error loading routes:', err.message);
 }
 
-// 404 handler
-app.use((req, res) => {
-  res.status(404).json({ error: 'Not found', path: req.path });
+// Serve React index.html for SPA routing (catch-all)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend/dist/index.html'));
 });
 
 // Error handler
