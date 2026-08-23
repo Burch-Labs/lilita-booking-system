@@ -112,7 +112,25 @@ try {
 
 // Serve React index.html for SPA routing (catch-all)
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend/dist/index.html'));
+  const indexPath = path.join(__dirname, 'frontend/dist/index.html');
+  let html = fs.readFileSync(indexPath, 'utf8');
+
+  // Inject fetch patch before closing head
+  const fetchPatch = `
+    <script>
+      window.fetch = (function(origFetch) {
+        return function(resource, config) {
+          if (typeof resource === 'string' && resource.includes('localhost:3002')) {
+            resource = resource.replace('http://localhost:3002', '/api');
+          }
+          return origFetch.call(this, resource, config);
+        };
+      })(window.fetch);
+    </script>
+  `;
+  html = html.replace('</head>', fetchPatch + '</head>');
+
+  res.type('text/html').send(html);
 });
 
 // Error handler
