@@ -381,6 +381,10 @@
         <button class="btn btn-primary" onclick="downloadProposal()">💾 Download PDF</button>
         <button class="btn btn-primary" onclick="shareProposalWhatsApp()">📱 Share on WhatsApp</button>
         <button class="btn btn-primary" onclick="shareProposalEmail()">📧 Share via Email</button>
+      </div>
+
+      <div class="action-buttons" style="margin-top: 15px;">
+        <button class="btn btn-primary" onclick="reshareBookingConfirmation()">🔄 Reshare Booking Confirmation</button>
         <button class="btn btn-secondary" onclick="closePreview()">← Back to Edit</button>
       </div>
     </div>
@@ -515,14 +519,14 @@
     function requestMpesaPayment() {
       const clientName = document.getElementById('clientName').value;
       const trackingCode = document.getElementById('trackingCode').value;
-      const message = `I have a proposal for ${clientName} (${trackingCode}). Please send M-Pesa payment link for the deposit.`;
+      const message = `I need an M-Pesa payment link for my booking payment (${trackingCode} - ${clientName})`;
       window.open(`https://wa.me/254180044355?text=${encodeURIComponent(message)}`, '_blank');
     }
 
     function requestCardPayment() {
       const clientName = document.getElementById('clientName').value;
       const trackingCode = document.getElementById('trackingCode').value;
-      const message = `I have a proposal for ${clientName} (${trackingCode}). Please send credit card payment link for the deposit.`;
+      const message = `I need a credit card payment link for my 100% deposit payment (${trackingCode} - ${clientName})`;
       window.open(`https://wa.me/254180044355?text=${encodeURIComponent(message)}`, '_blank');
     }
 
@@ -587,6 +591,58 @@ Lilita Keper Safari Lodge Team`;
         window.open(`mailto:${clientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`, '_blank');
       } else {
         alert('📧 Please enter client email to send proposal via email');
+      }
+    }
+
+    function reshareBookingConfirmation() {
+      const clientName = document.getElementById('clientName').value;
+      const clientEmail = document.getElementById('clientEmail').value;
+      const trackingCode = document.getElementById('trackingCode').value;
+      const checkInDate = document.getElementById('checkInDate').value;
+      const checkOutDate = document.getElementById('checkOutDate').value;
+
+      const message = `✅ BOOKING CONFIRMATION - Lilita Keper
+
+Dear ${clientName},
+
+Your booking has been confirmed!
+
+📋 Booking Details:
+🔖 Confirmation Code: ${trackingCode}
+📅 Check-in: ${new Date(checkInDate).toLocaleDateString()}
+📅 Check-out: ${new Date(checkOutDate).toLocaleDateString()}
+
+✅ Status: CONFIRMED
+💳 Payment: Required
+📍 Location: Lilita Keper Safari Lodge, Masai Mara
+
+Next Steps:
+1. Complete your 100% deposit payment
+2. You'll receive final confirmation
+3. Booking is secure once payment received
+
+Payment Options:
+📱 M-Pesa: Request link via WhatsApp
+💳 Credit Card: Request link via WhatsApp
+💬 Support: +254 180 044 355
+
+Thank you for choosing Lilita Keper!
+
+Arijit Bose
+CEO, Lilita Keper Masai Mara`;
+
+      const choice = confirm('Send booking confirmation via WhatsApp or Email?\n\nOK = WhatsApp\nCancel = Email');
+
+      if (choice) {
+        window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
+      } else {
+        const subject = `Booking Confirmation - ${trackingCode}`;
+        const emailBody = message;
+        if (clientEmail) {
+          window.open(`mailto:${clientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`, '_blank');
+        } else {
+          alert('📧 Please enter client email to send confirmation via email');
+        }
       }
     }
 

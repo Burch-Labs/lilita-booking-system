@@ -351,10 +351,10 @@
 
     function requestPaymentLink(type) {
       if (type === 'mpesa') {
-        const message = 'I need an M-Pesa payment link for my commission deposit';
+        const message = 'I need an M-Pesa payment link for my booking payment';
         window.open(`https://wa.me/254180044355?text=${encodeURIComponent(message)}`, '_blank');
       } else if (type === 'card') {
-        const message = 'I need a credit card payment link for my commission deposit';
+        const message = 'I need a credit card payment link for my 100% deposit payment';
         window.open(`https://wa.me/254180044355?text=${encodeURIComponent(message)}`, '_blank');
       }
     }
