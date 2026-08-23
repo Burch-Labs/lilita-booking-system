@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent Portal - Lilita Keper</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #2c5f8d 0%, #1e4b6f 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .header {
+      text-align: center;
+      color: white;
+      margin-bottom: 50px;
+    }
+
+    .logo {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      font-size: 1.2em;
+      opacity: 0.9;
+    }
+
+    .portal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .portal-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .portal-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+
+    .portal-header {
+      padding: 40px;
+      background: linear-gradient(135deg, #2c5f8d 0%, #1e4b6f 100%);
+      color: white;
+    }
+
+    .portal-icon {
+      font-size: 48px;
+      margin-bottom: 15px;
+    }
+
+    .portal-title {
+      font-size: 1.8em;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .portal-desc {
+      opacity: 0.9;
+      font-size: 0.95em;
+      line-height: 1.5;
+    }
+
+    .portal-content {
+      padding: 30px;
+      background: white;
+    }
+
+    .feature-list {
+      list-style: none;
+      margin-bottom: 20px;
+    }
+
+    .feature-list li {
+      padding: 10px 0;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 0.95em;
+      color: #666;
+    }
+
+    .feature-list li:last-child {
+      border-bottom: none;
+    }
+
+    .feature-list li:before {
+      content: "✓ ";
+      color: #2c5f8d;
+      font-weight: 600;
+      margin-right: 8px;
+    }
+
+    .portal-btn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #2c5f8d 0%, #1e4b6f 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .portal-btn:hover {
+      transform: scale(1.02);
+      box-shadow: 0 5px 20px rgba(44, 95, 141, 0.4);
+    }
+
+    .info-banner {
+      background: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 20px;
+      border-radius: 8px;
+      color: #856404;
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .contact-footer {
+      text-align: center;
+      color: white;
+      margin-top: 40px;
+      font-size: 0.9em;
+    }
+
+    .contact-footer p {
+      margin-bottom: 10px;
+    }
+
+    .emergency-link {
+      color: #ffd700;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .portal-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 2em;
+      }
+
+      .portal-header {
+        padding: 30px;
+      }
+
+      .portal-icon {
+        font-size: 36px;
+      }
+
+      .portal-title {
+        font-size: 1.4em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo">🦁</div>
+      <h1>Lilita Keper</h1>
+      <p class="subtitle">Agent Distribution Platform</p>
+    </div>
+
+    <div class="portal-grid">
+      <!-- Agent Portal -->
+      <div class="portal-card" onclick="goToAgentPortal()">
+        <div class="portal-header">
+          <div class="portal-icon">📱</div>
+          <div class="portal-title">Agent Portal</div>
+          <p class="portal-desc">Your complete booking & earnings hub</p>
+        </div>
+        <div class="portal-content">
+          <ul class="feature-list">
+            <li>Live rates & availability</li>
+            <li>Photo gallery to share</li>
+            <li>Custom proposal generator</li>
+            <li>Booking tracker with codes</li>
+            <li>Real-time commission tracking</li>
+            <li>24/7 emergency support</li>
+          </ul>
+          <button class="portal-btn">Enter Agent Portal →</button>
+        </div>
+      </div>
+
+      <!-- Hotel Admin (The Waterhole) -->
+      <div class="portal-card" onclick="goToWaterhole()">
+        <div class="portal-header" style="background: linear-gradient(135deg, #d4a574 0%, #b8915a 100%);">
+          <div class="portal-icon">📊</div>
+          <div class="portal-title">The Waterhole</div>
+          <p class="portal-desc">Hotel management & contact hub</p>
+        </div>
+        <div class="portal-content">
+          <ul class="feature-list">
+            <li>40,000+ contact database</li>
+            <li>Bulk email campaigns</li>
+            <li>Color-coded agent status</li>
+            <li>Commission management</li>
+            <li>Activity reports & analytics</li>
+            <li>Weekly reminders & follow-ups</li>
+          </ul>
+          <button class="portal-btn" style="background: linear-gradient(135deg, #d4a574 0%, #b8915a 100%);">Enter Admin Portal →</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-banner">
+      📱 <strong>Pro Tip:</strong> Agents can access the portal from any device. Hotel admins use The Waterhole for contact management and tracking.
+    </div>
+
+    <div class="contact-footer">
+      <p>24/7 Support Available</p>
+      <p>
+        📞 <a href="tel:+254180044355" class="emergency-link">+254 180 044 355</a> |
+        📧 <a href="mailto:sales@lilitakeper.com" class="emergency-link">sales@lilitakeper.com</a>
+      </p>
+      <p style="margin-top: 20px; opacity: 0.8;">Arijit Bose - Duty Manager</p>
+    </div>
+  </div>
+
+  <script>
+    function goToAgentPortal() {
+      window.location.href = '/agent-portal.html';
+    }
+
+    function goToWaterhole() {
+      window.location.href = '/waterhole-admin.html';
+    }
+  </script>
+</body>
+</html>
