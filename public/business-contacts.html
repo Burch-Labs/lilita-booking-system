@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Business Contacts - Undugu</title>
+  <title>The Waterhole - Agent Contacts Platform</title>
   <style>
     * {
       margin: 0;
@@ -13,7 +13,7 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      background: #f5f5f5;
+      background: #f5f7fa;
       color: #333;
     }
 
@@ -24,17 +24,19 @@
     }
 
     header {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #2c5f8d 0%, #1e4b6f 100%);
       color: white;
-      padding: 30px;
-      border-radius: 8px;
+      padding: 40px;
+      border-radius: 12px;
       margin-bottom: 30px;
-      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+      box-shadow: 0 4px 20px rgba(44, 95, 141, 0.25);
     }
 
     h1 {
       margin-bottom: 10px;
       font-size: 2.5em;
+      font-weight: 600;
+      letter-spacing: 0.5px;
     }
 
     .stats {
@@ -71,8 +73,8 @@
 
     .tab-btn {
       background: white;
-      color: #667eea;
-      border: 2px solid #667eea;
+      color: #2c5f8d;
+      border: 2px solid #2c5f8d;
       padding: 10px 20px;
       border-radius: 6px;
       cursor: pointer;
@@ -81,13 +83,13 @@
     }
 
     .tab-btn.active {
-      background: #667eea;
+      background: #2c5f8d;
       color: white;
     }
 
     .tab-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+      box-shadow: 0 4px 12px rgba(44, 95, 141, 0.2);
     }
 
     .tab-panel {
@@ -128,7 +130,7 @@
     input[type="text"]:focus,
     select:focus {
       outline: none;
-      border-color: #667eea;
+      border-color: #2c5f8d;
       box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
     }
 
@@ -143,7 +145,7 @@
     }
 
     .btn-primary {
-      background: #667eea;
+      background: #2c5f8d;
       color: white;
     }
 
@@ -201,7 +203,7 @@
       padding: 15px;
       text-align: left;
       font-weight: 600;
-      color: #667eea;
+      color: #2c5f8d;
       font-size: 13px;
       text-transform: uppercase;
     }
@@ -216,7 +218,7 @@
     }
 
     .website-link {
-      color: #667eea;
+      color: #2c5f8d;
       text-decoration: none;
       font-weight: 500;
       word-break: break-word;
@@ -253,11 +255,11 @@
     .loading {
       text-align: center;
       padding: 20px;
-      color: #667eea;
+      color: #2c5f8d;
     }
 
     .upload-area {
-      border: 2px dashed #667eea;
+      border: 2px dashed #2c5f8d;
       border-radius: 8px;
       padding: 40px;
       text-align: center;
@@ -267,12 +269,12 @@
     }
 
     .upload-area:hover {
-      border-color: #764ba2;
+      border-color: #1e4b6f;
       background: #f0f2ff;
     }
 
     .upload-area.dragover {
-      border-color: #764ba2;
+      border-color: #1e4b6f;
       background: #e8ebff;
     }
 
@@ -281,7 +283,7 @@
       padding: 15px;
       background: white;
       border-radius: 8px;
-      border-left: 4px solid #667eea;
+      border-left: 4px solid #2c5f8d;
     }
 
     .progress-bar {
@@ -295,7 +297,7 @@
 
     .progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(90deg, #2c5f8d 0%, #1e4b6f 100%);
       width: 0%;
       transition: width 0.3s;
     }
@@ -330,12 +332,12 @@
     }
 
     .export-card:hover {
-      border-color: #667eea;
+      border-color: #2c5f8d;
       box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
     }
 
     .export-card h4 {
-      color: #667eea;
+      color: #2c5f8d;
       margin-bottom: 8px;
     }
 
@@ -355,7 +357,7 @@
 
     .filter-group label {
       font-weight: 500;
-      color: #667eea;
+      color: #2c5f8d;
     }
 
     .modal {
@@ -387,7 +389,7 @@
 
     .modal-content h2 {
       margin-bottom: 20px;
-      color: #667eea;
+      color: #2c5f8d;
     }
 
     .form-group {
@@ -414,7 +416,7 @@
     .form-group input:focus,
     .form-group textarea:focus {
       outline: none;
-      border-color: #667eea;
+      border-color: #2c5f8d;
       box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
     }
 
@@ -442,7 +444,7 @@
     }
 
     .info-banner {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #2c5f8d 0%, #1e4b6f 100%);
       color: white;
       padding: 15px 20px;
       border-radius: 6px;
@@ -479,8 +481,8 @@
 <body>
   <div class="container">
     <header>
-      <h1>🎯 Business Contacts Intelligence</h1>
-      <p>Professional contacts for Meta ads, outreach & partnerships</p>
+      <h1>💧 The Waterhole - Agent Contacts Platform</h1>
+      <p>Manage travel agents, curators & distribution partners for Lilita Keper Safari Lodge</p>
       <div class="stats">
         <div class="stat-box">
           <div class="stat-number" id="total-contacts">0</div>
@@ -503,6 +505,9 @@
 
     <div class="tabs">
       <button class="tab-btn active" onclick="switchTab('contacts')">📇 Contacts</button>
+      <button class="tab-btn" onclick="switchTab('campaigns')">📧 Campaigns</button>
+      <button class="tab-btn" onclick="switchTab('performance')">📊 Performance</button>
+      <button class="tab-btn" onclick="switchTab('commissions')">💰 Commissions</button>
       <button class="tab-btn" onclick="switchTab('websites')">🌐 Websites</button>
       <button class="tab-btn" onclick="switchTab('upload')">📤 Upload</button>
       <button class="tab-btn" onclick="switchTab('export')">📤 Export & Meta</button>
@@ -543,6 +548,178 @@
       </div>
 
       <div class="pagination" id="pagination"></div>
+    </div>
+
+    <!-- Email Campaigns Tab -->
+    <div id="campaigns" class="tab-panel">
+      <div class="info-banner">
+        📧 <strong>Email Campaign Management:</strong> Create, track, and manage outreach campaigns with real-time engagement metrics and performance tracking.
+      </div>
+
+      <div class="controls">
+        <input type="text" id="campaign-search" placeholder="Search campaigns..." onkeyup="searchCampaigns()">
+        <button class="btn-primary" onclick="openNewCampaign()">+ New Campaign</button>
+        <select id="campaign-status-filter" onchange="filterCampaigns()">
+          <option value="">All Status</option>
+          <option value="draft">Draft</option>
+          <option value="active">Active</option>
+          <option value="completed">Completed</option>
+        </select>
+      </div>
+
+      <div class="contacts-table">
+        <table id="campaigns-table">
+          <thead>
+            <tr>
+              <th>Campaign Name</th>
+              <th>Status</th>
+              <th>Recipients</th>
+              <th>Opened</th>
+              <th>Clicked</th>
+              <th>Converted</th>
+              <th>ROI</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="campaigns-tbody">
+            <tr>
+              <td colspan="8" class="empty">No campaigns yet. Create your first campaign to start tracking engagement.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Performance Analytics Tab -->
+    <div id="performance" class="tab-panel">
+      <div class="info-banner">
+        📊 <strong>Performance Analytics & ROI:</strong> Track agent performance, booking conversion rates, and measure ROI for each contact and campaign.
+      </div>
+
+      <div class="controls">
+        <select id="perf-timeframe" onchange="updatePerformanceMetrics()">
+          <option value="7days">Last 7 Days</option>
+          <option value="30days" selected>Last 30 Days</option>
+          <option value="90days">Last 90 Days</option>
+          <option value="all">All Time</option>
+        </select>
+        <button class="btn-primary" onclick="exportPerformanceReport()">📥 Export Report</button>
+      </div>
+
+      <div class="export-options">
+        <div class="export-card">
+          <h4>📈 Conversion Rate</h4>
+          <div style="font-size: 32px; font-weight: bold; color: #2c5f8d; margin: 10px 0;" id="conversion-rate">0%</div>
+          <p style="color: #666; font-size: 12px;">Contacts who booked / Total contacted</p>
+        </div>
+
+        <div class="export-card">
+          <h4>💼 Active Agents</h4>
+          <div style="font-size: 32px; font-weight: bold; color: #2c5f8d; margin: 10px 0;" id="active-agents">0</div>
+          <p style="color: #666; font-size: 12px;">Agents with bookings in timeframe</p>
+        </div>
+
+        <div class="export-card">
+          <h4>💰 Total Bookings</h4>
+          <div style="font-size: 32px; font-weight: bold; color: #2c5f8d; margin: 10px 0;" id="total-bookings">0</div>
+          <p style="color: #666; font-size: 12px;">Total bookings generated</p>
+        </div>
+
+        <div class="export-card">
+          <h4>💵 Avg Commission</h4>
+          <div style="font-size: 32px; font-weight: bold; color: #d4a574; margin: 10px 0;" id="avg-commission">$0</div>
+          <p style="color: #666; font-size: 12px;">Average per booking</p>
+        </div>
+      </div>
+
+      <div style="background: white; padding: 20px; border-radius: 8px; margin-top: 20px;">
+        <h3 style="color: #2c5f8d; margin-bottom: 20px;">Top Performing Contacts</h3>
+        <div class="contacts-table">
+          <table id="top-contacts-table">
+            <thead>
+              <tr>
+                <th>Contact Name</th>
+                <th>Company</th>
+                <th>Bookings</th>
+                <th>Total Commission</th>
+                <th>Last Booking</th>
+              </tr>
+            </thead>
+            <tbody id="top-contacts-tbody">
+              <tr><td colspan="5" class="empty">No booking data yet.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Commissions Tab -->
+    <div id="commissions" class="tab-panel">
+      <div class="info-banner">
+        💰 <strong>Commission Management:</strong> Automated commission calculations, tracking, and payouts based on agent tier and booking performance.
+      </div>
+
+      <div class="controls">
+        <select id="commission-tier-filter" onchange="filterByTier()">
+          <option value="">All Tiers</option>
+          <option value="Premium">Premium Partners (40%)</option>
+          <option value="Standard">Standard Agents (20%)</option>
+          <option value="STO">STO Agents (20%)</option>
+        </select>
+        <select id="commission-status-filter" onchange="filterCommissionStatus()">
+          <option value="">All Status</option>
+          <option value="pending">Pending</option>
+          <option value="earned">Earned</option>
+          <option value="paid">Paid</option>
+        </select>
+        <button class="btn-primary" onclick="downloadCommissionReport()">📥 Download CSV</button>
+      </div>
+
+      <div class="export-options" style="margin-bottom: 20px;">
+        <div class="export-card">
+          <h4>👥 Premium Partners</h4>
+          <div style="font-size: 28px; font-weight: bold; color: #2c5f8d; margin: 10px 0;" id="premium-count">0</div>
+          <p style="font-size: 12px; color: #999;">40% Commission</p>
+        </div>
+
+        <div class="export-card">
+          <h4>👥 Standard Agents</h4>
+          <div style="font-size: 28px; font-weight: bold; color: #2c5f8d; margin: 10px 0;" id="standard-count">0</div>
+          <p style="font-size: 12px; color: #999;">20% Commission</p>
+        </div>
+
+        <div class="export-card">
+          <h4>💵 Total Commissions Owed</h4>
+          <div style="font-size: 28px; font-weight: bold; color: #d4a574; margin: 10px 0;" id="total-commissions">$0</div>
+          <p style="font-size: 12px; color: #999;">Pending + Earned</p>
+        </div>
+
+        <div class="export-card">
+          <h4>✅ Total Paid Out</h4>
+          <div style="font-size: 28px; font-weight: bold; color: #28a745; margin: 10px 0;" id="total-paidout">$0</div>
+          <p style="font-size: 12px; color: #999;">Fully disbursed</p>
+        </div>
+      </div>
+
+      <div class="contacts-table">
+        <table id="commissions-table">
+          <thead>
+            <tr>
+              <th>Agent Name</th>
+              <th>Company</th>
+              <th>Tier</th>
+              <th>Bookings</th>
+              <th>Commission Rate</th>
+              <th>Earned</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="commissions-tbody">
+            <tr><td colspan="8" class="empty">No commission data yet. Sync with Agent Portal to view.</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <!-- Websites Tab -->
@@ -616,10 +793,19 @@
 
     <!-- Export & Meta Tab -->
     <div id="export" class="tab-panel">
-      <div class="meta-integration">
+      <div class="meta-integration" style="border-left: 4px solid #d4a574; background: linear-gradient(135deg, #f8fafb 0%, #f0f4f8 100%);">
+        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+          <div style="font-size: 2em;">🔗</div>
+          <div>
+            <h3 style="margin: 0 0 5px 0; color: #2c5f8d;">Integrated with Agent Portal</h3>
+            <p style="margin: 0; font-size: 0.9em; color: #666;">This platform syncs with your Agent Portal to manage bookings and commissions seamlessly</p>
+          </div>
+          <a href="https://lilita-booking-system.up.railway.app" target="_blank" style="margin-left: auto; padding: 10px 20px; background: #2c5f8d; color: white; text-decoration: none; border-radius: 6px; font-weight: 600; white-space: nowrap;">Open Agent Portal →</a>
+        </div>
+        <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;">
         <h3>🎯 Meta Ads Integration</h3>
         <p style="margin-bottom: 15px; color: #666;">
-          Export your business contacts for Meta Lead Ads, audience targeting, or custom audiences.
+          Export your agent contacts for Meta Lead Ads, audience targeting, or custom audiences.
         </p>
 
         <div class="export-options">
@@ -662,17 +848,17 @@
       </div>
 
       <div style="background: white; padding: 20px; border-radius: 8px; margin-top: 20px;">
-        <h3 style="color: #667eea; margin-bottom: 15px;">📊 Export Analytics</h3>
+        <h3 style="color: #2c5f8d; margin-bottom: 15px;">📊 Export Analytics</h3>
         <div class="stats" style="color: #333;">
-          <div class="stat-box" style="background: #f8f9fa; border-left: 4px solid #667eea;">
+          <div class="stat-box" style="background: #f8f9fa; border-left: 4px solid #2c5f8d;">
             <div class="stat-number" id="export-ready">0</div>
             <div class="stat-label">Ready to Export</div>
           </div>
-          <div class="stat-box" style="background: #f8f9fa; border-left: 4px solid #667eea;">
+          <div class="stat-box" style="background: #f8f9fa; border-left: 4px solid #2c5f8d;">
             <div class="stat-number" id="meta-compatible">0</div>
             <div class="stat-label">Meta Compatible</div>
           </div>
-          <div class="stat-box" style="background: #f8f9fa; border-left: 4px solid #667eea;">
+          <div class="stat-box" style="background: #f8f9fa; border-left: 4px solid #2c5f8d;">
             <div class="stat-number" id="emails-valid">0</div>
             <div class="stat-label">Valid Emails</div>
           </div>
@@ -1050,6 +1236,152 @@
         document.getElementById('meta-compatible').textContent = data.total;
         document.getElementById('emails-valid').textContent = data.businessEmails;
       });
+    }
+
+    // Campaign Management Functions
+    function openNewCampaign() {
+      const name = prompt('Enter campaign name:');
+      if (name) {
+        fetch(`${API_URL}/campaigns`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: name, status: 'draft' })
+        }).then(() => loadCampaigns());
+      }
+    }
+
+    function searchCampaigns() {
+      // Implement campaign search
+    }
+
+    function filterCampaigns() {
+      // Implement campaign filtering
+    }
+
+    function loadCampaigns() {
+      fetch(`${API_URL}/campaigns`)
+        .then(r => r.json())
+        .then(campaigns => {
+          const tbody = document.getElementById('campaigns-tbody');
+          if (!campaigns || campaigns.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="8" class="empty">No campaigns yet. Create your first campaign to start tracking engagement.</td></tr>';
+            return;
+          }
+          tbody.innerHTML = campaigns.map(c => `
+            <tr>
+              <td><strong>${c.name}</strong></td>
+              <td><span class="company-badge">${c.status}</span></td>
+              <td>${c.recipients || 0}</td>
+              <td>${c.opened || 0} (${c.openRate || 0}%)</td>
+              <td>${c.clicked || 0} (${c.clickRate || 0}%)</td>
+              <td>${c.converted || 0}</td>
+              <td>${c.roi || 0}%</td>
+              <td><button class="btn-secondary" onclick="editCampaign(${c.id})" style="padding: 4px 8px; font-size: 12px;">View</button></td>
+            </tr>
+          `).join('');
+        });
+    }
+
+    // Performance Analytics Functions
+    function updatePerformanceMetrics() {
+      const timeframe = document.getElementById('perf-timeframe').value;
+      fetch(`${API_URL}/analytics/performance?timeframe=${timeframe}`)
+        .then(r => r.json())
+        .then(data => {
+          document.getElementById('conversion-rate').textContent = (data.conversionRate || 0) + '%';
+          document.getElementById('active-agents').textContent = data.activeAgents || 0;
+          document.getElementById('total-bookings').textContent = data.totalBookings || 0;
+          document.getElementById('avg-commission').textContent = '$' + (data.avgCommission || 0).toFixed(2);
+          renderTopContacts(data.topContacts || []);
+        });
+    }
+
+    function renderTopContacts(contacts) {
+      const tbody = document.getElementById('top-contacts-tbody');
+      if (!contacts || contacts.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" class="empty">No booking data yet.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = contacts.map(c => `
+        <tr>
+          <td><strong>${c.firstName} ${c.lastName}</strong></td>
+          <td><span class="company-badge">${c.company}</span></td>
+          <td>${c.bookings}</td>
+          <td>$${c.totalCommission.toFixed(2)}</td>
+          <td>${c.lastBooking || 'Never'}</td>
+        </tr>
+      `).join('');
+    }
+
+    function exportPerformanceReport() {
+      const timeframe = document.getElementById('perf-timeframe').value;
+      window.location.href = `${API_URL}/export/performance?timeframe=${timeframe}`;
+    }
+
+    // Commission Management Functions
+    function filterByTier() {
+      loadCommissions();
+    }
+
+    function filterCommissionStatus() {
+      loadCommissions();
+    }
+
+    function loadCommissions() {
+      const tier = document.getElementById('commission-tier-filter').value;
+      const status = document.getElementById('commission-status-filter').value;
+      const params = new URLSearchParams({ ...(tier && { tier }), ...(status && { status }) });
+
+      fetch(`${API_URL}/commissions?${params}`)
+        .then(r => r.json())
+        .then(data => {
+          document.getElementById('premium-count').textContent = data.premiumCount || 0;
+          document.getElementById('standard-count').textContent = data.standardCount || 0;
+          document.getElementById('total-commissions').textContent = '$' + (data.totalCommissions || 0).toFixed(2);
+          document.getElementById('total-paidout').textContent = '$' + (data.totalPaidOut || 0).toFixed(2);
+
+          const tbody = document.getElementById('commissions-tbody');
+          if (!data.commissions || data.commissions.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="8" class="empty">No commission data yet. Sync with Agent Portal to view.</td></tr>';
+            return;
+          }
+          tbody.innerHTML = data.commissions.map(c => `
+            <tr>
+              <td><strong>${c.agentName}</strong></td>
+              <td><span class="company-badge">${c.company}</span></td>
+              <td>${c.tier}</td>
+              <td>${c.bookings}</td>
+              <td>${c.rate}%</td>
+              <td>$${c.earned.toFixed(2)}</td>
+              <td><span class="company-badge">${c.status}</span></td>
+              <td><button class="btn-secondary" onclick="markAsPaid(${c.id})" style="padding: 4px 8px; font-size: 12px;">Mark Paid</button></td>
+            </tr>
+          `).join('');
+        });
+    }
+
+    function downloadCommissionReport() {
+      const tier = document.getElementById('commission-tier-filter').value;
+      const status = document.getElementById('commission-status-filter').value;
+      const params = new URLSearchParams({ ...(tier && { tier }), ...(status && { status }) });
+      window.location.href = `${API_URL}/export/commissions?${params}`;
+    }
+
+    function markAsPaid(commissionId) {
+      fetch(`${API_URL}/commissions/${commissionId}/mark-paid`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' }
+      }).then(() => loadCommissions());
+    }
+
+    // Enhanced switchTab function
+    const originalSwitchTab = switchTab;
+    function switchTab(tabName) {
+      originalSwitchTab.call(null, tabName);
+
+      if (tabName === 'campaigns') loadCampaigns();
+      if (tabName === 'performance') updatePerformanceMetrics();
+      if (tabName === 'commissions') loadCommissions();
     }
 
     // Initial load
