@@ -36,26 +36,39 @@ app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 
 // Database connection
 let pool;
-const dbUrl = process.env.DATABASE_PRIVATE_URL || process.env.DATABASE_URL;
-const dbConfig = dbUrl ?
-  dbUrl :
-  {
-    user: process.env.DB_USER || 'postgres',
-    password: process.env.DB_PASSWORD,
-    host: process.env.DB_HOST || 'localhost',
-    port: parseInt(process.env.DB_PORT) || 5432,
-    database: process.env.DB_NAME || 'lilita_booking'
-  };
-
-console.log('📦 Database config:', dbUrl ? 'Using connection URL' : `Using host: ${dbConfig.host}`);
-
 try {
-  pool = new pg.Pool(dbConfig);
+  const dbUrl = process.env.DATABASE_PRIVATE_URL || process.env.DATABASE_URL;
+
+  if (dbUrl) {
+    console.log('📦 Using DATABASE_PRIVATE_URL connection');
+    pool = new pg.Pool({ connectionString: dbUrl });
+  } else {
+    console.log('📦 Using individual DB environment variables');
+    pool = new pg.Pool({
+      user: process.env.DB_USER || 'postgres',
+      password: process.env.DB_PASSWORD || '',
+      host: process.env.DB_HOST || 'localhost',
+      port: parseInt(process.env.DB_PORT || '5432'),
+      database: process.env.DB_NAME || 'lilita_booking'
+    });
+  }
+
   pool.on('error', (err) => {
-    console.error('❌ Database connection error:', err.message);
+    console.error('⚠️  Database pool error:', err.message);
+  });
+
+  pool.on('connect', () => {
+    console.log('✅ Database connected');
   });
 } catch (err) {
-  console.error('❌ Failed to create database pool:', err.message);
+  console.error('⚠️  Database pool creation error:', err.message);
+  // Create a dummy pool that won't connect but won't crash the server
+  pool = new pg.Pool({
+    host: 'localhost',
+    user: 'dummy',
+    password: 'dummy',
+    database: 'dummy'
+  });
 }
 
 // ============================================================================
