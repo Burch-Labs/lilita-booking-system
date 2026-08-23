@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lilita Keper - Complete Integration Proposal</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f5f7fa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #2c5f8d 0%, #1e4b6f 100%);
+      color: white;
+      padding: 40px;
+      border-radius: 12px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .logo {
+      font-size: 56px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      opacity: 0.95;
+    }
+
+    .recipient {
+      background: rgba(255,255,255,0.1);
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .section {
+      background: white;
+      padding: 30px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2c5f8d;
+      margin-bottom: 20px;
+      border-bottom: 3px solid #d4a574;
+      padding-bottom: 10px;
+    }
+
+    .subsection {
+      margin-bottom: 25px;
+    }
+
+    .subsection h3 {
+      color: #2c5f8d;
+      margin-bottom: 12px;
+      font-size: 16px;
+    }
+
+    .highlight-box {
+      background: #f0f4f8;
+      border-left: 4px solid #d4a574;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 6px;
+    }
+
+    .app-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .app-card {
+      background: linear-gradient(135deg, #2c5f8d 0%, #1e4b6f 100%);
+      color: white;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .app-icon {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .app-title {
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .app-desc {
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    .link-button {
+      display: inline-block;
+      background: #2c5f8d;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 13px;
+      margin: 5px 5px 5px 0;
+      font-weight: 600;
+    }
+
+    .link-button:hover {
+      background: #1e4b6f;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    th {
+      background: #f5f7fa;
+      font-weight: 600;
+      color: #2c5f8d;
+    }
+
+    .revpar-box {
+      background: #fff9e6;
+      border: 2px solid #f39c12;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .revpar-box h3 {
+      color: #f39c12;
+      margin-bottom: 15px;
+    }
+
+    .timeline {
+      background: #e8f4f8;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .timeline-item {
+      display: flex;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #d0e8f2;
+    }
+
+    .timeline-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .timeline-phase {
+      background: #2c5f8d;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+      margin-right: 15px;
+      height: fit-content;
+    }
+
+    .timeline-desc {
+      font-size: 14px;
+      color: #555;
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, #2c5f8d 0%, #1e4b6f 100%);
+      color: white;
+      padding: 30px;
+      border-radius: 8px;
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .cta-box h2 {
+      margin-bottom: 15px;
+    }
+
+    .cta-box p {
+      margin-bottom: 20px;
+      font-size: 15px;
+    }
+
+    .btn-cta {
+      display: inline-block;
+      background: white;
+      color: #2c5f8d;
+      padding: 12px 30px;
+      border-radius: 6px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      font-size: 14px;
+      margin: 0 10px;
+    }
+
+    .btn-cta:hover {
+      transform: scale(1.05);
+    }
+
+    .contact-box {
+      background: #fff3cd;
+      border: 2px solid #ffc107;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .contact-box h3 {
+      color: #856404;
+      margin-bottom: 10px;
+    }
+
+    .contact-box p {
+      color: #856404;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .contact-link {
+      color: #ffc107;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .footer {
+      background: #f5f7fa;
+      padding: 25px;
+      text-align: center;
+      border-radius: 8px;
+      margin-top: 30px;
+      font-size: 13px;
+      color: #999;
+    }
+
+    @media (max-width: 768px) {
+      .app-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo">🦁</div>
+      <h1>Lilita Keper</h1>
+      <p class="subtitle">Complete Agent Distribution & Hotel Management Platform</p>
+      <div class="recipient">
+        📧 Proposal For: <strong>Arijit Bose</strong> | CEO, Lilita Keper Masai Mara
+      </div>
+    </div>
+
+    <!-- EXECUTIVE SUMMARY -->
+    <div class="section">
+      <div class="section-title">📋 Executive Summary</div>
+      <p style="margin-bottom: 15px;">
+        Lilita Keper is ready to launch a complete agent distribution platform with integrated hotel management, real-time bookings, and automated commission tracking. All systems are built, tested, and ready for immediate deployment.
+      </p>
+      <div class="highlight-box">
+        <strong>⚡ Fast Track Implementation:</strong><br>
+        If approved today, we will integrate to your website and start operations immediately. Full integration and PMS setup in <strong>48 hours</strong>.
+      </div>
+    </div>
+
+    <!-- THREE MAIN APPS -->
+    <div class="section">
+      <div class="section-title">🚀 Your Three Connected Applications</div>
+
+      <div class="app-grid">
+        <div class="app-card">
+          <div class="app-icon">📱</div>
+          <div class="app-title">Agent Portal</div>
+          <div class="app-desc">For your 40,000+ agents. Rates, proposals, commissions, CRM</div>
+          <div style="margin-top: 15px;">
+            <a href="https://contacts-app-wheat.vercel.app/agent-portal.html" target="_blank" class="link-button">Access</a>
+          </div>
+        </div>
+
+        <div class="app-card">
+          <div class="app-icon">🏜️</div>
+          <div class="app-title">The Waterhole</div>
+          <div class="app-desc">Hotel admin dashboard. Contacts, campaigns, analytics</div>
+          <div style="margin-top: 15px;">
+            <a href="https://contacts-app-wheat.vercel.app/waterhole-admin.html" target="_blank" class="link-button">Access</a>
+          </div>
+        </div>
+
+        <div class="app-card">
+          <div class="app-icon">💼</div>
+          <div class="app-title">Contact App</div>
+          <div class="app-desc">Entry point. Manage agents and integration hub</div>
+          <div style="margin-top: 15px;">
+            <a href="https://contacts-app-wheat.vercel.app/agent-portal-hub.html" target="_blank" class="link-button">Access</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3>Each App Features:</h3>
+        <ul style="margin-left: 20px;">
+          <li>✓ Logo upload & customization</li>
+          <li>✓ Email & WhatsApp sharing</li>
+          <li>✓ Quick proposal generation (inside Agent Portal)</li>
+          <li>✓ Real-time booking integration</li>
+          <li>✓ Commission tracking & reporting</li>
+          <li>✓ 48-hour proposal expiry & payment links</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- REVPAR & FINANCIALS -->
+    <div class="section">
+      <div class="section-title">💰 RevPAR & Financial Projections</div>
+
+      <div class="revpar-box">
+        <h3>💎 Projected RevPAR Impact (Craftwood Hospitality Data)</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>Current</th>
+              <th>With Platform (3 months)</th>
+              <th>With Platform (12 months)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Average Daily Rate (ADR)</td>
+              <td>$280</td>
+              <td>$315</td>
+              <td>$350</td>
+            </tr>
+            <tr>
+              <td>Occupancy Rate</td>
+              <td>65%</td>
+              <td>78%</td>
+              <td>85%</td>
+            </tr>
+            <tr>
+              <td>RevPAR</td>
+              <td>$182</td>
+              <td>$245</td>
+              <td>$298</td>
+            </tr>
+            <tr style="font-weight: bold; background: #f0f4f8;">
+              <td>Revenue Impact</td>
+              <td>Baseline</td>
+              <td>+34.6%</td>
+              <td>+63.7%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="subsection">
+        <h3>Commission Structure:</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Agent Tier</th>
+              <th>Commission</th>
+              <th>Threshold</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Standard (STO)</td>
+              <td>20%</td>
+              <td>Entry level</td>
+            </tr>
+            <tr>
+              <td>Premium</td>
+              <td>30%</td>
+              <td>100+ bed nights</td>
+            </tr>
+            <tr>
+              <td>Business Support</td>
+              <td>Custom</td>
+              <td>Custom negotiations</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- IMPLEMENTATION TIMELINE -->
+    <div class="section">
+      <div class="section-title">⏱️ 48-Hour Integration Plan</div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <span class="timeline-phase">Hour 0-2</span>
+          <div class="timeline-desc"><strong>Approval & Setup:</strong> Client approval received. Domain configuration & SSL setup.</div>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-phase">Hour 2-12</span>
+          <div class="timeline-desc"><strong>Website Integration:</strong> Agent Portal & Waterhole embedded on lilitakeper.com. Payment gateways configured (M-Pesa & Stripe).</div>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-phase">Hour 12-24</span>
+          <div class="timeline-desc"><strong>PMS Integration:</strong> Booking system connected to PMS (or cloud PMS provided if needed). Real-time availability sync.</div>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-phase">Hour 24-36</span>
+          <div class="timeline-desc"><strong>Agent Network Launch:</strong> Initial agents onboarded. Commission tracking live. WhatsApp bot activated.</div>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-phase">Hour 36-48</span>
+          <div class="timeline-desc"><strong>Full Operations:</strong> All systems tested & verified. Marketing materials ready. Support team trained.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TECHNOLOGY -->
+    <div class="section">
+      <div class="section-title">🔧 Technology & Integration</div>
+
+      <div class="subsection">
+        <h3>What We Provide:</h3>
+        <ul style="margin-left: 20px; margin-bottom: 20px;">
+          <li>✓ Complete Agent Portal with proposal generator</li>
+          <li>✓ Hotel admin dashboard (The Waterhole)</li>
+          <li>✓ Integrated booking system with real-time availability</li>
+          <li>✓ M-Pesa & Stripe payment integration</li>
+          <li>✓ Commission tracking & automated payouts</li>
+          <li>✓ WhatsApp bot for inquiries & confirmations</li>
+          <li>✓ Email notification system</li>
+          <li>✓ Analytics & reporting dashboard</li>
+        </ul>
+
+        <h3>PMS System:</h3>
+        <p style="margin-bottom: 15px;">
+          If you don't have a property management system, we provide a complete cloud-based PMS included in the platform:
+        </p>
+        <ul style="margin-left: 20px;">
+          <li>✓ Room inventory management</li>
+          <li>✓ Automated check-in/check-out</li>
+          <li>✓ Guest management & history</li>
+          <li>✓ Housekeeping scheduling</li>
+          <li>✓ Financial reporting & analytics</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- PROPOSAL DETAILS -->
+    <div class="section">
+      <div class="section-title">📊 Implementation Details</div>
+
+      <div class="subsection">
+        <h3>Agent Portal Features:</h3>
+        <ul style="margin-left: 20px;">
+          <li>✓ Live 2026-2027 rates & availability</li>
+          <li>✓ Quick proposal generator (30 seconds to PDF)</li>
+          <li>✓ Photo gallery for client sharing</li>
+          <li>✓ Customer CRM inside portal</li>
+          <li>✓ Real-time commission tracking</li>
+          <li>✓ 20% STO commission + upgrade path</li>
+          <li>✓ WhatsApp & Email sharing for all proposals</li>
+          <li>✓ M-Pesa & card payment links (48hr validity)</li>
+        </ul>
+      </div>
+
+      <div class="subsection">
+        <h3>The Waterhole (Admin) Features:</h3>
+        <ul style="margin-left: 20px;">
+          <li>✓ 40,000+ contact database management</li>
+          <li>✓ Color-coded agent status (Green/Yellow/Red)</li>
+          <li>✓ Bulk email campaigns</li>
+          <li>✓ Commission reporting by tier</li>
+          <li>✓ Weekly automated reminders</li>
+          <li>✓ Activity & engagement analytics</li>
+          <li>✓ Booking integration with agent tracking</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-box">
+      <h2>🎯 Ready to Launch?</h2>
+      <p>If approved, we will immediately:</p>
+      <p>✓ Integrate to lilitakeper.com<br>
+         ✓ Activate payment systems<br>
+         ✓ Train your team<br>
+         ✓ Go live in 48 hours</p>
+      <button onclick="approveAndIntegrate()" class="btn-cta">✓ Approve & Proceed</button>
+      <button onclick="requestMoreInfo()" class="btn-cta">ℹ️ More Information</button>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="contact-box">
+      <h3>📞 Questions or Ready to Proceed?</h3>
+      <p>
+        <a href="tel:+254180044355" class="contact-link">📞 +254 180 044 355</a> |
+        <a href="mailto:sales@lilitakeper.com" class="contact-link">📧 sales@lilitakeper.com</a>
+      </p>
+      <p style="margin-top: 10px; font-size: 12px;">Arijit Bose - Available 24/7</p>
+    </div>
+
+    <div class="footer">
+      <p><strong>Lilita Keper Agent Distribution Platform</strong></p>
+      <p>Complete integration proposal - All systems ready for immediate deployment</p>
+      <p style="margin-top: 15px;">This platform is built, tested, and waiting for your approval to launch.</p>
+    </div>
+  </div>
+
+  <script>
+    function approveAndIntegrate() {
+      const message = `✅ APPROVED - Ready to launch Lilita Keper platform!
+
+I have reviewed the complete integration proposal and approve proceeding immediately.
+
+Timeline: 48 hours to full integration
+📊 Projected RevPAR increase: 34-63%
+💰 Commission: 20% STO + upgrade to 30%
+🚀 Expected agent onboarding: 5,000+ in 30 days
+
+Please proceed with:
+1. Website integration
+2. Payment systems setup (M-Pesa & Stripe)
+3. PMS configuration (or provide cloud PMS)
+4. Initial agent onboarding
+
+Let's make Lilita Keper the #1 distribution platform in Masai Mara!`;
+
+      window.open(`https://wa.me/254180044355?text=${encodeURIComponent(message)}`, '_blank');
+    }
+
+    function requestMoreInfo() {
+      const message = `I would like more information about the Lilita Keper platform before approving.
+
+Please send additional details on:
+- Detailed pricing breakdown
+- Support & training details
+- PMS system specifications
+- Integration technical specs
+- Reference hotels/partners
+
+Looking forward to discussing further.`;
+
+      window.open(`https://wa.me/254180044355?text=${encodeURIComponent(message)}`, '_blank');
+    }
+  </script>
+</body>
+</html>
