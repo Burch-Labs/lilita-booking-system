@@ -358,10 +358,29 @@
     <!-- Proposal Preview -->
     <div class="preview-section" id="previewSection">
       <h3>Preview Your Proposal</h3>
+
+      <!-- 48hr Expiry Notice -->
+      <div style="background: #fff3cd; border: 2px solid #ffc107; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+        <p style="margin: 0; color: #856404; font-weight: 600;">⏰ This proposal expires in 48 hours</p>
+        <p style="margin: 5px 0 0 0; font-size: 12px; color: #856404;">Your client must review and confirm payment within 48 hours or proposal will auto-expire.</p>
+      </div>
+
+      <!-- Payment Section -->
+      <div style="background: #e8f4f8; border: 2px solid #2c5f8d; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+        <h4 style="color: #2c5f8d; margin: 0 0 12px 0;">💳 Payment Options</h4>
+        <div style="display: grid; gap: 10px;">
+          <button class="btn btn-primary" onclick="requestMpesaPayment()" style="width: 100%;">📱 Send M-Pesa Payment Link</button>
+          <button class="btn btn-primary" onclick="requestCardPayment()" style="width: 100%;">💳 Send Credit Card Link</button>
+          <p style="font-size: 12px; color: #666; margin: 10px 0 0 0; text-align: center;">Client can pay securely through their preferred method</p>
+        </div>
+      </div>
+
       <div class="proposal-preview" id="proposalPreview"></div>
+
       <div class="action-buttons" style="margin-top: 20px;">
         <button class="btn btn-primary" onclick="downloadProposal()">💾 Download PDF</button>
-        <button class="btn btn-primary" onclick="shareProposal()">📤 Share Link</button>
+        <button class="btn btn-primary" onclick="shareProposalWhatsApp()">📱 Share on WhatsApp</button>
+        <button class="btn btn-primary" onclick="shareProposalEmail()">📧 Share via Email</button>
         <button class="btn btn-secondary" onclick="closePreview()">← Back to Edit</button>
       </div>
     </div>
@@ -493,9 +512,87 @@
       alert('📥 PDF download feature coming soon!\n\nYou can:\n✓ Print to PDF (Ctrl+P)\n✓ Save as PDF from browser\n✓ Email directly to client');
     }
 
+    function requestMpesaPayment() {
+      const clientName = document.getElementById('clientName').value;
+      const trackingCode = document.getElementById('trackingCode').value;
+      const message = `I have a proposal for ${clientName} (${trackingCode}). Please send M-Pesa payment link for the deposit.`;
+      window.open(`https://wa.me/254180044355?text=${encodeURIComponent(message)}`, '_blank');
+    }
+
+    function requestCardPayment() {
+      const clientName = document.getElementById('clientName').value;
+      const trackingCode = document.getElementById('trackingCode').value;
+      const message = `I have a proposal for ${clientName} (${trackingCode}). Please send credit card payment link for the deposit.`;
+      window.open(`https://wa.me/254180044355?text=${encodeURIComponent(message)}`, '_blank');
+    }
+
+    function shareProposalWhatsApp() {
+      const clientName = document.getElementById('clientName').value;
+      const checkInDate = document.getElementById('checkInDate').value;
+      const checkOutDate = document.getElementById('checkOutDate').value;
+      const trackingCode = document.getElementById('trackingCode').value;
+
+      const message = `🦁 Lilita Keper Proposal for ${clientName}
+
+📅 Dates: ${new Date(checkInDate).toLocaleDateString()} - ${new Date(checkOutDate).toLocaleDateString()}
+📋 Reference: ${trackingCode}
+
+⏰ IMPORTANT: This proposal expires in 48 hours!
+
+✓ View full proposal & payment options
+✓ Accept terms & make deposit
+✓ Confirm your booking
+
+Book now: https://contacts-app-wheat.vercel.app/custom-proposal.html
+
+Questions? Contact us:
+📞 +254 180 044 355
+💬 WhatsApp`;
+
+      window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
+    }
+
+    function shareProposalEmail() {
+      const clientName = document.getElementById('clientName').value;
+      const clientEmail = document.getElementById('clientEmail').value;
+      const checkInDate = document.getElementById('checkInDate').value;
+      const checkOutDate = document.getElementById('checkOutDate').value;
+      const trackingCode = document.getElementById('trackingCode').value;
+
+      const subject = `Your Lilita Keper Proposal - ${trackingCode}`;
+      const body = `Dear ${clientName},
+
+Your personalized proposal for Lilita Keper Safari Lodge is ready!
+
+📅 Check-in: ${new Date(checkInDate).toLocaleDateString()}
+📅 Check-out: ${new Date(checkOutDate).toLocaleDateString()}
+📋 Reference Code: ${trackingCode}
+
+⏰ IMPORTANT: This proposal is valid for 48 hours only.
+
+Please review the attached proposal and confirm your booking with payment options:
+✓ M-Pesa
+✓ Credit Card
+
+View online: https://contacts-app-wheat.vercel.app/custom-proposal.html
+
+For questions, please reply to this email or contact:
+📞 +254 180 044 355
+📧 sales@lilitakeper.com
+
+Best regards,
+Lilita Keper Safari Lodge Team`;
+
+      if (clientEmail) {
+        window.open(`mailto:${clientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`, '_blank');
+      } else {
+        alert('📧 Please enter client email to send proposal via email');
+      }
+    }
+
     function shareProposal() {
       const link = `${window.location.href}?proposal=${Date.now()}`;
-      alert(`📤 Proposal Link Copied!\n\n${link}\n\nShare this link with your client. They can view & accept terms online.`);
+      alert(`📤 Proposal Link Ready!\n\nShare this with your client:\n${link}\n\nValid for 48 hours only.`);
     }
 
     function resetForm() {
