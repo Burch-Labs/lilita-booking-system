@@ -35,19 +35,28 @@ app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 
 // Database connection
-const pool = new pg.Pool(
-  process.env.DATABASE_PRIVATE_URL || process.env.DATABASE_URL || {
+let pool;
+const dbUrl = process.env.DATABASE_PRIVATE_URL || process.env.DATABASE_URL;
+const dbConfig = dbUrl ?
+  dbUrl :
+  {
     user: process.env.DB_USER || 'postgres',
     password: process.env.DB_PASSWORD,
     host: process.env.DB_HOST || 'localhost',
-    port: process.env.DB_PORT || 5432,
+    port: parseInt(process.env.DB_PORT) || 5432,
     database: process.env.DB_NAME || 'lilita_booking'
-  }
-);
+  };
 
-pool.on('error', (err) => {
-  console.error('Unexpected error on idle client', err);
-});
+console.log('📦 Database config:', dbUrl ? 'Using connection URL' : `Using host: ${dbConfig.host}`);
+
+try {
+  pool = new pg.Pool(dbConfig);
+  pool.on('error', (err) => {
+    console.error('❌ Database connection error:', err.message);
+  });
+} catch (err) {
+  console.error('❌ Failed to create database pool:', err.message);
+}
 
 // ============================================================================
 // AUTHENTICATION MIDDLEWARE
@@ -1097,9 +1106,24 @@ app.use((err, req, res, next) => {
 // START SERVER
 // ============================================================================
 
-app.listen(PORT, () => {
-  console.log(`✅ Lilita Booking API running on port ${PORT}`);
+const server = app.listen(PORT, () => {
+  console.log(`✅ Agent Platform 2.0 running on port ${PORT}`);
   console.log(`📊 Database: ${process.env.DB_NAME || 'lilita_booking'}`);
+  console.log(`🌐 API ready at http://localhost:${PORT}`);
+});
+
+server.on('error', (err) => {
+  console.error('❌ Server error:', err.message);
+  process.exit(1);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('❌ Unhandled Rejection at:', promise, 'reason:', reason);
+});
+
+process.on('uncaughtException', (err) => {
+  console.error('❌ Uncaught Exception:', err);
+  process.exit(1);
 });
 
 export default app;
