@@ -24,24 +24,13 @@
     }
 
     .card {
-      background: linear-gradient(135deg, #a69080 0%, #8b7565 100%);
+      background: white;
       border-radius: 20px;
       padding: 40px 30px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
       margin-bottom: 30px;
       position: relative;
       overflow: hidden;
-    }
-
-    .card::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-      pointer-events: none;
     }
 
     .content {
@@ -52,51 +41,53 @@
 
     .logo {
       margin-bottom: 25px;
+      background: linear-gradient(135deg, #a69080 0%, #8b7565 100%);
+      padding: 30px;
+      border-radius: 15px;
+      display: inline-block;
     }
 
     .logo img {
       height: 75px;
       width: auto;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
     }
 
     .greeting {
-      color: #ffffff;
+      color: #2c5f8d;
       font-size: 28px;
       font-weight: 700;
       margin-bottom: 15px;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
     .visit-message {
-      color: #f5e6d3;
+      color: #333;
       font-size: 15px;
       line-height: 1.7;
       margin-bottom: 25px;
-      background: rgba(0,0,0,0.15);
+      background: #f9f9f9;
       padding: 15px;
       border-radius: 10px;
-      border-left: 3px solid #f5e6d3;
+      border-left: 3px solid #a69080;
     }
 
     .highlight {
-      color: #ffffff;
+      color: #2c5f8d;
       font-weight: 700;
       display: block;
       margin: 10px 0 5px 0;
     }
 
     .meeting-box {
-      background: rgba(255,255,255,0.15);
+      background: #f9f9f9;
       padding: 20px;
       border-radius: 12px;
       margin-bottom: 20px;
-      backdrop-filter: blur(10px);
-      border: 2px solid rgba(255,255,255,0.2);
+      border: 2px solid #e0e0e0;
     }
 
     .meeting-title {
-      color: #f5e6d3;
+      color: #2c5f8d;
       font-size: 16px;
       font-weight: 700;
       margin-bottom: 15px;
@@ -105,7 +96,7 @@
     }
 
     .meeting-detail {
-      color: #ffffff;
+      color: #333;
       font-size: 13px;
       margin-bottom: 10px;
       display: flex;
@@ -114,22 +105,22 @@
     }
 
     .meeting-detail strong {
-      color: #f5e6d3;
+      color: #2c5f8d;
       min-width: 80px;
     }
 
     .offer-highlight {
-      background: rgba(255,255,255,0.1);
+      background: linear-gradient(135deg, #a69080 0%, #8b7565 100%);
       padding: 15px;
       border-radius: 8px;
       margin-bottom: 20px;
-      color: #f5e6d3;
+      color: #ffffff;
       font-size: 13px;
       line-height: 1.6;
     }
 
     .offer-highlight strong {
-      color: #ffffff;
+      color: #f5e6d3;
       display: block;
       margin-bottom: 5px;
     }
