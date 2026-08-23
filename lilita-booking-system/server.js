@@ -115,20 +115,29 @@ app.get('*', (req, res) => {
   const indexPath = path.join(__dirname, 'frontend/dist/index.html');
   let html = fs.readFileSync(indexPath, 'utf8');
 
-  // Inject fetch patch before closing head
-  const fetchPatch = `
+  // Inject immediate fetch/XMLHttpRequest patch before any scripts run
+  const apiPatch = `
     <script>
-      window.fetch = (function(origFetch) {
-        return function(resource, config) {
-          if (typeof resource === 'string' && resource.includes('localhost:3002')) {
-            resource = resource.replace('http://localhost:3002', '/api');
-          }
-          return origFetch.call(this, resource, config);
-        };
-      })(window.fetch);
+    (function() {
+      const origFetch = window.fetch;
+      window.fetch = function(resource, config) {
+        if (typeof resource === 'string' && resource.includes('localhost:3002')) {
+          resource = resource.replace('http://localhost:3002', '/api');
+        }
+        return origFetch.call(this, resource, config);
+      };
+
+      const origOpen = XMLHttpRequest.prototype.open;
+      XMLHttpRequest.prototype.open = function(method, url, ...args) {
+        if (typeof url === 'string' && url.includes('localhost:3002')) {
+          url = url.replace('http://localhost:3002', '/api');
+        }
+        return origOpen.call(this, method, url, ...args);
+      };
+    })();
     </script>
   `;
-  html = html.replace('</head>', fetchPatch + '</head>');
+  html = html.replace('<head>', '<head>' + apiPatch);
 
   res.type('text/html').send(html);
 });
