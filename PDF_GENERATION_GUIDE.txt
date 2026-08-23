@@ -1,0 +1,121 @@
+================================================================================
+CRAFTWOOD PROPOSAL - PDF GENERATION GUIDE
+================================================================================
+
+You now have TWO versions of the proposal:
+
+1. CRAFTWOOD_PROPOSAL.html
+   - Original interactive version
+   - Best for viewing/sharing online
+   - Has working buttons and demo links
+
+2. CRAFTWOOD_PROPOSAL_PDF_READY.html
+   - Optimized for PDF printing
+   - Cleaner layout for documents
+   - All Gerald Matu references removed
+   - Only shows "Craftwood Hospitality Management Ltd"
+
+================================================================================
+HOW TO GENERATE PDF (Choose One Method)
+================================================================================
+
+METHOD 1: BROWSER PRINT-TO-PDF (Recommended)
+─────────────────────────────────────────────
+
+1. Open either HTML file in your web browser:
+   - Double-click the .html file, OR
+   - Right-click → Open with → Chrome/Firefox/Edge
+
+2. Press Ctrl+P (or Cmd+P on Mac) to open Print dialog
+
+3. Select:
+   - Destination: "Save as PDF"
+   - Margins: "Minimal" or "None"
+   - Background Graphics: ☑ Enabled
+   - Paper size: A4
+
+4. Click "Save" and choose location
+
+5. Done! Your PDF is ready to email
+
+================================================================================
+
+METHOD 2: ONLINE CONVERSION (If browser printing fails)
+─────────────────────────────────────────────────────
+
+1. Upload CRAFTWOOD_PROPOSAL_PDF_READY.html to:
+   - https://www.html2pdf.com/
+   - https://cloudconvert.com/html-to-pdf
+   - https://www.zamzar.com/
+
+2. Download the generated PDF
+
+3. Rename if needed and send
+
+================================================================================
+
+METHOD 3: PYTHON SCRIPT (Advanced)
+──────────────────────────────────
+
+Save this as "convert_to_pdf.py" in the same folder:
+
+---8<--- BEGIN CODE ---8<---
+from weasyprint import HTML, CSS
+
+HTML('CRAFTWOOD_PROPOSAL_PDF_READY.html').write_pdf('CRAFTWOOD_PROPOSAL.pdf')
+print("PDF created: CRAFTWOOD_PROPOSAL.pdf")
+---8<--- END CODE ---8<---
+
+Then run: python convert_to_pdf.py
+
+================================================================================
+
+FINAL DELIVERABLES
+─────────────────
+
+Attach to email to Arijit:
+✅ CRAFTWOOD_PROPOSAL.pdf (your generated PDF)
+✅ Agent Portal link: https://lilita-booking-system.up.railway.app
+✅ Contacts app link: http://localhost:3001/business-contacts.html
+
+All Gerald Matu references have been removed.
+Document now shows only: "Craftwood Hospitality Management Ltd"
+
+Contact information in footer:
+- info@lilitakeper.com
+- sales@lilitakeper.com
+- +254 101 0070 095
+- +254 180 044 355
+
+================================================================================
+
+RECOMMENDED EMAIL TEXT
+─────────────────────
+
+Subject: Premium Distribution Platform Proposal - Lilita Keper 2027 Strategy
+
+Dear Arijit,
+
+Following our discussion, I'm pleased to present a comprehensive distribution
+and marketing strategy for Lilita Keper designed to position your property
+alongside top East African luxury competitors.
+
+This proposal includes:
+
+✅ Complete business strategy with financial projections
+✅ Two integrated platforms (Agent Portal + Contacts Management)
+✅ 50 premium curated partners at 40% commission
+✅ 40,000+ agents at 20% via direct email
+✅ 90-day implementation roadmap
+✅ USD 468,000 net income projection for 2027
+
+Live demo links:
+• Agent Portal: https://lilita-booking-system.up.railway.app
+• Contacts Platform: http://localhost:3001/business-contacts.html
+
+Ready to discuss implementation and partnership terms at your convenience.
+
+Best regards,
+[Your name]
+
+================================================================================

@@ -249,13 +249,13 @@
             <div class="stat-label">Pending Payout</div>
           </div>
           <div class="stat">
-            <div class="stat-value">40%</div>
-            <div class="stat-label">Commission</div>
+            <div class="stat-value">20%</div>
+            <div class="stat-label">Commission (STO)</div>
           </div>
         </div>
         <div class="action-buttons">
           <button class="btn btn-primary" onclick="goToDashboard()">View Full Dashboard</button>
-          <button class="btn btn-secondary" onclick="trackBooking()">Track Booking</button>
+          <button class="btn btn-secondary" onclick="manageCustomers()">Manage Customers</button>
         </div>
       </div>
 
@@ -263,7 +263,8 @@
       <div class="section">
         <h2>🎯 Quick Actions</h2>
         <div class="action-buttons">
-          <button class="btn btn-primary" onclick="goToRates()">💰 View All Rates</button>
+          <button class="btn btn-primary" onclick="goToRates()">💰 2026 STO Rates</button>
+          <button class="btn btn-primary" onclick="viewRackRates()">📊 2026 Rack Rates</button>
           <button class="btn btn-primary" onclick="createProposal()">📄 New Proposal</button>
           <button class="btn btn-primary" onclick="viewPhotos()">📸 Photo Gallery</button>
           <button class="btn btn-whatsapp" onclick="shareOnWhatsApp()">📱 Share Portal</button>
@@ -290,6 +291,10 @@
       window.location.href = '/agent-profile.html';
     }
 
+    function viewRackRates() {
+      alert('📊 2026 Rack Rates\n\nView our standard rack rates for 2026.\n\n✓ Premium Safari Packages\n✓ Seasonal Rates\n✓ Group Discounts\n\nContact support for detailed rate card.');
+    }
+
     function createProposal() {
       window.location.href = '/custom-proposal.html';
     }
@@ -298,13 +303,12 @@
       window.location.href = '/photo-gallery.html';
     }
 
-    function trackBooking() {
-      alert('📊 Track Your Bookings\n\nEnter your booking code to see:\n✓ Booking status\n✓ Commission earned\n✓ Payment timeline');
-      window.location.href = '/agent-dashboard.html';
+    function manageCustomers() {
+      alert('👥 Customer Management CRM\n\n✓ Add your customers\n✓ Track their bookings\n✓ Follow-up reminders\n✓ Booking history\n✓ Commission tracking per customer\n\nFeature coming soon with full CRM integration.');
     }
 
     function shareOnWhatsApp() {
-      const message = `Check out the Lilita Keper Agent Portal! 🦁\n\nEverything you need:\n✓ Live rates & availability\n✓ Custom proposals\n✓ Photo gallery\n✓ Real-time commission tracking\n\nAccess: https://contacts-app-wheat.vercel.app/agent-portal.html`;
+      const message = `Check out the Lilita Keper Agent Portal! 🦁\n\nEverything you need:\n✓ Live rates & availability\n✓ Custom proposals\n✓ Photo gallery\n✓ Customer management CRM\n✓ Real-time booking tracking\n\nAccess: https://contacts-app-wheat.vercel.app/agent-portal.html`;
       window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
     }
 

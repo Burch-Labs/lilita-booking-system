@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Craftwood - Premium Distribution Proposal</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: white;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #2c5f8d 0%, #1e4b6f 100%);
+      color: white;
+      padding: 60px 40px;
+      text-align: center;
+    }
+
+    .header-logo {
+      font-size: 2em;
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .header h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+
+    .header-subtitle {
+      font-size: 1.1em;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .signatory {
+      background: rgba(255,255,255,0.1);
+      padding: 20px;
+      margin-top: 30px;
+      border-radius: 8px;
+      border-left: 4px solid white;
+    }
+
+    .signatory-name {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .signatory-title {
+      opacity: 0.9;
+      font-size: 0.95em;
+    }
+
+    .content {
+      padding: 60px 40px;
+    }
+
+    section {
+      margin-bottom: 50px;
+      page-break-inside: avoid;
+    }
+
+    h2 {
+      color: #2c5f8d;
+      font-size: 1.8em;
+      margin-bottom: 20px;
+      border-bottom: 3px solid #d4a574;
+      padding-bottom: 10px;
+      font-weight: 600;
+      page-break-after: avoid;
+    }
+
+    h3 {
+      color: #2c5f8d;
+      font-size: 1.3em;
+      margin-top: 25px;
+      margin-bottom: 15px;
+      font-weight: 600;
+      page-break-after: avoid;
+    }
+
+    p {
+      margin-bottom: 15px;
+      text-align: justify;
+      font-size: 0.95em;
+    }
+
+    .highlight-box {
+      background: #f0f4f8;
+      border-left: 5px solid #2c5f8d;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 4px;
+      page-break-inside: avoid;
+    }
+
+    .highlight-number {
+      color: #d4a574;
+      font-size: 2em;
+      font-weight: bold;
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      background: #fafafa;
+      page-break-inside: avoid;
+    }
+
+    thead {
+      background: #2c5f8d;
+      color: white;
+    }
+
+    th {
+      padding: 15px;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    tr:hover {
+      background: #f5f5f5;
+    }
+
+    .price-tag {
+      background: #d4a574;
+      color: white;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-weight: bold;
+      font-size: 0.9em;
+    }
+
+    ul {
+      list-style: none;
+      margin: 15px 0;
+      padding-left: 20px;
+    }
+
+    li {
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    li:before {
+      content: "✓ ";
+      color: #d4a574;
+      font-weight: bold;
+      margin-right: 10px;
+      font-size: 1.1em;
+    }
+
+    .timeline {
+      margin: 30px 0;
+    }
+
+    .timeline-item {
+      display: flex;
+      margin-bottom: 25px;
+      position: relative;
+      padding-left: 40px;
+      page-break-inside: avoid;
+    }
+
+    .timeline-item:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 5px;
+      width: 12px;
+      height: 12px;
+      background: #d4a574;
+      border-radius: 50%;
+      border: 3px solid white;
+      box-shadow: 0 0 0 3px #2c5f8d;
+    }
+
+    .timeline-item h4 {
+      color: #2c5f8d;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+
+    .financial-box {
+      background: linear-gradient(135deg, #2c5f8d 0%, #1e4b6f 100%);
+      color: white;
+      padding: 30px;
+      border-radius: 8px;
+      margin: 25px 0;
+      page-break-inside: avoid;
+    }
+
+    .financial-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .financial-detail {
+      border-right: 1px solid rgba(255,255,255,0.2);
+      padding-right: 20px;
+    }
+
+    .financial-detail:last-child {
+      border-right: none;
+    }
+
+    .financial-label {
+      opacity: 0.8;
+      font-size: 0.9em;
+      margin-bottom: 5px;
+    }
+
+    .financial-value {
+      font-size: 1.8em;
+      font-weight: bold;
+    }
+
+    .agent-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .agent-item {
+      background: #f9f9f9;
+      padding: 15px;
+      border-left: 3px solid #2c5f8d;
+      border-radius: 4px;
+      font-size: 0.95em;
+    }
+
+    .footer {
+      background: #2c5f8d;
+      color: white;
+      padding: 30px;
+      text-align: center;
+      font-size: 0.9em;
+      page-break-before: always;
+    }
+
+    @media print {
+      body {
+        background: white;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 100%;
+        box-shadow: none;
+      }
+      section {
+        page-break-inside: avoid;
+      }
+      .button-group {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        padding: 40px 20px;
+      }
+      .header h1 {
+        font-size: 1.8em;
+      }
+      .content {
+        padding: 30px 20px;
+      }
+      .agent-list {
+        grid-template-columns: 1fr;
+      }
+      .financial-detail {
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+        padding-right: 0;
+        padding-bottom: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- HEADER -->
+    <div class="header">
+      <div class="header-logo">🏨 Craftwood Hospitality Management Ltd</div>
+      <h1>Premium Distribution & Marketing Proposal</h1>
+      <div class="header-subtitle">
+        Comprehensive Agent Portal & Contacts Management Platform<br>
+        Integrated Distribution Strategy for Lilita Keper Safari Lodge
+      </div>
+      <div class="signatory">
+        <div class="signatory-name">Craftwood Hospitality Management Ltd</div>
+        <div class="signatory-title">Distribution & Marketing Platform</div>
+      </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="content">
+      <!-- EXECUTIVE SUMMARY -->
+      <section>
+        <h2>Executive Summary</h2>
+        <p>
+          This proposal presents a comprehensive distribution and digital marketing strategy designed to position Lilita Keper Safari Lodge as a premium destination in the East African luxury market. Leveraging an integrated Agent Portal and Contacts Management Platform, we will reach 40,000+ qualified travel agents, curators, and travel specialists with a tiered commission structure that rewards performance while maintaining operational efficiency.
+        </p>
+        <p>
+          Our projections target <strong>USD 468,000 net income in 2027</strong> through a combination of high-value commission-based bookings, strategic partnerships with luxury curators, aggressive digital marketing, and specialized offerings including destination weddings and curated safari experiences.
+        </p>
+      </section>
+
+      <!-- VALUE PROPOSITION -->
+      <section>
+        <h2>Value Proposition: Two Integrated Platforms</h2>
+        <p>Craftwood Hospitality Management Ltd delivers a complete digital ecosystem for hospitality distribution:</p>
+
+        <h3>1. Agent Portal - The Waterhole for Agents</h3>
+        <p>A comprehensive booking and commission management platform where travel agents can:</p>
+        <ul>
+          <li>Access real-time availability and rates for Lilita Keper</li>
+          <li>Submit bookings with instant confirmation</li>
+          <li>Track commission earnings and referral bonuses</li>
+          <li>Monitor tier progression (Bronze → Silver → Gold → Platinum)</li>
+          <li>Access marketing materials and property information</li>
+          <li>Manage group bookings and custom packages</li>
+        </ul>
+
+        <h3>2. Contacts Management - Your Agency Network Database</h3>
+        <p>A powerful CRM and email management system for maintaining relationships with your agent network:</p>
+        <ul>
+          <li>Centralized agent and travel curator database</li>
+          <li>Email campaign management with tracking</li>
+          <li>Performance analytics and ROI measurement</li>
+          <li>Automated commission calculations</li>
+          <li>Booking history and client preferences</li>
+          <li>Integration with Agent Portal for seamless workflows</li>
+        </ul>
+
+        <div class="highlight-box">
+          <span class="highlight-number">2</span>
+          <strong>Complete Value Package</strong>
+          <p>Both platforms work together to create a unified distribution ecosystem that benefits agents, your property, and travelers.</p>
+        </div>
+      </section>
+
+      <!-- INVESTMENT & PRICING -->
+      <section>
+        <h2>Investment & Pricing Structure</h2>
+
+        <h3>Service Fee</h3>
+        <p>
+          <span class="price-tag">USD 500</span>
+          <br><br>
+          One-time setup and configuration fee for platform access, agent database integration, and system customization.
+        </p>
+
+        <h3>Digital Management Budget</h3>
+        <p>
+          <span class="price-tag">USD 1,500/month</span>
+          <br><br>
+          Recommended allocation from your marketing budget for SEO, AEO, GEO, keyword management, and AI marketing.
+        </p>
+
+        <div class="highlight-box">
+          <span class="highlight-number">700+</span>
+          <strong>Projected Annual Bed Nights from Digital Marketing</strong>
+          <p>With proper SEO/AEO implementation, the USD 1,500/month investment typically generates ROI of over 700 bed nights annually at rack rate.</p>
+        </div>
+
+        <h3>Commission Structure</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Agent Tier</th>
+              <th>Criteria</th>
+              <th>Commission Rate</th>
+              <th>Target Agents</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Premium Partners</strong></td>
+              <td>High-volume curators & luxury specialists</td>
+              <td><span class="price-tag">40%</span></td>
+              <td>~50 curated partners</td>
+            </tr>
+            <tr>
+              <td><strong>Standard STO</strong></td>
+              <td>Active travel agencies & online travel agents</td>
+              <td><span class="price-tag">20%</span></td>
+              <td>~40,000 agents</td>
+            </tr>
+            <tr>
+              <td><strong>Referral Bonus</strong></td>
+              <td>Per successful sub-agent recruitment</td>
+              <td><span class="price-tag">USD 50</span></td>
+              <td>Unlimited</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- TARGET AGENTS -->
+      <section>
+        <h2>Premium Partner Targets (40% Commission @ USD 1,600 Rack Rate)</h2>
+        <p>These curated luxury travel specialists will receive personalized outreach and premium commissions:</p>
+
+        <div class="agent-list">
+          <div class="agent-item">💎 Elewana Cheli & Peacock</div>
+          <div class="agent-item">💎 Tauck</div>
+          <div class="agent-item">💎 Micato Safaris</div>
+          <div class="agent-item">💎 Bush & Beyond</div>
+          <div class="agent-item">💎 Naked Wilderness</div>
+          <div class="agent-item">💎 Pollmans Tours</div>
+          <div class="agent-item">💎 African Horizon</div>
+          <div class="agent-item">💎 Virtuoso Network Partners</div>
+        </div>
+
+        <p><strong>Plus 40 additional curated high-volume partners</strong> identified through market analysis and existing relationships.</p>
+      </section>
+
+      <!-- 90-DAY STRATEGY -->
+      <section>
+        <h2>First 90 Days Implementation Strategy</h2>
+        <p>A detailed action plan to maximize agent adoption and booking velocity:</p>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <h4>Days 1-15: Foundation & Onboarding</h4>
+            <p>✓ Launch Agent Portal and Contacts Platform</p>
+            <p>✓ Personal outreach to 50 premium partner agents</p>
+            <p>✓ Deliver platform training and marketing materials</p>
+            <p>✓ Configure premium agent access and commission settings</p>
+          </div>
+
+          <div class="timeline-item">
+            <h4>Days 16-45: Active Engagement Phase</h4>
+            <p>✓ Face-to-face meetings with key curators in Nairobi and other hubs</p>
+            <p>✓ Launch bulk email campaigns to 40,000 agents with STO contract</p>
+            <p>✓ Activate "Pay 3 Stay 4" seasonal offers for Dec/Q1</p>
+            <p>✓ Establish direct incentive programs for top-performing agents</p>
+          </div>
+
+          <div class="timeline-item">
+            <h4>Days 46-90: Scale & Optimization</h4>
+            <p>✓ Launch aggressive digital marketing (SEO, AEO, GEO)</p>
+            <p>✓ Activate paid advertising on Google, Meta, and OTA platforms</p>
+            <p>✓ Implement Virtuoso and luxury curator partnerships</p>
+            <p>✓ Measure and optimize first 60-90 days of booking data</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- FINANCIAL PROJECTIONS -->
+      <section>
+        <h2>Financial Projections & ROI Analysis</h2>
+
+        <h3>2027 Revenue Target: USD 468,000</h3>
+        <p>Based on conservative booking projections and commission structure:</p>
+
+        <div class="financial-box">
+          <div class="financial-item">
+            <div class="financial-detail">
+              <div class="financial-label">Annual Bed Nights Target</div>
+              <div class="financial-value">2,000</div>
+            </div>
+            <div class="financial-detail">
+              <div class="financial-label">REVPAR per Bed Night (Rate - Taxes - Costs)</div>
+              <div class="financial-value">USD 234</div>
+            </div>
+          </div>
+
+          <div class="financial-item">
+            <div class="financial-detail">
+              <div class="financial-label">Gross REVPAR Revenue (2,000 nights × USD 234)</div>
+              <div class="financial-value">USD 468,000</div>
+            </div>
+          </div>
+        </div>
+
+        <h3>Commission & Payment Details</h3>
+        <ul>
+          <li>Premium Partners pay 30% deposit at booking</li>
+          <li>STO agents pay in full at least 30 days before arrival</li>
+          <li>Direct bookings pay 100% deposit</li>
+        </ul>
+
+        <h3>Platform Costs & Profitability</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Cost Item</th>
+              <th>Annual</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Platform Service Fee</td>
+              <td>USD 500</td>
+              <td>One-time setup</td>
+            </tr>
+            <tr>
+              <td>Digital Marketing Budget</td>
+              <td>USD 18,000</td>
+              <td>USD 1,500/month (from marketing budget)</td>
+            </tr>
+            <tr>
+              <td>Portal Maintenance & Support</td>
+              <td>USD 2,000</td>
+              <td>Included technical support</td>
+            </tr>
+            <tr>
+              <td><strong>Total Annual Costs</strong></td>
+              <td><strong>USD 20,500</strong></td>
+              <td>4.4% of projected revenue</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="highlight-box">
+          <span class="highlight-number">95.6%</span>
+          <strong>Net Margin After Platform Costs</strong>
+          <p>The platform structure ensures minimal overhead while maintaining infrastructure for agent support, marketing materials, and system maintenance.</p>
+        </div>
+      </section>
+
+      <!-- COMPETITIVE POSITIONING -->
+      <section>
+        <h2>Competitive Positioning</h2>
+        <p>Lilita Keper positioned at the same level as leading competitors:</p>
+
+        <div class="agent-list">
+          <div class="agent-item">🏆 Fairmont Mara</div>
+          <div class="agent-item">🏆 Elewana Sandriver</div>
+          <div class="agent-item">🏆 Elewana Elephant Pepper</div>
+          <div class="agent-item">🏆 Angama Mara</div>
+          <div class="agent-item">🏆 Olonana Sanctuary</div>
+          <div class="agent-item">🏆 Mahali Mzuri</div>
+          <div class="agent-item">🏆 OlareMara Kempinski</div>
+          <div class="agent-item">🏆 Mara Plains</div>
+          <div class="agent-item">🏆 &Beyond Kichwa Tembo</div>
+          <div class="agent-item">🏆 &Beyond Bateleur Camp</div>
+          <div class="agent-item">🏆 Soroi Mara Bush</div>
+          <div class="agent-item">🏆 Bush & Beyond</div>
+        </div>
+
+        <h3>Why Agents Choose Lilita Keper</h3>
+        <ul>
+          <li><strong>Higher Commissions:</strong> 40% for top partners vs. traditional 15-25%</li>
+          <li><strong>Transparency:</strong> Real-time commission tracking and booking management</li>
+          <li><strong>Ease of Access:</strong> One-click portal login with email-based authentication</li>
+          <li><strong>Marketing Support:</strong> Co-op advertising and marketing materials included</li>
+          <li><strong>Flexibility:</strong> Customizable packages and group rates</li>
+        </ul>
+
+        <h3>Why Clients Choose Lilita Keper</h3>
+        <ul>
+          <li>Authentic Maasai cultural experiences and ceremonies</li>
+          <li>Exclusive 6-villa intimate setting</li>
+          <li>Year-round 24/7 game viewing in Enonkishu Conservancy</li>
+          <li>All-inclusive pricing with premium meals and beverages</li>
+          <li>Expert guides with deep conservation knowledge</li>
+          <li>Destination wedding packages with complete ceremonial integration</li>
+        </ul>
+      </section>
+
+      <!-- SPECIAL OFFERINGS -->
+      <section>
+        <h2>Specialized Revenue Drivers</h2>
+
+        <h3>Destination Wedding Packages</h3>
+        <p>Premium offering with complete end-to-end management:</p>
+        <ul>
+          <li>Ceremony setup and Maasai blessing ceremony</li>
+          <li>Traditional wedding attire and cultural integration</li>
+          <li>Elders' blessings and ceremonial protocols</li>
+          <li>Pre-wedding celebrations and rehearsal dinners</li>
+          <li>All-inclusive package (guests only pay base rate)</li>
+        </ul>
+
+        <h3>Seasonal Promotions</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Season</th>
+              <th>Offer</th>
+              <th>Target Market</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>December (Peak)</strong></td>
+              <td>Holiday family packages, celebration events</td>
+              <td>International luxury travelers</td>
+            </tr>
+            <tr>
+              <td><strong>Q1 (Shoulder)</strong></td>
+              <td>Pay 3 Stay 4, extended stays, honeymoon specials</td>
+              <td>Romantic getaways, extended holidays</td>
+            </tr>
+            <tr>
+              <td><strong>Low Season</strong></td>
+              <td>Discounted rates, group packages, adventure focused</td>
+              <td>Budget-conscious luxury travelers, groups</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- CONCLUSION -->
+      <section>
+        <h2>Conclusion</h2>
+
+        <p>
+          Lilita Keper Safari Lodge has the foundation to compete at the highest level of East African luxury hospitality. With the right distribution strategy, agent network, and digital marketing approach, 2027 can be a breakthrough year for profitability and market position.
+        </p>
+
+        <p>
+          Craftwood Hospitality Management Ltd brings proven technology, deep market expertise, and execution commitment to this partnership. We are confident that this comprehensive approach will position Lilita Keper as a must-have property in every travel agent's portfolio.
+        </p>
+
+        <div class="highlight-box">
+          <span class="highlight-number">✓</span>
+          <strong>Ready to Launch:</strong> All platforms are tested, agent database is prepared, and digital marketing strategies are ready for immediate deployment.
+        </div>
+      </section>
+
+      <!-- NEXT STEPS -->
+      <section>
+        <h2>Next Steps & Engagement</h2>
+
+        <h3>Contact Information</h3>
+        <p>
+          <strong>Email:</strong> info@lilitakeper.com | sales@lilitakeper.com<br>
+          <strong>Phone:</strong> +254 101 0070 095 | +254 180 044 355<br>
+          <strong>Address:</strong> Westpark Towers, 5th floor, Mpesi Lane, Westlands, Nairobi, Kenya
+        </p>
+
+        <h3>Immediate Actions</h3>
+        <ol style="margin-left: 20px; margin-bottom: 15px;">
+          <li><strong>Schedule Deep Dive Meeting:</strong> Review detailed financial projections and strategy</li>
+          <li><strong>Portal Demonstration:</strong> Live walkthrough of both platforms</li>
+          <li><strong>Agent Validation:</strong> Confirm premium partner list and outreach strategy</li>
+          <li><strong>Contract & Terms:</strong> Finalize commission structure and STO agreements</li>
+        </ol>
+      </section>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <p><strong>Craftwood Hospitality Management Ltd</strong></p>
+      <p>Digital Distribution & Marketing Platform for Luxury Hospitality</p>
+      <p style="margin-top: 15px; opacity: 0.8;">
+        Proposal Date: August 23, 2026 | Effective for: 2027 Fiscal Year | Confidential
+      </p>
+      <p style="margin-top: 10px; font-size: 0.85em;">
+        © 2026 Craftwood Hospitality Management Ltd. All Rights Reserved.
+      </p>
+    </div>
+  </div>
+</body>
+</html>
