@@ -5,6 +5,121 @@
   align-items: center;
   justify-content: center;
   padding: 2rem;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.property-info {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 500px;
+  padding: 2rem;
+}
+
+.property-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 2rem;
+}
+
+.property-logo {
+  width: 120px;
+  height: 120px;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  object-fit: contain;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  image-rendering: -webkit-optimize-contrast;
+}
+
+.property-header h2 {
+  font-size: 2rem;
+  color: #2c5f8d;
+  margin: 0.5rem 0;
+}
+
+.property-header .location {
+  color: #d4a574;
+  font-weight: 600;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.property-details .tagline {
+  font-size: 1.1rem;
+  color: #2c5f8d;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.property-details .description {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.property-highlights {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.highlight {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.highlight .label {
+  display: block;
+  font-size: 0.85rem;
+  color: #999;
+  margin-bottom: 0.5rem;
+}
+
+.highlight .value {
+  display: block;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #2c5f8d;
+}
+
+.amenities {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+.amenities h4 {
+  color: #2c5f8d;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.amenities ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.amenities li {
+  color: #666;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
 }
 
 .login-box {
@@ -166,6 +281,21 @@
   line-height: 1.5;
 }
 
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .property-info {
+    max-width: 100%;
+  }
+
+  .login-box {
+    max-width: 100%;
+  }
+}
+
 @media (max-width: 480px) {
   .login-box {
     padding: 2rem 1.5rem;
@@ -177,5 +307,18 @@
 
   .form-row {
     grid-template-columns: 1fr;
+  }
+
+  .property-highlights {
+    grid-template-columns: 1fr;
+  }
+
+  .property-logo {
+    width: 100px;
+    height: 100px;
+  }
+
+  .property-header h2 {
+    font-size: 1.5rem;
   }
 }
