@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Proposal Generator - Lilita Keper</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f5f7fa;
+      color: #333;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      background: linear-gradient(135deg, #2c5f8d 0%, #1e4b6f 100%);
+      color: white;
+      padding: 30px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    .form-section {
+      background: white;
+      padding: 25px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .form-section h2 {
+      color: #2c5f8d;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #d4a574;
+      padding-bottom: 10px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #2c5f8d;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"],
+    input[type="number"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+      font-family: inherit;
+      transition: border-color 0.3s;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #2c5f8d;
+      box-shadow: 0 0 0 3px rgba(44, 95, 141, 0.1);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .checkbox-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .checkbox-item input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 14px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+
+    .btn-primary {
+      background: #2c5f8d;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #1e4b6f;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(44, 95, 141, 0.3);
+    }
+
+    .btn-secondary {
+      background: #f0f0f0;
+      color: #333;
+    }
+
+    .btn-secondary:hover {
+      background: #e0e0e0;
+    }
+
+    .preview-section {
+      background: #f8f9fa;
+      padding: 25px;
+      border-radius: 8px;
+      border: 2px solid #d4a574;
+      margin-top: 20px;
+      display: none;
+    }
+
+    .preview-section h3 {
+      color: #2c5f8d;
+      margin-bottom: 15px;
+    }
+
+    .proposal-preview {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      line-height: 1.6;
+    }
+
+    .logo-placeholder {
+      width: 100px;
+      height: 60px;
+      background: #eee;
+      border-radius: 4px;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+    }
+
+    .pricing-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+    }
+
+    .pricing-table th,
+    .pricing-table td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .pricing-table th {
+      background: #f0f0f0;
+      font-weight: 600;
+    }
+
+    .price-total {
+      font-size: 18px;
+      font-weight: bold;
+      color: #2c5f8d;
+    }
+
+    @media (max-width: 600px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .checkbox-group {
+        grid-template-columns: 1fr;
+      }
+
+      .action-buttons {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>📄 Custom Proposal Generator</h1>
+      <p>Create personalized proposals in seconds. Share directly with clients.</p>
+    </header>
+
+    <!-- Client Information -->
+    <div class="form-section">
+      <h2>👤 Client Information</h2>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Client Name *</label>
+          <input type="text" id="clientName" required>
+        </div>
+        <div class="form-group">
+          <label>Client Email</label>
+          <input type="email" id="clientEmail">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Check-in Date *</label>
+          <input type="date" id="checkInDate" required>
+        </div>
+        <div class="form-group">
+          <label>Check-out Date *</label>
+          <input type="date" id="checkOutDate" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Number of Guests</label>
+        <input type="number" id="numGuests" value="2" min="1">
+      </div>
+    </div>
+
+    <!-- Room & Rate Selection -->
+    <div class="form-section">
+      <h2>🛏️ Room & Rate Selection</h2>
+      <div class="form-group">
+        <label>Select Room Type *</label>
+        <select id="roomType" required>
+          <option value="">Choose a room...</option>
+          <option value="standard">Standard Double - $234/night</option>
+          <option value="luxury">Luxury Suite - $315/night</option>
+          <option value="group">Group Rate - $189/night (4+ rooms)</option>
+          <option value="extended">Extended Stay - $205/night (7+ nights)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Special Offers -->
+    <div class="form-section">
+      <h2>🎁 Available Offers</h2>
+      <div class="checkbox-group">
+        <div class="checkbox-item">
+          <input type="checkbox" id="pay3stay4">
+          <label for="pay3stay4">Pay 3 Stay 4 (+1 free night)</label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="groupDiscount">
+          <label for="groupDiscount">Group Discount (15% off)</label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="earlyBooking">
+          <label for="earlyBooking">Early Booking Bonus (+$50)</label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="honeymoon">
+          <label for="honeymoon">Honeymoon Special</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Special Requests -->
+    <div class="form-section">
+      <h2>📝 Special Requests & Preferences</h2>
+      <div class="form-group">
+        <label>Customized Experiences (select all that apply)</label>
+        <div class="checkbox-group">
+          <div class="checkbox-item">
+            <input type="checkbox" id="wildlife" value="wildlife">
+            <label for="wildlife">Wildlife Safari</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="wedding" value="wedding">
+            <label for="wedding">Wedding Venue</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="photography" value="photography">
+            <label for="photography">Photography Package</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="corporate" value="corporate">
+            <label for="corporate">Corporate Retreat</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="mission" value="mission">
+            <label for="mission">Mission/NGO Group</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="honeymoon2" value="honeymoon">
+            <label for="honeymoon2">Honeymoon Package</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Special Requests & Notes</label>
+        <textarea id="specialRequests" placeholder="Any special dietary needs, room preferences, activities, etc."></textarea>
+      </div>
+    </div>
+
+    <!-- Booking Information -->
+    <div class="form-section">
+      <h2>📋 Booking Details</h2>
+      <div class="form-group">
+        <label>Your Tracking Code</label>
+        <input type="text" id="trackingCode" readonly value="TRACK-" style="background: #f0f0f0;">
+      </div>
+      <p style="color: #666; font-size: 14px;">This code tracks your commission and booking status</p>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="form-section">
+      <div class="action-buttons">
+        <button class="btn btn-primary" onclick="generateProposal()">✓ Generate Proposal</button>
+        <button class="btn btn-secondary" onclick="resetForm()">↺ Reset</button>
+      </div>
+    </div>
+
+    <!-- Proposal Preview -->
+    <div class="preview-section" id="previewSection">
+      <h3>Preview Your Proposal</h3>
+      <div class="proposal-preview" id="proposalPreview"></div>
+      <div class="action-buttons" style="margin-top: 20px;">
+        <button class="btn btn-primary" onclick="downloadProposal()">💾 Download PDF</button>
+        <button class="btn btn-primary" onclick="shareProposal()">📤 Share Link</button>
+        <button class="btn btn-secondary" onclick="closePreview()">← Back to Edit</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const agentCode = params.get('agent') || 'AGENT-001';
+
+    // Initialize tracking code
+    document.getElementById('trackingCode').value = `TRACK-${Date.now()}-${agentCode}`;
+
+    function generateProposal() {
+      const clientName = document.getElementById('clientName').value;
+      const checkInDate = document.getElementById('checkInDate').value;
+      const checkOutDate = document.getElementById('checkOutDate').value;
+      const roomType = document.getElementById('roomType').value;
+      const specialRequests = document.getElementById('specialRequests').value;
+
+      if (!clientName || !checkInDate || !checkOutDate || !roomType) {
+        alert('Please fill in all required fields');
+        return;
+      }
+
+      // Calculate nights
+      const checkIn = new Date(checkInDate);
+      const checkOut = new Date(checkOutDate);
+      const nights = Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24));
+
+      // Get room rate
+      const roomRates = {
+        'standard': 234,
+        'luxury': 315,
+        'group': 189,
+        'extended': 205
+      };
+
+      let rate = roomRates[roomType];
+      let totalCost = rate * nights;
+
+      // Apply offers
+      if (document.getElementById('pay3stay4').checked) {
+        totalCost = rate * (Math.floor(nights / 4) * 3 + (nights % 4));
+      }
+      if (document.getElementById('groupDiscount').checked) {
+        totalCost = totalCost * 0.85;
+      }
+
+      const commission = totalCost * 0.40; // 40% commission
+
+      const proposal = `
+        <div style="padding: 20px;">
+          <div style="text-align: center; margin-bottom: 30px;">
+            <img src="/logo.avif" style="width: 100px; height: auto; border-radius: 8px; margin-bottom: 10px;">
+            <h2 style="color: #2c5f8d; margin: 10px 0;">Lilita Keper Safari Lodge</h2>
+            <p style="color: #666;">Premium Safari Experience</p>
+          </div>
+
+          <h3 style="color: #2c5f8d; margin: 20px 0 10px;">Dear ${clientName},</h3>
+          <p style="line-height: 1.6;">Thank you for your interest in Lilita Keper Safari Lodge. We're delighted to present a customized itinerary tailored to your preferences.</p>
+
+          <h3 style="color: #2c5f8d; margin: 20px 0 10px;">Your Booking Details</h3>
+          <table class="pricing-table">
+            <tr>
+              <td><strong>Check-in:</strong></td>
+              <td>${new Date(checkInDate).toLocaleDateString()}</td>
+            </tr>
+            <tr>
+              <td><strong>Check-out:</strong></td>
+              <td>${new Date(checkOutDate).toLocaleDateString()}</td>
+            </tr>
+            <tr>
+              <td><strong>Number of Nights:</strong></td>
+              <td>${nights}</td>
+            </tr>
+            <tr>
+              <td><strong>Room Type:</strong></td>
+              <td>${roomType.charAt(0).toUpperCase() + roomType.slice(1)}</td>
+            </tr>
+            <tr style="background: #f0f0f0; font-weight: bold;">
+              <td>Nightly Rate:</td>
+              <td>$${rate.toFixed(2)}</td>
+            </tr>
+          </table>
+
+          <h3 style="color: #2c5f8d; margin: 20px 0 10px;">Pricing Summary</h3>
+          <table class="pricing-table">
+            <tr>
+              <td><strong>Accommodation:</strong></td>
+              <td>${nights} nights × $${rate}</td>
+              <td style="text-align: right;">$${(rate * nights).toFixed(2)}</td>
+            </tr>
+            ${document.getElementById('pay3stay4').checked ? `<tr><td colspan="2"><em>Pay 3 Stay 4 Discount:</em></td><td style="text-align: right; color: #28a745;">Applied</td></tr>` : ''}
+            ${document.getElementById('groupDiscount').checked ? `<tr><td colspan="2"><em>Group Discount (15%):</em></td><td style="text-align: right; color: #28a745;">-15%</td></tr>` : ''}
+            <tr style="background: #f0f0f0; font-weight: bold; font-size: 16px;">
+              <td colspan="2">Total Accommodation Cost:</td>
+              <td style="text-align: right;">$${totalCost.toFixed(2)}</td>
+            </tr>
+            <tr>
+              <td colspan="3" style="padding: 15px 0; text-align: center; font-size: 12px; color: #666;">✅ All meals, activities, and amenities included</td>
+            </tr>
+          </table>
+
+          ${specialRequests ? `<h3 style="color: #2c5f8d; margin: 20px 0 10px;">Your Special Requests</h3><p>${specialRequests}</p>` : ''}
+
+          <h3 style="color: #2c5f8d; margin: 20px 0 10px;">Next Steps</h3>
+          <ul style="margin-left: 20px; line-height: 1.8;">
+            <li>Review this proposal</li>
+            <li>Contact your agent to confirm booking</li>
+            <li>Deposit required: 30% or full amount 30 days before arrival</li>
+            <li>Receive confirmation & booking details</li>
+          </ul>
+
+          <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #2c5f8d;">
+            <p style="font-size: 12px; color: #666; margin: 0;">
+              <strong>Booking Reference:</strong> ${document.getElementById('trackingCode').value}<br>
+              <strong>Prepared by:</strong> Agent ${agentCode}
+            </p>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('proposalPreview').innerHTML = proposal;
+      document.getElementById('previewSection').style.display = 'block';
+      window.scrollTo(0, 0);
+    }
+
+    function downloadProposal() {
+      alert('📥 PDF download feature coming soon!\n\nYou can:\n✓ Print to PDF (Ctrl+P)\n✓ Save as PDF from browser\n✓ Email directly to client');
+    }
+
+    function shareProposal() {
+      const link = `${window.location.href}?proposal=${Date.now()}`;
+      alert(`📤 Proposal Link Copied!\n\n${link}\n\nShare this link with your client. They can view & accept terms online.`);
+    }
+
+    function resetForm() {
+      document.querySelectorAll('input, textarea, select').forEach(el => {
+        if (el.id !== 'trackingCode') {
+          if (el.type === 'checkbox') el.checked = false;
+          else el.value = '';
+        }
+      });
+      document.getElementById('trackingCode').value = `TRACK-${Date.now()}-${agentCode}`;
+      document.getElementById('previewSection').style.display = 'none';
+    }
+
+    function closePreview() {
+      document.getElementById('previewSection').style.display = 'none';
+    }
+  </script>
+</body>
+</html>

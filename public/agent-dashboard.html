@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent Dashboard - Lilita Keper</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f5f7fa;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      background: linear-gradient(135deg, #2c5f8d 0%, #1e4b6f 100%);
+      color: white;
+      padding: 30px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    h1 {
+      margin-bottom: 5px;
+    }
+
+    .header-subtitle {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    .user-info {
+      text-align: right;
+    }
+
+    .user-info p {
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .logout-btn {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      margin-top: 10px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .stat-card {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-left: 4px solid #2c5f8d;
+    }
+
+    .stat-card h3 {
+      color: #666;
+      font-size: 12px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .stat-value {
+      font-size: 32px;
+      font-weight: bold;
+      color: #2c5f8d;
+    }
+
+    .stat-secondary {
+      font-size: 14px;
+      color: #999;
+      margin-top: 8px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #ddd;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      padding: 15px 20px;
+      cursor: pointer;
+      font-weight: 600;
+      color: #999;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s;
+    }
+
+    .tab-btn.active {
+      color: #2c5f8d;
+      border-bottom-color: #2c5f8d;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .table-container {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead {
+      background: #f8f9fa;
+      border-bottom: 2px solid #ddd;
+    }
+
+    th {
+      padding: 15px;
+      text-align: left;
+      font-weight: 600;
+      color: #2c5f8d;
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+
+    td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #eee;
+    }
+
+    tbody tr:hover {
+      background: #f8f9fa;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .status-confirmed {
+      background: #e6f7ec;
+      color: #1a7f3c;
+    }
+
+    .status-pending {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    .status-paid {
+      background: #d4edda;
+      color: #1a7f3c;
+    }
+
+    .amount {
+      font-weight: 600;
+      color: #2c5f8d;
+    }
+
+    .positive {
+      color: #28a745;
+    }
+
+    .action-btn {
+      background: #2c5f8d;
+      color: white;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: all 0.3s;
+    }
+
+    .action-btn:hover {
+      background: #1e4b6f;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 40px;
+      color: #999;
+    }
+
+    .quick-actions {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .quick-actions h3 {
+      color: #2c5f8d;
+      margin-bottom: 15px;
+    }
+
+    .action-buttons {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+    }
+
+    .action-btn-large {
+      padding: 12px;
+      background: #2c5f8d;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .action-btn-large:hover {
+      background: #1e4b6f;
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .user-info {
+        text-align: left;
+        margin-top: 15px;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      table {
+        font-size: 12px;
+      }
+
+      th, td {
+        padding: 8px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <h1>📊 Agent Dashboard</h1>
+        <p class="header-subtitle">Lilita Keper Safari Lodge Booking Manager</p>
+      </div>
+      <div class="user-info">
+        <p><strong id="agentName">Agent Name</strong></p>
+        <p id="agentCode" style="font-size: 12px; color: #ddd;">CODE-001</p>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+      </div>
+    </header>
+
+    <!-- Key Metrics -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <h3>Total Bookings</h3>
+        <div class="stat-value" id="totalBookings">12</div>
+        <div class="stat-secondary">This year</div>
+      </div>
+
+      <div class="stat-card" style="border-left-color: #d4a574;">
+        <h3>Total Earnings</h3>
+        <div class="stat-value positive" id="totalEarnings">$2,847</div>
+        <div class="stat-secondary">Commission earned</div>
+      </div>
+
+      <div class="stat-card" style="border-left-color: #28a745;">
+        <h3>Pending Payouts</h3>
+        <div class="stat-value" id="pendingPayouts">$582</div>
+        <div class="stat-secondary">Next payout: 30 days</div>
+      </div>
+
+      <div class="stat-card" style="border-left-color: #ffc107;">
+        <h3>Commission Rate</h3>
+        <div class="stat-value" id="commissionRate">40%</div>
+        <div class="stat-secondary">Premium Partner</div>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+      <h3>⚡ Quick Actions</h3>
+      <div class="action-buttons">
+        <button class="action-btn-large" onclick="goToRates()">💰 View Rates</button>
+        <button class="action-btn-large" onclick="createProposal()">📄 New Proposal</button>
+        <button class="action-btn-large" onclick="shareWhatsApp()">📱 Share Link</button>
+        <button class="action-btn-large" onclick="editBranding()">🎨 My Branding</button>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('bookings')">📋 My Bookings</button>
+      <button class="tab-btn" onclick="switchTab('commissions')">💰 Commissions</button>
+      <button class="tab-btn" onclick="switchTab('reports')">📈 Reports</button>
+      <button class="tab-btn" onclick="switchTab('settings')">⚙️ Settings</button>
+    </div>
+
+    <!-- Bookings Tab -->
+    <div id="bookings" class="tab-content active">
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Booking Code</th>
+              <th>Guest Name</th>
+              <th>Dates</th>
+              <th>Room Type</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="bookingsTable">
+            <tr>
+              <td colspan="7" class="empty-state">No bookings yet. <a href="javascript:createProposal()" style="color: #2c5f8d; text-decoration: underline;">Create your first proposal</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Commissions Tab -->
+    <div id="commissions" class="tab-content">
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Booking Code</th>
+              <th>Guest</th>
+              <th>Booking Amount</th>
+              <th>Your Commission (40%)</th>
+              <th>Status</th>
+              <th>Payout Date</th>
+            </tr>
+          </thead>
+          <tbody id="commissionsTable">
+            <tr>
+              <td>BK-2024-001</td>
+              <td>John Doe</td>
+              <td class="amount">$936</td>
+              <td class="amount positive">$374.40</td>
+              <td><span class="status-badge status-confirmed">Confirmed</span></td>
+              <td>Sep 30, 2024</td>
+            </tr>
+            <tr>
+              <td>BK-2024-002</td>
+              <td>Jane Smith</td>
+              <td class="amount">$1,248</td>
+              <td class="amount positive">$499.20</td>
+              <td><span class="status-badge status-confirmed">Confirmed</span></td>
+              <td>Oct 15, 2024</td>
+            </tr>
+            <tr>
+              <td>BK-2024-003</td>
+              <td>Robert Johnson</td>
+              <td class="amount">$2,340</td>
+              <td class="amount positive">$936</td>
+              <td><span class="status-badge status-pending">Pending</span></td>
+              <td>Nov 15, 2024</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Reports Tab -->
+    <div id="reports" class="tab-content">
+      <div style="background: white; padding: 30px; border-radius: 8px; text-align: center;">
+        <h3 style="color: #2c5f8d; margin-bottom: 20px;">📊 Your Performance</h3>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <h3>Conversion Rate</h3>
+            <div class="stat-value">67%</div>
+            <div class="stat-secondary">Proposals → Bookings</div>
+          </div>
+
+          <div class="stat-card">
+            <h3>Avg Booking Value</h3>
+            <div class="stat-value">$1,508</div>
+            <div class="stat-secondary">Average per booking</div>
+          </div>
+
+          <div class="stat-card">
+            <h3>Monthly Earnings</h3>
+            <div class="stat-value positive">$947</div>
+            <div class="stat-secondary">This month so far</div>
+          </div>
+
+          <div class="stat-card">
+            <h3>Ranking</h3>
+            <div class="stat-value">#3</div>
+            <div class="stat-secondary">Among top agents</div>
+          </div>
+        </div>
+
+        <button class="action-btn-large" style="margin-top: 20px;" onclick="downloadReport()">📥 Download Full Report</button>
+      </div>
+    </div>
+
+    <!-- Settings Tab -->
+    <div id="settings" class="tab-content">
+      <div style="background: white; padding: 30px; border-radius: 8px;">
+        <h3 style="color: #2c5f8d; margin-bottom: 20px;">⚙️ Account Settings</h3>
+
+        <div style="margin-bottom: 20px;">
+          <label style="display: block; margin-bottom: 10px; font-weight: 600; color: #2c5f8d;">Your Email</label>
+          <input type="email" id="settingEmail" value="agent@example.com" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+        </div>
+
+        <div style="margin-bottom: 20px;">
+          <label style="display: block; margin-bottom: 10px; font-weight: 600; color: #2c5f8d;">Your Phone</label>
+          <input type="tel" id="settingPhone" value="+254 700 000000" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+        </div>
+
+        <div style="margin-bottom: 20px;">
+          <label style="display: block; margin-bottom: 10px; font-weight: 600; color: #2c5f8d;">Preferred Payout Method</label>
+          <select style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+            <option>M-Pesa</option>
+            <option>Bank Transfer</option>
+            <option>Crypto</option>
+          </select>
+        </div>
+
+        <button class="action-btn-large" onclick="saveSettings()">✓ Save Settings</button>
+
+        <hr style="margin: 30px 0; border: none; border-top: 1px solid #ddd;">
+
+        <h3 style="color: #2c5f8d; margin-bottom: 20px;">🔒 Security</h3>
+        <button class="action-btn-large" style="background: #dc3545;" onclick="changePassword()">Change Password</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function switchTab(tabName) {
+      // Hide all tabs
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+
+      // Show selected tab
+      document.getElementById(tabName).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    function goToRates() {
+      window.location.href = '/agent-profile.html?agent=AGENT-001';
+    }
+
+    function createProposal() {
+      window.location.href = '/custom-proposal.html?agent=AGENT-001';
+    }
+
+    function shareWhatsApp() {
+      const message = `Check out my rates and book with me! 🦁\n${window.location.href}`;
+      const encoded = encodeURIComponent(message);
+      window.open(`https://wa.me/?text=${encoded}`, '_blank');
+    }
+
+    function editBranding() {
+      alert('🎨 Branding settings coming soon!\n\nYou can:\n✓ Upload your logo\n✓ Add your name & contact\n✓ Customize your profile page');
+    }
+
+    function downloadReport() {
+      alert('📥 PDF Report downloaded!\n\nYour performance summary has been saved.');
+    }
+
+    function saveSettings() {
+      alert('✓ Settings saved successfully!');
+    }
+
+    function changePassword() {
+      alert('🔒 Password change feature coming soon!\n\nFor now, contact support@lilitakeper.com');
+    }
+
+    function logout() {
+      if (confirm('Are you sure you want to logout?')) {
+        window.location.href = '/';
+      }
+    }
+
+    // Initialize dashboard
+    document.getElementById('agentName').textContent = 'Your Agency';
+  </script>
+</body>
+</html>
