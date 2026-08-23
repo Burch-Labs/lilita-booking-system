@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { setupAgentPlatformRoutes } from './agent-platform-api.js';
 
@@ -23,19 +24,16 @@ app.use(cors());
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 
-// Fix API URL in served JavaScript (temporary workaround for pending build)
-app.use((req, res, next) => {
-  if (req.path.endsWith('.js')) {
-    const originalSend = res.send;
-    res.send = function(data) {
-      if (typeof data === 'string' && data.includes('localhost:3002')) {
-        data = data.replace(/http:\/\/localhost:3002/g, '/api');
-        data = data.replace(/localhost:3002/g, 'window.location.origin');
-      }
-      return originalSend.call(this, data);
-    };
+// Custom middleware to fix API URL in JavaScript files
+app.get('*.js', (req, res, next) => {
+  const filePath = path.join(__dirname, 'frontend/dist', req.path);
+  try {
+    let content = fs.readFileSync(filePath, 'utf8');
+    content = content.replace(/http:\/\/localhost:3002/g, '/api');
+    res.type('application/javascript').send(content);
+  } catch (e) {
+    next();
   }
-  next();
 });
 
 // Serve React frontend from frontend/dist
