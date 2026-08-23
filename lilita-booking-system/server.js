@@ -26,6 +26,9 @@ const app = express();
 const PORT = process.env.PORT || 3002;
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
 
+// Force fresh build - Agent Platform 2.0
+console.log(`🚀 Agent Platform 2.0 starting on port ${PORT}`);
+
 // Middleware
 app.use(cors());
 app.use(bodyParser.json({ limit: '10mb' }));
