@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lilita Keper - Refined Hospitality Meets Wild Africa</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+      line-height: 1.8;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #2c4a3d 0%, #1a2f28 100%);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><defs><pattern id="dots" x="50" y="50" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="1200" height="400" fill="url(%23dots)"/></svg>');
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      margin-bottom: 30px;
+    }
+
+    .logo img {
+      height: 100px;
+      width: auto;
+      filter: brightness(1.2);
+    }
+
+    h1 {
+      font-size: 42px;
+      margin-bottom: 15px;
+      font-weight: 300;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .tagline {
+      font-size: 24px;
+      font-weight: 300;
+      color: #d4a574;
+      margin-bottom: 30px;
+      font-style: italic;
+    }
+
+    .subheading {
+      font-size: 16px;
+      opacity: 0.95;
+      line-height: 1.8;
+      margin-bottom: 30px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    .intro-section {
+      background: white;
+      padding: 50px;
+      border-radius: 12px;
+      box-shadow: 0 5px 30px rgba(0,0,0,0.1);
+      margin-bottom: 40px;
+      border-top: 4px solid #a69080;
+    }
+
+    .intro-section h2 {
+      color: #2c5f8d;
+      font-size: 28px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .intro-section p {
+      color: #555;
+      font-size: 16px;
+      line-height: 1.9;
+      margin-bottom: 15px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      margin: 40px 0;
+    }
+
+    .feature-card {
+      background: #f9f9f9;
+      padding: 30px;
+      border-radius: 10px;
+      border-left: 4px solid #a69080;
+      text-align: center;
+    }
+
+    .feature-icon {
+      font-size: 40px;
+      margin-bottom: 15px;
+    }
+
+    .feature-title {
+      color: #2c5f8d;
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .feature-text {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .location-section {
+      background: linear-gradient(135deg, #a69080 0%, #8b7565 100%);
+      color: white;
+      padding: 40px;
+      border-radius: 12px;
+      margin-bottom: 40px;
+    }
+
+    .location-section h3 {
+      font-size: 20px;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .location-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .location-item {
+      background: rgba(255,255,255,0.15);
+      padding: 15px;
+      border-radius: 8px;
+      backdrop-filter: blur(10px);
+    }
+
+    .location-item strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      opacity: 0.85;
+    }
+
+    .location-item span {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .cta-section {
+      text-align: center;
+      padding: 40px;
+      background: #f9f9f9;
+      border-radius: 12px;
+      margin-bottom: 40px;
+    }
+
+    .cta-section h3 {
+      color: #2c5f8d;
+      font-size: 22px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    .cta-buttons {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .cta-btn {
+      background: linear-gradient(135deg, #2c5f8d 0%, #1e4b6f 100%);
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(44, 95, 141, 0.3);
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(44, 95, 141, 0.4);
+    }
+
+    .cta-btn.secondary {
+      background: linear-gradient(135deg, #a69080 0%, #8b7565 100%);
+      box-shadow: 0 4px 15px rgba(166, 144, 128, 0.3);
+    }
+
+    .cta-btn.secondary:hover {
+      box-shadow: 0 6px 20px rgba(166, 144, 128, 0.4);
+    }
+
+    .values-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      margin: 40px 0;
+    }
+
+    .value-card {
+      background: linear-gradient(135deg, #f9f9f9 0%, #f0ede9 100%);
+      padding: 30px;
+      border-radius: 10px;
+      border: 1px solid #e0d7cc;
+    }
+
+    .value-card h4 {
+      color: #2c4a3d;
+      font-size: 18px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .value-card p {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .footer {
+      background: #2c4a3d;
+      color: white;
+      padding: 40px;
+      text-align: center;
+      border-top: 4px solid #a69080;
+      margin-top: 60px;
+    }
+
+    .footer-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .footer-link {
+      text-decoration: none;
+      color: #d4a574;
+      font-size: 14px;
+      transition: color 0.3s;
+    }
+
+    .footer-link:hover {
+      color: white;
+    }
+
+    .contact-info {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 32px; }
+      .tagline { font-size: 18px; }
+      .intro-section { padding: 30px; }
+      .intro-section h2 { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <div class="hero-content">
+      <div class="logo">
+        <img src="/lilita-logo.avif" alt="Lilita Keper Safari Lodge">
+      </div>
+      <h1>Lilita Keper</h1>
+      <p class="tagline">A place where refined hospitality meets the raw spirit of the wild</p>
+      <p class="subheading">
+        An invitation to witness the African wild through a lens of respect and elegance.
+        By blending refined hospitality with a passion for the natural world, we create a space
+        where the rhythms of the Maasai Mara become your own.
+      </p>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Our Approach -->
+    <div class="intro-section">
+      <h2>Our Approach</h2>
+      <p>
+        Lilita Keper is more than a safari lodge—it's a sanctuary for discerning travelers seeking
+        authenticity without compromise. Our approach is simple but deliberate:
+      </p>
+
+      <div class="values-section">
+        <div class="value-card">
+          <h4>🌍 Honour the Land</h4>
+          <p>
+            Every detail of Lilita Keper respects the Maasai Mara's ecosystem.
+            We operate with deep reverence for the environment and the wildlife it sustains.
+          </p>
+        </div>
+
+        <div class="value-card">
+          <h4>✨ Celebrate Heritage</h4>
+          <p>
+            From Maasai partnerships to local community engagement, we celebrate the rich
+            cultural heritage of East Africa through authentic experiences.
+          </p>
+        </div>
+
+        <div class="value-card">
+          <h4>🔒 Preserve the Future</h4>
+          <p>
+            Conservation isn't an afterthought—it's woven into everything we do.
+            We're committed to leaving the Mara richer than we found it.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- The Experience -->
+    <div class="intro-section">
+      <h2>The Experience</h2>
+      <p>
+        Lilita Keper offers an intimate safari experience in 12 luxury tented suites,
+        each designed with modern comforts and authentic African aesthetics.
+        Your stay includes curated game drives, cultural interactions,
+        fine dining, and moments of solitude in one of Africa's most spectacular landscapes.
+      </p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🏕️</div>
+          <div class="feature-title">12 Luxury Suites</div>
+          <div class="feature-text">
+            Intimate tented accommodations with all modern comforts in a 5-star setting.
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🚙</div>
+          <div class="feature-title">Expert Guides</div>
+          <div class="feature-text">
+            Knowledgeable naturalists sharing deep insights into wildlife and ecosystems.
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🍽️</div>
+          <div class="feature-title">Fine Dining</div>
+          <div class="feature-text">
+            Culinary experiences celebrating local flavours with international sophistication.
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🤝</div>
+          <div class="feature-title">Cultural Immersion</div>
+          <div class="feature-text">
+            Authentic Maasai experiences and community engagement opportunities.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Location -->
+    <div class="location-section">
+      <h3>📍 Location</h3>
+      <div class="location-info">
+        <div class="location-item">
+          <strong>Primary Location</strong>
+          <span>Maasai Mara<br>Enonkishu Conservancy</span>
+        </div>
+        <div class="location-item">
+          <strong>Nearest Airstrip</strong>
+          <span>Ngerende Airstrip<br>~45 min flight from Wilson</span>
+        </div>
+        <div class="location-item">
+          <strong>Road Access</strong>
+          <span>4-5 hours from Nairobi<br>Weather dependent</span>
+        </div>
+        <div class="location-item">
+          <strong>Luxury Suites</strong>
+          <span>12 Intimate<br>Twin & King Configurations</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rates & Availability -->
+    <div class="cta-section">
+      <h3>📋 Rates, Availability & More</h3>
+      <p style="color: #666; margin-bottom: 20px;">
+        Access complete rate cards, multi-year projections, resident rates,
+        luxury images, and real-time availability through the agent portal.
+      </p>
+      <div class="cta-buttons">
+        <a href="/agent-portal.html" class="cta-btn">📱 Agent Portal</a>
+        <a href="/lilita-2026-agent-rates.html" class="cta-btn secondary">💰 2026 Rates</a>
+        <a href="/lilita-2027-agent-rates.html" class="cta-btn secondary">📈 2027 Rates</a>
+        <a href="/lilita-2028-agent-rates.html" class="cta-btn secondary">🎯 2028 Rates</a>
+        <a href="/lilita-resident-rates-kes.html" class="cta-btn secondary">🇰🇪 Resident Rates</a>
+        <a href="/series-block-booking.html" class="cta-btn">📅 Group Bookings</a>
+      </div>
+    </div>
+
+    <!-- Premium Partnership -->
+    <div class="intro-section">
+      <h2>🎖️ Premium Partner Tier</h2>
+      <p>
+        Top-performing agents who deliver 100+ bed nights annually qualify for our
+        exclusive Premium Partner tier with 40% commission on all bookings, locked in
+        for 2026–2028, plus $50 USD referral bonuses and dedicated partnership support.
+      </p>
+      <div class="cta-buttons" style="margin-top: 25px; gap: 12px;">
+        <a href="/premium-partner-friendly" class="cta-btn secondary">💬 View Offer</a>
+        <a href="/premium-partner-meeting-request" class="cta-btn">📅 Schedule CEO Visit</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <h3 style="margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px;">Lilita Keper Safari Lodge</h3>
+
+    <div class="footer-links">
+      <a href="/agent-portal.html" class="footer-link">Agent Portal</a>
+      <a href="/series-block-booking.html" class="footer-link">Group Bookings</a>
+      <a href="/custom-proposal.html" class="footer-link">Proposals</a>
+      <a href="/copy-paste-guide.html" class="footer-link">Quick Share</a>
+    </div>
+
+    <div class="contact-info">
+      <strong>Maasai Mara, Enonkishu Conservancy, Kenya</strong><br>
+      📞 +254 724 167 447 | 📧 sparksnairobi@gmail.com<br><br>
+      Managed by Craftwood Hospitality Management Ltd<br>
+      © 2026 Lilita Keper. All rights reserved.
+    </div>
+  </div>
+</body>
+</html>
