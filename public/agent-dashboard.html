@@ -324,8 +324,10 @@
       <div class="action-buttons">
         <button class="action-btn-large" onclick="goToRates()">💰 View Rates</button>
         <button class="action-btn-large" onclick="createProposal()">📄 New Proposal</button>
+        <button class="action-btn-large" onclick="viewPhotos()">📸 Photo Gallery</button>
         <button class="action-btn-large" onclick="shareWhatsApp()">📱 Share Link</button>
         <button class="action-btn-large" onclick="editBranding()">🎨 My Branding</button>
+        <button class="action-btn-large" onclick="callSupport()">🆘 24/7 Support</button>
       </div>
     </div>
 
@@ -505,6 +507,15 @@
 
     function editBranding() {
       alert('🎨 Branding settings coming soon!\n\nYou can:\n✓ Upload your logo\n✓ Add your name & contact\n✓ Customize your profile page');
+    }
+
+    function viewPhotos() {
+      window.location.href = '/photo-gallery.html';
+    }
+
+    function callSupport() {
+      alert('🆘 24/7 SUPPORT\n\n📞 Arijit Bose (Duty Manager)\n+254 180 044 355\n\n📧 sales@lilitakeper.com\n\n💬 WhatsApp: Tap button below');
+      window.open('https://wa.me/254180044355?text=I%20need%20urgent%20assistance', '_blank');
     }
 
     function downloadReport() {
