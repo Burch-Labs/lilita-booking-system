@@ -1096,7 +1096,12 @@ app.post('/api/admin/campaigns', authenticateToken, async (req, res) => {
 // ============================================================================
 // AGENT PLATFORM 2.0 ROUTES
 // ============================================================================
-setupAgentPlatformRoutes(app, pool, jwt, JWT_SECRET, authenticateToken);
+try {
+  setupAgentPlatformRoutes(app, pool, jwt, JWT_SECRET, authenticateToken);
+  console.log('✅ Agent Platform routes loaded');
+} catch (err) {
+  console.error('⚠️  Error loading agent platform routes:', err.message);
+}
 
 // ============================================================================
 // HEALTH CHECK
