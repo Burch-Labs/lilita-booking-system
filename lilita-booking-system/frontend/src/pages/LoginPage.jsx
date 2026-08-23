@@ -54,7 +54,9 @@ export default function LoginPage({ onLogin }) {
     <div className="login-container">
       <div className="property-info">
         <div className="property-header">
-          <img src="/logo.avif" alt="Lilita Keper Logo" className="property-logo" />
+          <a href="https://lilitakeper.com/" target="_blank" rel="noopener noreferrer" className="logo-link">
+            <img src="/logo.avif" alt="Lilita Keper Logo" className="property-logo" />
+          </a>
           <h2>Lilita Keper</h2>
           <p className="location">Enonkishu Conservancy</p>
         </div>
