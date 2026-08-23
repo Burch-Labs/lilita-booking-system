@@ -23,6 +23,21 @@ app.use(cors());
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 
+// Fix API URL in served JavaScript (temporary workaround for pending build)
+app.use((req, res, next) => {
+  if (req.path.endsWith('.js')) {
+    const originalSend = res.send;
+    res.send = function(data) {
+      if (typeof data === 'string' && data.includes('localhost:3002')) {
+        data = data.replace(/http:\/\/localhost:3002/g, '/api');
+        data = data.replace(/localhost:3002/g, 'window.location.origin');
+      }
+      return originalSend.call(this, data);
+    };
+  }
+  next();
+});
+
 // Serve React frontend from frontend/dist
 app.use(express.static(path.join(__dirname, 'frontend/dist')));
 
