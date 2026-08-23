@@ -1,3 +1,5 @@
+package.json
+package-lock.json
 server.js
 server-minimal.js
 agent-platform-api.js
@@ -9,3 +11,4 @@ TEST-SUITE.js
 .env.local
 node_modules/
 .git/
+railway.json
