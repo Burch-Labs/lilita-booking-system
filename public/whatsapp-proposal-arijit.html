@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:title" content="Lilita Keper Agent Commission Platform Proposal">
+  <meta property="og:description" content="WhatsApp-shareable proposal for Lilita Keper agent distribution platform">
+  <title>Lilita Keper - Proposal to Arijit</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f5f7fa;
+      color: #333;
+      padding: 20px;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    .header {
+      background: linear-gradient(135deg, #2c5f8d 0%, #1e4b6f 100%);
+      color: white;
+      padding: 40px 30px;
+      text-align: center;
+    }
+
+    .logo {
+      font-size: 56px;
+      margin-bottom: 20px;
+    }
+
+    .title {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      opacity: 0.95;
+      margin-bottom: 20px;
+    }
+
+    .recipient {
+      background: rgba(255,255,255,0.1);
+      padding: 15px;
+      border-radius: 6px;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .content {
+      padding: 40px 30px;
+    }
+
+    .section {
+      margin-bottom: 40px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2c5f8d;
+      margin-bottom: 20px;
+      border-bottom: 3px solid #d4a574;
+      padding-bottom: 12px;
+    }
+
+    .section-text {
+      font-size: 15px;
+      line-height: 1.8;
+      color: #555;
+      margin-bottom: 15px;
+    }
+
+    .highlight-box {
+      background: #f0f4f8;
+      border-left: 4px solid #d4a574;
+      padding: 20px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    .highlight-box strong {
+      color: #2c5f8d;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .feature-card {
+      background: #f9f9f9;
+      padding: 15px;
+      border-radius: 6px;
+      border-left: 3px solid #d4a574;
+    }
+
+    .feature-title {
+      font-weight: 600;
+      color: #2c5f8d;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    .feature-desc {
+      font-size: 13px;
+      color: #666;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .stat-box {
+      background: linear-gradient(135deg, #2c5f8d 0%, #1e4b6f 100%);
+      color: white;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      opacity: 0.9;
+    }
+
+    .commission-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+      font-size: 14px;
+    }
+
+    .commission-table thead {
+      background: #2c5f8d;
+      color: white;
+    }
+
+    .commission-table th {
+      padding: 12px;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .commission-table td {
+      padding: 12px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .commission-table tbody tr:nth-child(odd) {
+      background: #f9f9f9;
+    }
+
+    .pricing-section {
+      background: #fff9e6;
+      border: 2px solid #f39c12;
+      border-radius: 8px;
+      padding: 25px;
+      margin-bottom: 30px;
+    }
+
+    .pricing-title {
+      color: #f39c12;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .price-tier {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .price-tier:last-child {
+      border-bottom: none;
+    }
+
+    .tier-name {
+      font-weight: 600;
+      color: #333;
+    }
+
+    .tier-commission {
+      background: #f39c12;
+      color: white;
+      padding: 8px 14px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .benefits-list {
+      list-style: none;
+      margin-bottom: 20px;
+    }
+
+    .benefits-list li {
+      padding: 10px 0;
+      padding-left: 28px;
+      position: relative;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .benefits-list li:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #2ecc71;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .timeline {
+      background: #f5f7fa;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+
+    .timeline-item {
+      display: flex;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .timeline-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .timeline-phase {
+      background: #2c5f8d;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+      margin-right: 15px;
+      height: fit-content;
+    }
+
+    .timeline-desc {
+      font-size: 14px;
+      color: #555;
+    }
+
+    .cta-section {
+      background: linear-gradient(135deg, #2c5f8d 0%, #1e4b6f 100%);
+      color: white;
+      border-radius: 8px;
+      padding: 30px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .cta-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .cta-text {
+      font-size: 14px;
+      margin-bottom: 20px;
+      opacity: 0.95;
+    }
+
+    .contact-info {
+      background: #fff3cd;
+      border: 2px solid #ffc107;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .contact-info h3 {
+      color: #856404;
+      margin-bottom: 10px;
+    }
+
+    .contact-info p {
+      font-size: 14px;
+      color: #856404;
+      margin-bottom: 8px;
+    }
+
+    .contact-link {
+      color: #ffc107;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .footer {
+      background: #f5f7fa;
+      padding: 25px 30px;
+      text-align: center;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .footer-text {
+      font-size: 13px;
+      color: #999;
+      margin-bottom: 8px;
+    }
+
+    .action-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .btn {
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 13px;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-whatsapp {
+      background: #25d366;
+      color: white;
+    }
+
+    .btn-whatsapp:hover {
+      background: #1eaa50;
+    }
+
+    .btn-email {
+      background: #d4a574;
+      color: white;
+    }
+
+    .btn-email:hover {
+      background: #b8915a;
+    }
+
+    @media (max-width: 600px) {
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .action-buttons {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        border-radius: 0;
+      }
+
+      body {
+        padding: 10px;
+      }
+
+      .content {
+        padding: 25px 15px;
+      }
+
+      .header {
+        padding: 30px 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo">🦁</div>
+      <div class="title">Lilita Keper</div>
+      <p class="subtitle">Agent Commission Platform Proposal</p>
+      <div class="recipient">
+        📧 Proposed For: <strong>Arijit Bose</strong> | CEO, Lilita Keper Masai Mara
+      </div>
+    </div>
+
+    <div class="content">
+      <!-- EXECUTIVE SUMMARY -->
+      <div class="section">
+        <div class="section-title">📋 Executive Summary</div>
+        <div class="section-text">
+          Lilita Keper is implementing a comprehensive white-label agent commission platform to streamline booking operations, manage 40,000+ agent network contacts, and maximize revenue through transparent commission structures and real-time tracking.
+        </div>
+        <div class="highlight-box">
+          <strong>🎯 Platform Objective:</strong>
+          Create a unified ecosystem where agents access rates, proposals, and real-time commission tracking while hotel management maintains complete visibility into agent performance, contact status, and revenue attribution.
+        </div>
+      </div>
+
+      <!-- PLATFORM OVERVIEW -->
+      <div class="section">
+        <div class="section-title">🚀 Platform Architecture</div>
+
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-title">📱 Agent Portal</div>
+            <div class="feature-desc">Self-service platform for rates, proposals, photo gallery, booking tracking, commission management</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-title">🏜️ Admin Dashboard</div>
+            <div class="feature-desc">Complete hotel management with contact database, bulk campaigns, commission reporting, analytics</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-title">💻 Technical Stack</div>
+            <div class="feature-desc">React 19.2 + Vite frontend, Node.js Express backend, PostgreSQL database, Vercel deployment</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-title">🔒 Security</div>
+            <div class="feature-desc">JWT authentication with 30-day token expiry, bcrypt password hashing, CORS protection</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- NETWORK SCALE -->
+      <div class="section">
+        <div class="section-title">📊 Network Scale & Potential</div>
+
+        <div class="stats-grid">
+          <div class="stat-box">
+            <div class="stat-value">40,000+</div>
+            <div class="stat-label">Agent Contacts</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-value">3,847</div>
+            <div class="stat-label">Premium Partners</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-value">$547K</div>
+            <div class="stat-label">Commissions/Month</div>
+          </div>
+        </div>
+
+        <div class="section-text">
+          <strong>Market Opportunity:</strong> With efficient agent management and real-time tracking, we can:
+        </div>
+
+        <ul class="benefits-list">
+          <li>Increase booking volume by 40-60% through optimized agent performance</li>
+          <li>Reduce payment processing time from 30 days to real-time tracking</li>
+          <li>Improve agent engagement through transparent commission visibility</li>
+          <li>Scale to 100,000+ agent network without operational overhead</li>
+          <li>Generate $2M+ annual revenue from higher commission volumes</li>
+        </ul>
+      </div>
+
+      <!-- COMMISSION STRUCTURE -->
+      <div class="section">
+        <div class="section-title">💰 Tiered Commission Structure</div>
+
+        <div class="pricing-section">
+          <div class="pricing-title">Agent Commission Tiers</div>
+          <div class="price-tier">
+            <span class="tier-name">🏆 Premium Partners</span>
+            <span class="tier-commission">40% + $100</span>
+          </div>
+          <div class="price-tier">
+            <span class="tier-name">⭐ Standard Agents</span>
+            <span class="tier-commission">20% + $50</span>
+          </div>
+          <div class="price-tier">
+            <span class="tier-name">Direct Bookings</span>
+            <span class="tier-commission">100% Payout</span>
+          </div>
+        </div>
+
+        <table class="commission-table">
+          <thead>
+            <tr>
+              <th>Agent Tier</th>
+              <th>Count</th>
+              <th>Monthly Bookings</th>
+              <th>Commission Paid</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Premium Partners</td>
+              <td>847</td>
+              <td>3,247</td>
+              <td>$341,562</td>
+            </tr>
+            <tr>
+              <td>Standard Agents</td>
+              <td>11,000</td>
+              <td>8,956</td>
+              <td>$189,473</td>
+            </tr>
+            <tr>
+              <td>Direct Bookings</td>
+              <td>1,000</td>
+              <td>644</td>
+              <td>$16,258</td>
+            </tr>
+            <tr style="font-weight: 700; background: #f5f7fa;">
+              <td colspan="3">TOTAL MONTHLY PAYOUTS</td>
+              <td>$547,293</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- KEY FEATURES -->
+      <div class="section">
+        <div class="section-title">✨ Key Platform Features</div>
+
+        <div class="section-text" style="margin-bottom: 20px;"><strong>For Agents:</strong></div>
+        <ul class="benefits-list">
+          <li>Real-time rates & availability updates</li>
+          <li>One-click proposal generator for client customization</li>
+          <li>Professional photo gallery for sharing</li>
+          <li>Booking tracker with commission visibility</li>
+          <li>WhatsApp-shareable portal link</li>
+          <li>24/7 emergency support access</li>
+        </ul>
+
+        <div class="section-text" style="margin: 25px 0 20px 0;"><strong>For Hotel Management:</strong></div>
+        <ul class="benefits-list">
+          <li>40,000+ contact database with search & filter</li>
+          <li>Color-coded agent status tracking (Green/Yellow/Red)</li>
+          <li>Bulk email campaigns to agent network</li>
+          <li>Commission reports by agent type</li>
+          <li>Weekly automated reminders to Yellow status agents</li>
+          <li>Activity & engagement analytics dashboard</li>
+        </ul>
+      </div>
+
+      <!-- IMPLEMENTATION TIMELINE -->
+      <div class="section">
+        <div class="section-title">⏱️ Implementation Timeline</div>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <span class="timeline-phase">Phase 1</span>
+            <div class="timeline-desc"><strong>Week 1-2:</strong> Platform deployment, agent onboarding, initial contact database setup</div>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-phase">Phase 2</span>
+            <div class="timeline-desc"><strong>Week 3-4:</strong> Agent portal testing, rates optimization, first bulk campaign send</div>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-phase">Phase 3</span>
+            <div class="timeline-desc"><strong>Month 2:</strong> Network expansion, performance monitoring, commission optimization</div>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-phase">Ongoing</span>
+            <div class="timeline-desc"><strong>Continuous:</strong> Weekly reminders, analytics review, agent support</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTACT & CTA -->
+      <div class="contact-info">
+        <h3>📞 Ready to Launch?</h3>
+        <p><strong>Arijit Bose - CEO, Lilita Keper</strong></p>
+        <p>
+          📱 <a href="tel:+254180044355" class="contact-link">+254 180 044 355</a><br>
+          📧 <a href="mailto:sales@lilitakeper.com" class="contact-link">sales@lilitakeper.com</a>
+        </p>
+        <p style="margin-top: 12px; font-size: 12px; opacity: 0.8;">Available 24/7 for partnership discussions</p>
+      </div>
+
+      <div class="cta-section">
+        <div class="cta-title">🎯 Next Steps</div>
+        <div class="cta-text">
+          Let's grow together. Access the live platform and start managing your agent network today.
+        </div>
+        <div class="action-buttons">
+          <a href="https://contacts-app-wheat.vercel.app/agent-portal-hub.html" class="btn btn-whatsapp" target="_blank">View Live Platform</a>
+          <a href="https://wa.me/254180044355?text=I%20reviewed%20the%20agent%20platform%20proposal" class="btn btn-email" target="_blank">Discuss Details</a>
+        </div>
+      </div>
+
+      <!-- QUICK REFERENCE -->
+      <div class="section">
+        <div class="section-title">🔗 Platform Access Links</div>
+
+        <div class="highlight-box" style="margin-bottom: 10px;">
+          <strong>Agent Portal Hub:</strong><br>
+          https://contacts-app-wheat.vercel.app/agent-portal-hub.html
+        </div>
+
+        <div class="highlight-box" style="margin-bottom: 10px;">
+          <strong>Agent Portal:</strong><br>
+          https://contacts-app-wheat.vercel.app/agent-portal.html
+        </div>
+
+        <div class="highlight-box">
+          <strong>Admin Dashboard (The Waterhole):</strong><br>
+          https://contacts-app-wheat.vercel.app/waterhole-admin.html
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p class="footer-text"><strong>Lilita Keper Masai Mara</strong></p>
+      <p class="footer-text">Professional Safari Lodge Management | Agent Commission Platform</p>
+      <p class="footer-text">Proposal Date: August 23, 2024</p>
+      <p class="footer-text" style="margin-top: 15px; opacity: 0.6;">
+        This proposal is WhatsApp-shareable. Forward to stakeholders for discussion.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    function shareOnWhatsApp() {
+      const message = `Check out the Lilita Keper Agent Commission Platform Proposal! 🦁
+
+Platform includes:
+✓ Agent Portal - Rates, proposals, commission tracking
+✓ Admin Dashboard - 40,000+ contacts, bulk campaigns, analytics
+✓ Real-time commission tracking for all agent tiers
+✓ Weekly automated reminders & follow-ups
+
+Commission Structure:
+• Premium Partners: 40% + $100
+• Standard Agents: 20% + $50
+• Direct Bookings: 100%
+
+View Live Platform:
+https://contacts-app-wheat.vercel.app/agent-portal-hub.html
+
+Questions? Contact Arijit:
+📞 +254 180 044 355
+
+Let's grow together! 🌍`;
+
+      const encoded = encodeURIComponent(message);
+      window.open(`https://wa.me/?text=${encoded}`, '_blank');
+    }
+  </script>
+</body>
+</html>

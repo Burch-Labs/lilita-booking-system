@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:title" content="Lilita Keper - Exclusive Safari & Lodge Experience">
+  <meta property="og:description" content="Check out Lilita Keper Safari Lodge. Exclusive rates, bookings, and commission deals for agents.">
+  <meta property="og:image" content="https://contacts-app-wheat.vercel.app/logo.avif">
+  <meta property="og:url" content="https://contacts-app-wheat.vercel.app/whatsapp-agent-share.html">
+  <title>Lilita Keper - Agent Share</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f5f7fa;
+      color: #333;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .header {
+      background: linear-gradient(135deg, #2c5f8d 0%, #1e4b6f 100%);
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    .logo {
+      font-size: 48px;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 5px;
+    }
+
+    .subtitle {
+      opacity: 0.9;
+      font-size: 14px;
+    }
+
+    .content {
+      padding: 30px 20px;
+    }
+
+    .hero-message {
+      background: #f0f4f8;
+      border-left: 4px solid #d4a574;
+      padding: 20px;
+      border-radius: 6px;
+      margin-bottom: 30px;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .hero-message strong {
+      color: #2c5f8d;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .features {
+      margin-bottom: 30px;
+    }
+
+    .feature-section {
+      margin-bottom: 20px;
+    }
+
+    .feature-section h3 {
+      color: #2c5f8d;
+      margin-bottom: 12px;
+      font-size: 16px;
+    }
+
+    .feature-list {
+      list-style: none;
+    }
+
+    .feature-list li {
+      padding: 8px 0;
+      padding-left: 28px;
+      position: relative;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .feature-list li:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #2ecc71;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .rates-section {
+      background: #fff9e6;
+      border: 2px solid #f39c12;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+
+    .rates-section h3 {
+      color: #f39c12;
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+
+    .rate {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .rate:last-child {
+      border-bottom: none;
+    }
+
+    .rate-label {
+      font-weight: 600;
+      color: #333;
+    }
+
+    .rate-value {
+      background: #f39c12;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .cta-section {
+      background: linear-gradient(135deg, #2c5f8d 0%, #1e4b6f 100%);
+      color: white;
+      border-radius: 8px;
+      padding: 25px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .cta-section h3 {
+      margin-bottom: 15px;
+      font-size: 18px;
+    }
+
+    .cta-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .btn {
+      padding: 14px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 13px;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-portal {
+      background: white;
+      color: #2c5f8d;
+    }
+
+    .btn-portal:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .btn-whatsapp {
+      background: #25d366;
+      color: white;
+    }
+
+    .btn-whatsapp:hover {
+      background: #1eaa50;
+    }
+
+    .info-box {
+      background: #e8f4f8;
+      border-left: 4px solid #2c5f8d;
+      padding: 15px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .info-box strong {
+      color: #2c5f8d;
+    }
+
+    .contact-badge {
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      border-radius: 6px;
+      padding: 15px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .contact-badge p {
+      margin-bottom: 8px;
+      font-size: 13px;
+    }
+
+    .contact-link {
+      color: #ffc107;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .contact-link:hover {
+      text-decoration: underline;
+    }
+
+    .footer {
+      background: #f5f7fa;
+      padding: 20px;
+      text-align: center;
+      font-size: 12px;
+      color: #999;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .footer p {
+      margin-bottom: 5px;
+    }
+
+    @media (max-width: 600px) {
+      .cta-buttons {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        border-radius: 0;
+      }
+
+      body {
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo">🦁</div>
+      <h1>Lilita Keper</h1>
+      <p class="subtitle">Masai Mara Safari & Lodge</p>
+    </div>
+
+    <div class="content">
+      <div class="hero-message">
+        <strong>✨ Exclusive Agent Portal Access</strong>
+        Your all-in-one platform for rates, bookings, proposals & commissions. Everything your clients need in one click.
+      </div>
+
+      <div class="features">
+        <div class="feature-section">
+          <h3>📱 What You Get Access To</h3>
+          <ul class="feature-list">
+            <li>Live rates & real-time availability</li>
+            <li>Professional photo gallery to share</li>
+            <li>Custom proposal generator</li>
+            <li>Instant booking tracker with codes</li>
+            <li>Real-time commission tracking</li>
+            <li>24/7 emergency support</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="rates-section">
+        <h3>💰 Commission Rates</h3>
+        <div class="rate">
+          <span class="rate-label">🏆 Premium Partners</span>
+          <span class="rate-value">40% + $100</span>
+        </div>
+        <div class="rate">
+          <span class="rate-label">⭐ Standard Agents</span>
+          <span class="rate-value">20% + $50</span>
+        </div>
+        <div class="rate">
+          <span class="rate-label">Direct Bookings</span>
+          <span class="rate-value">100% Payout</span>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <strong>💡 Why Use Our Agent Portal?</strong><br>
+        No more emails. No more confusion. Everything is in ONE place:
+        <ul style="margin-left: 20px; margin-top: 10px;">
+          <li>View all rates instantly</li>
+          <li>Create custom proposals in seconds</li>
+          <li>Track commissions in real-time</li>
+          <li>Share directly with your clients</li>
+        </ul>
+      </div>
+
+      <div class="contact-badge">
+        <p><strong>Questions?</strong></p>
+        <p>
+          📞 <a href="tel:+254180044355" class="contact-link">+254 180 044 355</a><br>
+          📧 <a href="mailto:sales@lilitakeper.com" class="contact-link">sales@lilitakeper.com</a>
+        </p>
+        <p style="margin-top: 8px; font-size: 11px; color: #999;">Arijit Bose - Available 24/7</p>
+      </div>
+
+      <div class="cta-section">
+        <h3>🚀 Ready to Get Started?</h3>
+        <div class="cta-buttons">
+          <a href="https://contacts-app-wheat.vercel.app/agent-portal.html" class="btn btn-portal" target="_blank">Open Portal</a>
+          <a href="https://wa.me/254180044355?text=I%20want%20to%20access%20the%20Lilita%20Keper%20agent%20portal" class="btn btn-whatsapp" target="_blank">Message Us</a>
+        </div>
+        <p style="font-size: 13px; opacity: 0.9; margin-top: 15px;">
+          🔒 Secure • 📲 Mobile-Friendly • ⚡ Real-Time Updates
+        </p>
+      </div>
+
+      <div style="text-align: center; margin-bottom: 20px;">
+        <button onclick="shareOnWhatsApp()" style="background: #25d366; color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">
+          📤 Share This on WhatsApp
+        </button>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p><strong>Lilita Keper Masai Mara</strong></p>
+      <p>Professional Safari & Lodge Management</p>
+      <p style="margin-top: 10px; opacity: 0.7;">Forwarded by your agent • Click link above to access</p>
+    </div>
+  </div>
+
+  <script>
+    function shareOnWhatsApp() {
+      const message = `Check out the Lilita Keper Agent Portal! 🦁
+
+✨ Everything you need in ONE place:
+✓ Live rates & availability
+✓ Professional photo gallery
+✓ Custom proposals in seconds
+✓ Real-time booking tracking
+✓ Commission tracking
+
+💰 Commission Rates:
+• Premium Partners: 40% + $100
+• Standard Agents: 20% + $50
+• Direct Bookings: 100%
+
+🚀 Access Portal Here:
+https://contacts-app-wheat.vercel.app/agent-portal.html
+
+Questions? Contact us:
+📞 +254 180 044 355
+📧 sales@lilitakeper.com
+
+Let's grow together! 🌍`;
+
+      const encoded = encodeURIComponent(message);
+      window.open(`https://wa.me/?text=${encoded}`, '_blank');
+    }
+  </script>
+</body>
+</html>
