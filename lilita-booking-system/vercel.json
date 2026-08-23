@@ -1,8 +1,20 @@
 {
-  "buildCommand": "cd frontend && npm run build",
+  "buildCommand": "cd frontend && npm install && npm run build",
   "outputDirectory": "frontend/dist",
   "devCommand": "cd frontend && npm run dev",
+  "framework": "react",
+  "public": "frontend/dist",
+  "env": {
+    "VITE_API_URL": "@vite_api_url"
+  },
   "git": {
     "deploymentEnabled": true
-  }
+  },
+  "functions": {},
+  "rewrites": [
+    {
+      "source": "/:path*",
+      "destination": "/index.html"
+    }
+  ]
 }
