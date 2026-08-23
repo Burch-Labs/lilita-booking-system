@@ -10,10 +10,17 @@
   "git": {
     "deploymentEnabled": true
   },
-  "functions": {},
+  "functions": {
+    "api/**": {
+      "runtime": "disabled"
+    }
+  },
+  "api": {
+    "maxDuration": 0
+  },
   "rewrites": [
     {
-      "source": "/:path*",
+      "source": "/(.*)",
       "destination": "/index.html"
     }
   ]
