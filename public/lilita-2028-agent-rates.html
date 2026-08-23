@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lilita Keper 2028 Agent Rates Projection</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f5f5;
+      color: #333;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      padding: 40px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+      border-bottom: 3px solid #8B6F47;
+      padding-bottom: 20px;
+    }
+    .logo {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+    h1 {
+      color: #8B6F47;
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+    .subtitle {
+      color: #666;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .badge {
+      display: inline-block;
+      background: #5cb85c;
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-top: 10px;
+    }
+    .rate-section {
+      margin: 30px 0;
+      padding: 25px;
+      background: #f9f7f4;
+      border-left: 4px solid #8B6F47;
+    }
+    .rate-section h2 {
+      color: #8B6F47;
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+    .rate-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+    }
+    .rate-table th {
+      background: #8B6F47;
+      color: white;
+      padding: 12px;
+      text-align: left;
+      font-weight: 600;
+    }
+    .rate-table td {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+    }
+    .rate-table tr:hover {
+      background: #f0ede9;
+    }
+    .peak { color: #d9534f; font-weight: 600; }
+    .shoulder { color: #5cb85c; font-weight: 600; }
+    .low { color: #0275d8; font-weight: 600; }
+    .increase {
+      background: #d4edda;
+      color: #155724;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .comparison {
+      background: #f0ede9;
+      padding: 15px;
+      border-radius: 5px;
+      margin: 20px 0;
+      font-size: 13px;
+    }
+    .comparison-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid #ddd;
+    }
+    .comparison-row:last-child {
+      border-bottom: none;
+    }
+    .comparison-label {
+      font-weight: 600;
+      color: #8B6F47;
+    }
+    .inclusions, .exclusions {
+      margin: 15px 0;
+    }
+    .inclusions h3, .exclusions h3 {
+      color: #8B6F47;
+      font-size: 14px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+    .inclusions ul, .exclusions ul {
+      margin-left: 20px;
+    }
+    .inclusions li, .exclusions li {
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+    .terms {
+      margin: 30px 0;
+      padding: 20px;
+      background: #fff8f5;
+      border: 1px solid #e6d4c5;
+    }
+    .terms h3 {
+      color: #8B6F47;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      font-size: 14px;
+    }
+    .terms p {
+      margin-bottom: 15px;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+    .contact-footer {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 2px solid #8B6F47;
+      color: #666;
+      font-size: 13px;
+    }
+    .contact-footer a {
+      color: #8B6F47;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .button {
+      display: inline-block;
+      background: #8B6F47;
+      color: white;
+      padding: 12px 30px;
+      border-radius: 5px;
+      text-decoration: none;
+      margin: 10px 5px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .button:hover {
+      background: #6d5836;
+    }
+    .projection-note {
+      background: #e8f4f8;
+      border-left: 4px solid #0275d8;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="logo">🦁</div>
+      <h1>LILITA KEPER</h1>
+      <p class="subtitle">2028 Agent Partnership Rates - Planning Projection</p>
+      <span class="badge">📈 +15% from 2027</span>
+      <p style="color: #8B6F47; margin-top: 10px; font-weight: 600;">Maasai Mara · Enonkishu Conservancy</p>
+    </header>
+
+    <div class="projection-note">
+      <strong>📋 Planning Projection:</strong> These 2028 rates are indicative projections based on historical 15% annual growth. Final 2028 rates will be confirmed in Q4 2027. Use these for long-term revenue planning and agent forecasting.
+    </div>
+
+    <!-- Year-over-Year Comparison -->
+    <div class="comparison">
+      <strong style="display: block; margin-bottom: 15px; color: #8B6F47;">📊 2026 vs 2027 vs 2028 Price Progression (Full Board)</strong>
+
+      <div class="comparison-row">
+        <div class="comparison-label">Season</div>
+        <div class="comparison-label">2026</div>
+        <div class="comparison-label">2027</div>
+        <div class="comparison-label">2028</div>
+        <div class="comparison-label" style="text-align: right;">Total Growth</div>
+      </div>
+
+      <div class="comparison-row">
+        <div><span class="peak">PEAK</span> (Jun-Aug)</div>
+        <div>$1,600</div>
+        <div>$1,840</div>
+        <div><strong>$2,116</strong></div>
+        <div style="text-align: right;"><span class="increase">+$516 (+32%)</span></div>
+      </div>
+
+      <div class="comparison-row">
+        <div><span class="shoulder">SHOULDER</span> (Apr-May, Sep-Oct)</div>
+        <div>$1,280</div>
+        <div>$1,472</div>
+        <div><strong>$1,693</strong></div>
+        <div style="text-align: right;"><span class="increase">+$413 (+32%)</span></div>
+      </div>
+
+      <div class="comparison-row">
+        <div><span class="low">LOW</span> (Nov-Mar)</div>
+        <div>$960</div>
+        <div>$1,104</div>
+        <div><strong>$1,270</strong></div>
+        <div style="text-align: right;"><span class="increase">+$310 (+32%)</span></div>
+      </div>
+    </div>
+
+    <!-- FULL BOARD RATE -->
+    <div class="rate-section">
+      <h2>FULL BOARD RATE - 2028 PROJECTION</h2>
+
+      <table class="rate-table">
+        <thead>
+          <tr>
+            <th>Season</th>
+            <th>Dates</th>
+            <th>Per Person (Sharing)</th>
+            <th>Agent Commission @ 20%</th>
+            <th>vs 2027</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="peak">PEAK</span></td>
+            <td>01 June - 31 August 2028</td>
+            <td><strong>$2,116 USD</strong></td>
+            <td><strong>$423.20 USD</strong></td>
+            <td><span class="increase">+$276 (+15%)</span></td>
+          </tr>
+          <tr>
+            <td><span class="shoulder">SHOULDER</span></td>
+            <td>01 April - 31 May & 01 Sep - 31 Oct</td>
+            <td><strong>$1,693 USD</strong></td>
+            <td><strong>$338.60 USD</strong></td>
+            <td><span class="increase">+$221 (+15%)</span></td>
+          </tr>
+          <tr>
+            <td><span class="low">LOW</span></td>
+            <td>01 November - 31 March</td>
+            <td><strong>$1,270 USD</strong></td>
+            <td><strong>$254 USD</strong></td>
+            <td><span class="increase">+$166 (+15%)</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="inclusions">
+        <h3>Inclusions</h3>
+        <ul>
+          <li>Accommodation in luxury tented suite</li>
+          <li>All meals (breakfast, lunch, dinner)</li>
+          <li>Complimentary wireless internet</li>
+          <li>1 scheduled game drive per day in 4x4 safari vehicle</li>
+          <li>Transfers to/from camp from nearest airstrip</li>
+          <li>All taxes and local levies</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ALL INCLUSIVE RATE -->
+    <div class="rate-section">
+      <h2>ALL INCLUSIVE RATE - 2028 PROJECTION (Premium)</h2>
+
+      <table class="rate-table">
+        <thead>
+          <tr>
+            <th>Season</th>
+            <th>Dates</th>
+            <th>Per Person (Sharing)</th>
+            <th>Agent Commission @ 20%</th>
+            <th>vs 2027</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="peak">PEAK</span></td>
+            <td>01 June - 31 August 2028</td>
+            <td><strong>$2,963 USD</strong></td>
+            <td><strong>$592.60 USD</strong></td>
+            <td><span class="increase">+$388 (+15%)</span></td>
+          </tr>
+          <tr>
+            <td><span class="shoulder">SHOULDER</span></td>
+            <td>01 April - 31 May & 01 Sep - 31 Oct</td>
+            <td><strong>$2,370 USD</strong></td>
+            <td><strong>$474 USD</strong></td>
+            <td><span class="increase">+$310 (+15%)</span></td>
+          </tr>
+          <tr>
+            <td><span class="low">LOW</span></td>
+            <td>01 November - 31 March</td>
+            <td><strong>$1,777 USD</strong></td>
+            <td><strong>$355.40 USD</strong></td>
+            <td><span class="increase">+$232 (+15%)</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="inclusions">
+        <h3>Inclusions</h3>
+        <ul>
+          <li>Accommodation in luxury tented suite</li>
+          <li>All meals (breakfast, lunch, dinner)</li>
+          <li>Drinks (excl. premium brands)</li>
+          <li>Complimentary wireless internet</li>
+          <li>2 scheduled game drives per day in 4x4 safari vehicle</li>
+          <li>Transfers to/from camp from nearest airstrip</li>
+          <li>1 sundowner & 1 bush breakfast during stay</li>
+          <li>Laundry services (excl. dry cleaning)</li>
+          <li>Use of spa facilities (excl. treatments)</li>
+          <li>All taxes and local levies</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- PLANNING INSIGHTS -->
+    <div class="rate-section" style="background: #e8f4f8; border-left-color: #0275d8;">
+      <h2 style="color: #0275d8;">💡 3-Year Revenue Planning Guide</h2>
+
+      <table class="rate-table">
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>2026</th>
+            <th>2027</th>
+            <th>2028</th>
+            <th>3-Yr Growth</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Peak Season Rate</td>
+            <td>$1,600</td>
+            <td>$1,840</td>
+            <td>$2,116</td>
+            <td>+32.25%</td>
+          </tr>
+          <tr>
+            <td>Peak Commission (20%)</td>
+            <td>$320</td>
+            <td>$368</td>
+            <td>$423.20</td>
+            <td>+32.25%</td>
+          </tr>
+          <tr>
+            <td>10 Peak Bookings/Year</td>
+            <td>$3,200</td>
+            <td>$3,680</td>
+            <td>$4,232</td>
+            <td>+32.25%</td>
+          </tr>
+          <tr>
+            <td>20 Mixed Bookings/Year</td>
+            <td>~$6,000</td>
+            <td>~$6,900</td>
+            <td>~$7,935</td>
+            <td>+32.25%</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p style="margin-top: 15px; font-size: 13px; color: #0275d8;"><strong>💼 Use this data to:</strong><br>
+      • Plan agent commission budgets for next 3 years<br>
+      • Project revenue growth for business planning<br>
+      • Set performance targets and incentive levels<br>
+      • Forecast marketing investment ROI
+      </p>
+    </div>
+
+    <!-- TERMS & CONDITIONS -->
+    <div class="terms">
+      <h3>Important Notes on 2028 Projection</h3>
+
+      <p>These 2028 rates are <strong>indicative projections only</strong> based on:</p>
+      <ul style="margin-left: 20px; margin-bottom: 15px;">
+        <li>Consistent 15% year-over-year rate growth</li>
+        <li>Stable operational costs and inflation patterns</li>
+        <li>No major market disruptions or currency fluctuations</li>
+        <li>Continued market demand for luxury Maasai Mara safaris</li>
+      </ul>
+
+      <p><strong>Actual 2028 rates may vary due to:</strong></p>
+      <ul style="margin-left: 20px; margin-bottom: 15px;">
+        <li>Currency exchange rate changes (USD/KES volatility)</li>
+        <li>Changes in Kenya Wildlife Service park fees</li>
+        <li>Operational cost adjustments</li>
+        <li>Market conditions and competitive landscape</li>
+        <li>Economic conditions and inflation rates</li>
+      </ul>
+
+      <p><strong>Official 2028 rates will be confirmed in:</strong> Q4 2027, communicated to all agents at least 60 days before season change.</p>
+
+      <h3 style="margin-top: 20px;">Commission Structure Stability</h3>
+      <p>Agent commission percentages (20% STO, 40% Premium Partners, $50 referral bonus) are expected to remain stable through 2028, with rate increases applied proportionally across all tiers.</p>
+    </div>
+
+    <!-- Contact Footer -->
+    <div class="contact-footer">
+      <p style="font-size: 16px; margin-bottom: 15px;"><strong>Use This for 2028 Planning</strong></p>
+
+      <a href="https://contacts-app-wheat.vercel.app/lilita-2026-agent-rates" class="button">2026 Confirmed</a>
+      <a href="https://contacts-app-wheat.vercel.app/lilita-2027-agent-rates" class="button">2027 Confirmed</a>
+      <a href="https://contacts-app-wheat.vercel.app/lilita-complete-proposal" class="button">Full Proposal</a>
+
+      <p style="margin-top: 30px;">
+        <strong>Questions about these projections?</strong><br>
+        📧 <a href="mailto:sparksnairobi@gmail.com">sparksnairobi@gmail.com</a><br>
+        📱 <a href="tel:+254724167447">+254 724 167 447</a>
+      </p>
+
+      <p style="margin-top: 20px; color: #999;">
+        Lilita Keper Safari Lodge<br>
+        Maasai Mara, Enonkishu Conservancy, Kenya<br>
+        <br>
+        © 2026-2028 Lilita Keper. All rights reserved. | Managed by Craftwood Hospitality Management Ltd
+      </p>
+    </div>
+  </div>
+</body>
+</html>
