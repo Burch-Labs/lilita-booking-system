@@ -767,3 +767,87 @@ Throughout: CEO Agent monitors all interactions
 **Investment:** ~$285K/month in Claude API for 1,000 properties  
 **ROI:** >10x within first year  
 
+---
+
+## 👤 Founder & AI Vision
+
+**Charles Muriuki**  
+**Country:** Kenya  
+**ID:** 24453911  
+**Email:** sparknairobi@gmail.com  
+**Phone:** +254724167447  
+
+**About:** Charles is the architect of BurchIntelligence's AI Workforce framework. With deep expertise in multi-agent systems and enterprise AI integration, Charles designed the 15-agent orchestration system powered by Anthropic Claude. This framework transforms hospitality from human-dependent operations to autonomous agent-driven workflows, achieving 90% automation while maintaining human oversight on critical decisions.
+
+**AI Philosophy:** "Agents should augment, not replace. Our framework empowers teams with AI partners that handle routine tasks, freeing humans for strategic decisions. By coordinating multiple specialized agents, we create emergent intelligence greater than any single AI."
+
+---
+
+## 🤖 AI Workforce Vision
+
+**Current State:** 5 core agents handling booking, support, commission, calendar, and portal orchestration  
+**Phase 1 (2026):** Expand to 8 agents (add Finance, Analytics, Fraud)  
+**Phase 2 (Q2-Q3 2026):** Expand to 12 agents (add Hotel, Restaurant, Event, Marketing)  
+**Phase 3 (Q4 2026):** Full 15-agent roster (add Sales, Operations, Developer)  
+**Beyond:** Specialization, multi-language support, region-specific agents
+
+---
+
+## 📊 AI Workforce Impact
+
+| Metric | Current | Target | Timeline |
+|--------|---------|--------|----------|
+| **Agents Deployed** | 5 | 15 | Q4 2026 |
+| **Monthly API Cost** | $57K | $285K | Scale to 1,000 properties |
+| **Properties Supported** | 1 | 1,000+ | 3 years |
+| **Automation Rate** | 85% | 90% | 2027 |
+| **Response Time** | 2s | <1s | Optimize |
+| **Success Rate** | 98% | 99%+ | Continuous improvement |
+
+---
+
+## 🌐 Global AI Deployment
+
+**Multi-Region Agent Distribution:**
+- Primary agents replicated across 5 regions
+- Regional customization for local compliance
+- Shared Claude API integration with rate limiting
+- Disaster recovery: automatic failover to backup agents
+- Monitoring: Real-time health checks on all 15 agents
+
+---
+
+## 💼 Strategic Partnership: Anthropic
+
+**Claude Integration Benefits:**
+- ✅ Industry-leading reasoning capabilities
+- ✅ Multimodal understanding (text, images, documents)
+- ✅ Built-in safety and alignment
+- ✅ Transparent pricing and usage tracking
+- ✅ Enterprise-grade reliability (99.9% uptime SLA)
+- ✅ Continuous model improvements without agent rewriting
+
+---
+
+## 🎯 AI Workforce Roadmap
+
+**Year 1 (2026):** Prove unit economics, achieve 90% automation  
+**Year 2 (2027):** Scale to 500+ properties, add regional customization  
+**Year 3 (2028):** 1,000+ properties, achieve $17M+ ARR  
+**Year 5 (2030):** Industry-leading hospitality AI platform, potential exit
+
+---
+
+## 📞 AI Workforce Contact & Support
+
+**For Integration Questions:**
+- Email: sparknairobi@gmail.com
+- Phone: +254724167447
+- GitHub: https://github.com/Burch-Labs/lilita-booking-system
+
+**For AI Partnership Inquiries:**
+- Agent consulting and custom training
+- Multi-region deployment support
+- API optimization and cost reduction
+- Real-time monitoring and escalation setup
+
