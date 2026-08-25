@@ -524,9 +524,9 @@ Tier 3 Marketplace Agent:
 ## 📞 Contact for Global Expansion
 
 **BurchIntelligence Global Headquarters**
-- Email: global@burchintelligence.io
-- Phone: +25414229870
-- Website: burchintelligence.io/global
+- Email: sparknairobi@gmail.com
+- Phone: +254724167447
+- Website: burchintelligence.io
 
 **Regional Operator Inquiries**
 - Investment: $20K-$50K
@@ -536,8 +536,31 @@ Tier 3 Marketplace Agent:
 
 ---
 
+## 👤 Founder & Vision
+
+**Charles Muriuki**  
+**Country:** Kenya  
+**ID:** 24453911  
+**Email:** sparknairobi@gmail.com  
+**Phone:** +254724167447  
+
+**About:** Charles is the visionary founder of Burch Labs and architect of BurchIntelligence. With deep expertise in multi-agent systems, enterprise architecture, and hospitality technology, Charles is building the global operating system for luxury hospitality. The Global Expansion strategy represents a 3-year roadmap to scale from 1 property to 1,000+ properties across 5 continents, creating a $17M+ revenue business powered by AI agents.
+
+**Mission:** Transform hospitality from manual coordination to autonomous operations through production-grade multi-agent systems. Make BurchIntelligence the Stripe of Hospitality Booking.
+
+---
+
+## 🎯 Global Vision
+
+**Year 1 (2026):** Establish regional operators in 2-3 key markets  
+**Year 2 (2027):** Scale to 500+ properties, prove unit economics  
+**Year 3 (2028):** Reach 1,000+ properties, $17M+ ARR, operator network dominance  
+**Year 5 (2030):** Potential unicorn exit ($100M+ valuation)
+
+---
+
 **Status:** 🚀 Ready for Global Launch  
 **Next Step:** Recruit first 5 regional operators  
 **Timeline:** 3 years to $17M ARR  
-**Vision:** Make BurchIntelligence the Stripe of Hospitality Booking
+**Vision:** Make BurchIntelligence the operating system for global hospitality
 
