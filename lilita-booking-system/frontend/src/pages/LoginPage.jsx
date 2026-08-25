@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { api } from '../api';
+import { supabase } from '../lib/supabase';
 import '../styles/LoginPage.css';
 
 export default function LoginPage({ onLogin }) {
-  const [mode, setMode] = useState('login'); // 'login' or 'register'
+  const [mode, setMode] = useState('login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -18,14 +18,29 @@ export default function LoginPage({ onLogin }) {
     setLoading(true);
 
     try {
-      const result = await api.agentLogin(email, password);
-      if (result.token) {
-        onLogin(result.token, result.user);
-      } else {
-        setError(result.error || 'Login failed');
+      const { data, error: authError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (authError) {
+        setError(authError.message);
+        return;
+      }
+
+      if (data.user && data.session) {
+        const { data: agentData } = await supabase
+          .from('agents')
+          .select('*')
+          .eq('id', data.user.id)
+          .single();
+
+        if (agentData) {
+          onLogin(data.session.access_token, agentData);
+        }
       }
     } catch (err) {
-      setError('Connection error: ' + err.message);
+      setError('Login error: ' + err.message);
     } finally {
       setLoading(false);
     }
@@ -37,14 +52,42 @@ export default function LoginPage({ onLogin }) {
     setLoading(true);
 
     try {
-      const result = await api.agentRegister(email, password, firstName, lastName, company);
-      if (result.token) {
-        onLogin(result.token, result.user);
-      } else {
-        setError(result.error || 'Registration failed');
+      const { data: authData, error: authError } = await supabase.auth.signUp({
+        email,
+        password,
+      });
+
+      if (authError) {
+        setError(authError.message);
+        return;
+      }
+
+      if (authData.user) {
+        const { error: insertError } = await supabase
+          .from('agents')
+          .insert([
+            {
+              id: authData.user.id,
+              email,
+              first_name: firstName,
+              last_name: lastName,
+              company,
+              password_hash: 'auth-user',
+              status: 'active',
+              property_id: (await supabase.from('properties').select('id').limit(1).single()).data.id,
+            },
+          ]);
+
+        if (insertError) {
+          setError('Failed to create agent record: ' + insertError.message);
+          return;
+        }
+
+        setMode('login');
+        setError('Account created! Please log in.');
       }
     } catch (err) {
-      setError('Connection error: ' + err.message);
+      setError('Registration error: ' + err.message);
     } finally {
       setLoading(false);
     }

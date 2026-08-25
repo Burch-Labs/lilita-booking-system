@@ -1,22 +1,28 @@
 import { useState, useEffect } from 'react';
-import { api } from '../api';
+import { supabase } from '../lib/supabase';
 import '../styles/CommissionsPage.css';
 
 export default function CommissionsPage({ token, user }) {
-  const [commissions, setCommissions] = useState([]);
+  const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
-    loadCommissions();
+    loadBookings();
   }, []);
 
-  const loadCommissions = async () => {
+  const loadBookings = async () => {
     try {
-      const data = await api.getAgentCommissions(token);
-      setCommissions(Array.isArray(data) ? data : []);
+      const { data, error: err } = await supabase
+        .from('bookings')
+        .select('*')
+        .eq('agent_id', user.id)
+        .order('created_at', { ascending: false });
+
+      if (err) throw err;
+      setBookings(Array.isArray(data) ? data : []);
     } catch (err) {
-      setError('Failed to load commissions: ' + err.message);
+      setError('Failed to load bookings: ' + err.message);
     } finally {
       setLoading(false);
     }
@@ -30,17 +36,17 @@ export default function CommissionsPage({ token, user }) {
     return <div className="error-message">{error}</div>;
   }
 
-  const totalEarned = commissions
-    .filter(c => c.status === 'EARNED' || c.status === 'PAID')
-    .reduce((sum, c) => sum + (parseFloat(c.commission_amount) || 0), 0);
+  const totalEarned = bookings
+    .filter(b => b.status === 'confirmed' || b.status === 'completed')
+    .reduce((sum, b) => sum + (parseFloat(b.commission_earned) || 0), 0);
 
-  const pendingPayment = commissions
-    .filter(c => c.status === 'PENDING_PAYMENT')
-    .reduce((sum, c) => sum + (parseFloat(c.commission_amount) || 0), 0);
+  const pendingPayment = bookings
+    .filter(b => b.status === 'pending')
+    .reduce((sum, b) => sum + (parseFloat(b.commission_earned) || 0), 0);
 
-  const alreadyPaid = commissions
-    .filter(c => c.status === 'PAID')
-    .reduce((sum, c) => sum + (parseFloat(c.commission_amount) || 0), 0);
+  const alreadyPaid = bookings
+    .filter(b => b.status === 'completed')
+    .reduce((sum, b) => sum + (parseFloat(b.commission_earned) || 0), 0);
 
   return (
     <div className="commissions-container">
@@ -66,49 +72,51 @@ export default function CommissionsPage({ token, user }) {
         </div>
 
         <div className="summary-card">
-          <h4>Commission Rate</h4>
-          <p className="amount">{((user?.commission_rate || 0.15) * 100).toFixed(0)}%</p>
-          <span className="status">Your rate</span>
+          <h4>Total Bookings</h4>
+          <p className="amount">{bookings.length}</p>
+          <span className="status">Confirmed bookings</span>
         </div>
       </div>
 
       <div className="commission-details">
         <h3>📊 Commission Breakdown</h3>
 
-        {commissions.length === 0 ? (
+        {bookings.length === 0 ? (
           <div className="empty-state">
-            <p>No commissions yet. Complete bookings to start earning! 🚀</p>
+            <p>No bookings yet. Start creating bookings to earn commissions! 🚀</p>
           </div>
         ) : (
           <div className="commission-table">
             <table>
               <thead>
                 <tr>
-                  <th>Booking Reference</th>
-                  <th>Booking Amount</th>
-                  <th>Commission Rate</th>
+                  <th>Guest Name</th>
+                  <th>Check-in</th>
+                  <th>Check-out</th>
+                  <th>Booking Total</th>
                   <th>Commission</th>
                   <th>Status</th>
-                  <th>Date Earned</th>
+                  <th>Date Created</th>
                 </tr>
               </thead>
               <tbody>
-                {commissions.map((comm) => (
-                  <tr key={comm.id} className={`status-${comm.status?.toLowerCase()}`}>
+                {bookings.map((booking) => (
+                  <tr key={booking.id} className={`status-${booking.status?.toLowerCase()}`}>
                     <td className="booking-ref">
-                      <span className="badge">{comm.booking_id?.substring(0, 8)}</span>
+                      <span className="badge">{booking.guest_name || 'N/A'}</span>
                     </td>
-                    <td>${parseFloat(comm.booking_amount).toFixed(2)}</td>
-                    <td>{(parseFloat(comm.commission_rate) * 100).toFixed(0)}%</td>
+                    <td>{new Date(booking.check_in).toLocaleDateString()}</td>
+                    <td>{new Date(booking.check_out).toLocaleDateString()}</td>
+                    <td>${parseFloat(booking.total_value || 0).toFixed(2)}</td>
                     <td className="commission-amount">
-                      <strong>${parseFloat(comm.commission_amount).toFixed(2)}</strong>
+                      <strong>${parseFloat(booking.commission_earned || 0).toFixed(2)}</strong>
                     </td>
                     <td>
-                      <span className={`status-badge status-${comm.status?.toLowerCase()}`}>
-                        {comm.status}
+                      <span className={`status-badge status-${booking.status?.toLowerCase()}`}>
+                        {booking.status}
                       </span>
                     </td>
-                    <td>{new Date(comm.created_at).toLocaleDateString()}</td>
+                    <td>{new Date(booking.created_at).toLocaleDateString()}</td>
                   </tr>
                 ))}
               </tbody>

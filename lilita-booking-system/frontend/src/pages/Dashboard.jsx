@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
-import { api } from '../api';
+import { supabase } from '../lib/supabase';
 import '../styles/Dashboard.css';
 
 export default function Dashboard({ token, user }) {
-  const [dashboardData, setDashboardData] = useState(null);
+  const [agent, setAgent] = useState(user || {});
+  const [property, setProperty] = useState(null);
+  const [rates, setRates] = useState([]);
+  const [tiers, setTiers] = useState([]);
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -14,13 +17,23 @@ export default function Dashboard({ token, user }) {
 
   const loadDashboard = async () => {
     try {
-      const [dashData, bookingsList] = await Promise.all([
-        api.getAgentDashboard(token),
-        api.getAgentBookings(token)
+      if (!user?.property_id) {
+        setError('No property assigned');
+        setLoading(false);
+        return;
+      }
+
+      const [propData, ratesData, tiersData, bookingsData] = await Promise.all([
+        supabase.from('properties').select('*').eq('id', user.property_id).single(),
+        supabase.from('rates').select('*').eq('property_id', user.property_id),
+        supabase.from('commission_tiers').select('*').eq('property_id', user.property_id),
+        supabase.from('bookings').select('*').eq('agent_id', user.id)
       ]);
 
-      setDashboardData(dashData);
-      setBookings(Array.isArray(bookingsList) ? bookingsList : []);
+      if (propData.data) setProperty(propData.data);
+      if (ratesData.data) setRates(ratesData.data);
+      if (tiersData.data) setTiers(tiersData.data);
+      if (bookingsData.data) setBookings(bookingsData.data);
     } catch (err) {
       setError('Failed to load dashboard: ' + err.message);
     } finally {
@@ -45,7 +58,7 @@ export default function Dashboard({ token, user }) {
           <div className="stat-icon">📅</div>
           <div className="stat-content">
             <h3>Total Bookings</h3>
-            <p className="stat-value">{dashboardData?.total_bookings || 0}</p>
+            <p className="stat-value">{bookings.length}</p>
           </div>
         </div>
 
@@ -53,7 +66,7 @@ export default function Dashboard({ token, user }) {
           <div className="stat-icon">✅</div>
           <div className="stat-content">
             <h3>Confirmed</h3>
-            <p className="stat-value">{dashboardData?.confirmed_bookings || 0}</p>
+            <p className="stat-value">{bookings.filter(b => b.status === 'confirmed').length}</p>
           </div>
         </div>
 
@@ -61,15 +74,15 @@ export default function Dashboard({ token, user }) {
           <div className="stat-icon">💰</div>
           <div className="stat-content">
             <h3>Commission Earned</h3>
-            <p className="stat-value">${(dashboardData?.total_commission || 0).toFixed(2)}</p>
+            <p className="stat-value">${(bookings.reduce((sum, b) => sum + (b.commission_earned || 0), 0)).toFixed(2)}</p>
           </div>
         </div>
 
         <div className="stat-card">
           <div className="stat-icon">🎯</div>
           <div className="stat-content">
-            <h3>Commission Rate</h3>
-            <p className="stat-value">{((user?.commission_rate || 0.15) * 100).toFixed(0)}%</p>
+            <h3>Commission Tier</h3>
+            <p className="stat-value">{tiers.length > 0 ? tiers[0].tier_name : 'Standard'}</p>
           </div>
         </div>
       </div>

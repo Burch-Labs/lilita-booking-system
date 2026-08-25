@@ -2,7 +2,8 @@
 # AGENT PLATFORM 2.0 - VERCEL DEPLOYMENT SCRIPT (PowerShell)
 # ============================================================================
 
-$ErrorActionPreference = "Stop"
+$ErrorActionPreference = "Stop"VITE_SUPABASE_URL=https://dhirjmihiuwcibkxhucu.supabase.co
+VITE_SUPABASE_ANON_KEY=eyJhbGci••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
 
 Write-Host "🚀 AGENT PLATFORM 2.0 - VERCEL DEPLOYMENT" -ForegroundColor Cyan
 Write-Host "==========================================" -ForegroundColor Cyan

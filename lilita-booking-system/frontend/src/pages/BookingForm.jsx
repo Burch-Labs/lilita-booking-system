@@ -1,32 +1,38 @@
 import { useState, useEffect } from 'react';
-import { api } from '../api';
+import { supabase } from '../lib/supabase';
 import '../styles/BookingForm.css';
 
 export default function BookingForm({ token, user }) {
-  const [suites, setSuites] = useState([]);
-  const [selectedSuite, setSelectedSuite] = useState('');
+  const [rates, setRates] = useState([]);
+  const [selectedRate, setSelectedRate] = useState('');
   const [checkInDate, setCheckInDate] = useState('');
   const [checkOutDate, setCheckOutDate] = useState('');
   const [numGuests, setNumGuests] = useState(1);
   const [guestEmail, setGuestEmail] = useState('');
   const [guestName, setGuestName] = useState('');
   const [specialRequests, setSpecialRequests] = useState('');
-  const [paymentMethod, setPaymentMethod] = useState('CARD');
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
   useEffect(() => {
-    loadSuites();
+    loadRates();
   }, []);
 
-  const loadSuites = async () => {
+  const loadRates = async () => {
     try {
-      const data = await api.getSuites();
-      setSuites(Array.isArray(data) ? data : []);
+      const { data, error: err } = await supabase
+        .from('rates')
+        .select('*')
+        .eq('property_id', user.property_id)
+        .order('year', { ascending: false });
+
+      if (err) throw err;
+      setRates(Array.isArray(data) ? data : []);
+      if (data?.length > 0) setSelectedRate(data[0].id);
     } catch (err) {
-      setError('Failed to load suites: ' + err.message);
+      setError('Failed to load rates: ' + err.message);
     } finally {
       setLoading(false);
     }
@@ -38,40 +44,42 @@ export default function BookingForm({ token, user }) {
     setSuccess('');
     setSubmitting(true);
 
-    if (!selectedSuite || !checkInDate || !checkOutDate) {
+    if (!selectedRate || !checkInDate || !checkOutDate) {
       setError('Please fill in all required fields');
       setSubmitting(false);
       return;
     }
 
     try {
-      const suite = suites.find(s => s.id === selectedSuite);
+      const rate = rates.find(r => r.id === selectedRate);
       const checkIn = new Date(checkInDate);
       const checkOut = new Date(checkOutDate);
       const nights = Math.floor((checkOut - checkIn) / (1000 * 60 * 60 * 24));
-      const baseTotal = parseFloat(suite.base_price) * nights;
-      const finalTotal = baseTotal * 1.15; // 15% standard markup
+      const total = parseFloat(rate.price_usd) * nights;
 
-      const bookingData = {
-        suite_id: selectedSuite,
-        check_in_date: checkInDate,
-        check_out_date: checkOutDate,
-        num_guests: parseInt(numGuests),
-        guest_email: guestEmail,
-        guest_name: guestName,
-        special_requests: specialRequests,
-        booking_channel: 'AGENT',
-        base_total: baseTotal,
-        final_total: finalTotal,
-        payment_method: paymentMethod
-      };
+      const bookingRef = `BK${Date.now().toString().slice(-8)}`;
 
-      const result = await api.createBooking(token, bookingData);
+      const { data, error: err } = await supabase
+        .from('bookings')
+        .insert([{
+          property_id: user.property_id,
+          agent_id: user.id,
+          guest_name: guestName,
+          guest_email: guestEmail,
+          check_in: checkInDate,
+          check_out: checkOutDate,
+          num_guests: parseInt(numGuests),
+          total_value: total,
+          commission_earned: 0,
+          status: 'confirmed',
+          booking_reference: bookingRef
+        }])
+        .select();
 
-      if (result.booking) {
-        setSuccess(`✅ Booking created! Reference: ${result.booking.booking_reference}`);
-        // Reset form
-        setSelectedSuite('');
+      if (err) throw err;
+      if (data?.length > 0) {
+        setSuccess(`✅ Booking created! Reference: ${bookingRef}`);
+        setSelectedRate('');
         setCheckInDate('');
         setCheckOutDate('');
         setNumGuests(1);
@@ -79,8 +87,6 @@ export default function BookingForm({ token, user }) {
         setGuestName('');
         setSpecialRequests('');
         setTimeout(() => setSuccess(''), 5000);
-      } else {
-        setError(result.error || 'Failed to create booking');
       }
     } catch (err) {
       setError('Error: ' + err.message);
@@ -90,7 +96,7 @@ export default function BookingForm({ token, user }) {
   };
 
   if (loading) {
-    return <div className="loading">Loading suites...</div>;
+    return <div className="loading">Loading rates...</div>;
   }
 
   return (
@@ -102,24 +108,21 @@ export default function BookingForm({ token, user }) {
 
       <form onSubmit={handleSubmit} className="booking-form">
         <div className="form-section">
-          <h3>🏨 Choose a Suite</h3>
-          <div className="suites-grid">
-            {suites.map((suite) => (
-              <div
-                key={suite.id}
-                className={`suite-card ${selectedSuite === suite.id ? 'selected' : ''}`}
-                onClick={() => setSelectedSuite(suite.id)}
-              >
-                <h4>{suite.name}</h4>
-                <p className="suite-desc">{suite.description}</p>
-                <p className="suite-price">${parseFloat(suite.base_price).toFixed(2)}/night</p>
-                <div className="suite-amenities">
-                  {suite.amenities?.slice(0, 3).map((amenity, i) => (
-                    <span key={i} className="amenity">✓ {amenity}</span>
-                  ))}
-                </div>
-              </div>
-            ))}
+          <h3>💰 Select Rate</h3>
+          <div className="form-group">
+            <label>Rate Package *</label>
+            <select
+              value={selectedRate}
+              onChange={(e) => setSelectedRate(e.target.value)}
+              required
+            >
+              <option value="">Choose a rate...</option>
+              {rates.map((rate) => (
+                <option key={rate.id} value={rate.id}>
+                  {rate.year} - {rate.season}: ${parseFloat(rate.price_usd).toFixed(2)}/night
+                </option>
+              ))}
+            </select>
           </div>
         </div>
 
@@ -197,43 +200,11 @@ export default function BookingForm({ token, user }) {
           />
         </div>
 
-        <div className="form-section">
-          <h3>💳 Payment Method</h3>
-          <div className="payment-options">
-            <label className="payment-option">
-              <input
-                type="radio"
-                value="CARD"
-                checked={paymentMethod === 'CARD'}
-                onChange={(e) => setPaymentMethod(e.target.value)}
-              />
-              💳 Credit Card
-            </label>
-            <label className="payment-option">
-              <input
-                type="radio"
-                value="MPESA"
-                checked={paymentMethod === 'MPESA'}
-                onChange={(e) => setPaymentMethod(e.target.value)}
-              />
-              📱 M-Pesa
-            </label>
-            <label className="payment-option">
-              <input
-                type="radio"
-                value="BANK_TRANSFER"
-                checked={paymentMethod === 'BANK_TRANSFER'}
-                onChange={(e) => setPaymentMethod(e.target.value)}
-              />
-              🏦 Bank Transfer
-            </label>
-          </div>
-        </div>
 
         <div className="form-actions">
           <button
             type="submit"
-            disabled={submitting || !selectedSuite}
+            disabled={submitting || !selectedRate}
             className="btn-primary"
           >
             {submitting ? '⏳ Creating booking...' : '✅ Create Booking'}
