@@ -62,42 +62,45 @@ export default function LoginPage({ onLogin }) {
         return;
       }
 
-      if (authData.user) {
-        // Get the default property (Mara Meguarra Sanctuary)
-        const { data: propertyData, error: propError } = await supabase
-          .from('properties')
-          .select('id')
-          .eq('name', 'Mara Meguarra Sanctuary')
-          .single();
-
-        if (propError || !propertyData) {
-          setError('Property not found. Please contact admin.');
-          return;
-        }
-
-        const { error: insertError } = await supabase
-          .from('agents')
-          .insert([
-            {
-              id: authData.user.id,
-              email,
-              first_name: firstName,
-              last_name: lastName,
-              company,
-              password_hash: 'auth-user',
-              status: 'active',
-              property_id: propertyData.id,
-            },
-          ]);
-
-        if (insertError) {
-          setError('Failed to create agent record: ' + insertError.message);
-          return;
-        }
-
-        setMode('login');
-        setError('Account created! Please log in.');
+      if (!authData?.user?.id) {
+        setError('Signup failed: Unable to create user account. Please try again.');
+        return;
       }
+
+      // Get the default property (Mara Meguarra Sanctuary)
+      const { data: propertyData, error: propError } = await supabase
+        .from('properties')
+        .select('id')
+        .eq('name', 'Mara Meguarra Sanctuary')
+        .single();
+
+      if (propError || !propertyData?.id) {
+        setError('Property not found. Please contact admin.');
+        return;
+      }
+
+      const { error: insertError } = await supabase
+        .from('agents')
+        .insert([
+          {
+            id: authData.user.id,
+            email,
+            first_name: firstName,
+            last_name: lastName,
+            company,
+            password_hash: 'auth-user',
+            status: 'active',
+            property_id: propertyData.id,
+          },
+        ]);
+
+      if (insertError) {
+        setError('Failed to create agent record: ' + insertError.message);
+        return;
+      }
+
+      setMode('login');
+      setError('Account created! Please log in.');
     } catch (err) {
       setError('Registration error: ' + err.message);
     } finally {
