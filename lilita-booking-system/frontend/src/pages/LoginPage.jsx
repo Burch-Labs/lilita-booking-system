@@ -63,6 +63,18 @@ export default function LoginPage({ onLogin }) {
       }
 
       if (authData.user) {
+        // Get the default property (Mara Meguarra Sanctuary)
+        const { data: propertyData, error: propError } = await supabase
+          .from('properties')
+          .select('id')
+          .eq('name', 'Mara Meguarra Sanctuary')
+          .single();
+
+        if (propError || !propertyData) {
+          setError('Property not found. Please contact admin.');
+          return;
+        }
+
         const { error: insertError } = await supabase
           .from('agents')
           .insert([
@@ -74,7 +86,7 @@ export default function LoginPage({ onLogin }) {
               company,
               password_hash: 'auth-user',
               status: 'active',
-              property_id: (await supabase.from('properties').select('id').limit(1).single()).data.id,
+              property_id: propertyData.id,
             },
           ]);
 
