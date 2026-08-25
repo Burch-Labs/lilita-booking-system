@@ -262,7 +262,7 @@ CREATE POLICY agent_isolation ON bookings
 
 ### Recent Updates (August 2026)
 - ✅ Modern luxury design with Playfair Display typography
-- ✅ Phone number updated: +25414229870
+- ✅ Phone number updated: +254724167447
 - ✅ JSX syntax fixes for production stability
 - ✅ Registration property auto-creation
 - ✅ Comprehensive error handling and logging
@@ -412,7 +412,7 @@ const handleSubmit = async (e) => {
 - **GitHub:** https://github.com/Burch-Labs/lilita-booking-system
 - **Live Demo:** https://dulcet-tarsier-90a825.netlify.app
 - **Architecture Docs:** See README.md for full schema
-- **Contact:** sales@marameguarrasanctuary.com / +25414229870
+- **Contact:** sales@marameguarrasanctuary.com / +254724167447
 
 ---
 
