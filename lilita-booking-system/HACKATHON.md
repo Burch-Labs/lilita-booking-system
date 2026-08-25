@@ -428,3 +428,28 @@ const handleSubmit = async (e) => {
 **Team:** Burch Labs  
 **Status:** Ready for production ✅
 
+---
+
+## 👤 Founder & Submission
+
+**Charles Muriuki**  
+**Country:** Kenya  
+**ID:** 24453911  
+**Email:** sparknairobi@gmail.com  
+**Phone:** +254724167447  
+
+**About:** Charles is the founder of Burch Labs, building the future of hospitality automation with AI-powered agent fleets. BurchIntelligence represents 2+ years of research into multi-agent coordination, enterprise compliance, and global scalability in the hospitality sector.
+
+---
+
+## 📋 Submission Metadata
+
+**Hackathon:** All Things Agentic (August 2026)  
+**Submission Date:** August 25, 2026  
+**Category:** Multi-Agent Systems  
+**Innovation Focus:** Production-grade agent orchestration for enterprise hospitality  
+**Team Size:** 1 founder, open to regional operators  
+**GitHub:** https://github.com/Burch-Labs/lilita-booking-system  
+**Live Demo:** https://dulcet-tarsier-90a825.netlify.app  
+**Contact:** sparknairobi@gmail.com | +254724167447
+
