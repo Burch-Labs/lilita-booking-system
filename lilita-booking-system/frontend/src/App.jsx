@@ -53,7 +53,7 @@ export default function App() {
       <nav className="navbar">
         <div className="navbar-brand">
           <h1>🏨 Mara Meguarra Sanctuary Agent Portal</h1>
-          <p className="tagline">powered by Burch</p>
+          <p className="tagline">Powered by Burch</p>
         </div>
 
         <div className="navbar-menu">
