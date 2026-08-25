@@ -6,7 +6,7 @@
 
 ## Executive Summary
 
-**Lilita Keeper** is a production-grade multi-agent system that automates complex hospitality workflows through a coordinated fleet of specialized AI agents. Built on Google Cloud technologies (Supabase, PostgREST, Vertex AI-ready), it demonstrates how autonomous agents can scale enterprise operations while maintaining real-time consistency and compliance.
+**BurchIntelligence** is a production-grade multi-agent system that automates complex hospitality workflows through a coordinated fleet of specialized AI agents. Built on Google Cloud technologies (Supabase, PostgREST, Vertex AI-ready), it demonstrates how autonomous agents can scale enterprise operations while maintaining real-time consistency and compliance.
 
 **Problem Solved:** Travel agencies and luxury properties struggle with manual booking coordination, real-time inventory management, and agent commission tracking. Our agent fleet automates these workflows, reducing booking friction from 30+ minutes to under 2 minutes.
 
@@ -25,7 +25,7 @@
   - Real-time availability checking across 5 luxury suites
   - Hold management with automatic 48-hour release
   - Double-booking prevention (impossible to oversell)
-  - Booking reference generation (LILITA-XXXXXXXX format)
+  - Booking reference generation (BIRCH-XXXXXXXX format)
   - Payment intent creation (Stripe, M-Pesa, bank transfers)
 
 - **Coordination:** Consults Calendar Intelligence Agent before confirming availability

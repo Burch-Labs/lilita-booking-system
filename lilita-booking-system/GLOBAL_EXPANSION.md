@@ -1,12 +1,12 @@
 # 🌍 Global Expansion Strategy: Agent-Driven Hospitality Platform
 
-**Making Lilita the Operating System for Global Hospitality**
+**Making BurchIntelligence the Operating System for Global Hospitality**
 
 ---
 
 ## Executive Vision
 
-Transform from a **single-property booking system** into a **global agent-operated platform** where:
+**BurchIntelligence** transforms from a **single-property booking system** into a **global agent-operated platform** where:
 - 🏨 1,000+ hospitality properties worldwide use the same agent fleet
 - 🌐 Regional agent networks maintain deployments locally
 - 🤖 Autonomous agents handle 90% of operations (no human intervention)
@@ -54,7 +54,7 @@ Transform from a **single-property booking system** into a **global agent-operat
 
 ```yaml
 Global Platform:
-  ├─ Lilita Core (Open Source)
+  ├─ BurchIntelligence Core (Open Source)
   │   ├─ Booking Agent
   │   ├─ Commission Tracking Agent
   │   ├─ Emergency Support Agent
@@ -397,7 +397,7 @@ Tier 1 Operator (100+ properties):
   Obligations:
     - SLA: 99.5% platform uptime
     - Support: <1 hour response for critical issues
-    - Compliance: Local regulations + Lilita standards
+    - Compliance: Local regulations + BurchIntelligence standards
     - Growth: 50+ new properties per year
 
 Tier 2 Operator (30-99 properties):
@@ -463,7 +463,7 @@ Tier 3 Marketplace Agent:
    ```
    US operator needs: Help managing Easter peak season
    Kenya operator has: Low occupancy March-April
-   Lilita matches: Cross-regional agent collaboration
+   BurchIntelligence matches: Cross-regional agent collaboration
    Outcome: Knowledge sharing + mutual growth
    ```
 
@@ -472,7 +472,7 @@ Tier 3 Marketplace Agent:
 ## 🎯 Why Global Wins the Hackathon
 
 ### Before (Single Property)
-- ❌ Lilita handles Mara Meguarra only
+- ❌ BurchIntelligence handles Mara Meguarra only
 - ❌ Limited to Kenya market
 - ❌ Can't prove scalability
 - ❌ Revenue capped at $50K/month
@@ -523,10 +523,10 @@ Tier 3 Marketplace Agent:
 
 ## 📞 Contact for Global Expansion
 
-**Lilita Global Headquarters**
-- Email: global@lilita.io
+**BurchIntelligence Global Headquarters**
+- Email: global@burchintelligence.io
 - Phone: +25414229870
-- Website: lilita.io/global
+- Website: burchintelligence.io/global
 
 **Regional Operator Inquiries**
 - Investment: $20K-$50K
@@ -539,5 +539,5 @@ Tier 3 Marketplace Agent:
 **Status:** 🚀 Ready for Global Launch  
 **Next Step:** Recruit first 5 regional operators  
 **Timeline:** 3 years to $17M ARR  
-**Vision:** Make Lilita the Stripe of Hospitality Booking
+**Vision:** Make BurchIntelligence the Stripe of Hospitality Booking
 
