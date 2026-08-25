@@ -138,7 +138,6 @@ export default function LoginPage({ onLogin }) {
       </div>
       <div className="login-box">
         <div className="login-header">
-          <h1>🏨 Lilita Keper</h1>
           <p>Luxury Safari Lodge Booking System</p>
           <p className="subtitle">Travel Agent Portal</p>
         </div>
