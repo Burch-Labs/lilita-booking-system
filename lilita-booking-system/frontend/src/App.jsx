@@ -7,6 +7,9 @@ import CommissionsPage from './pages/CommissionsPage';
 import AdminDashboard from './pages/AdminDashboard';
 import CalendarView from './pages/CalendarView';
 import OffersPage from './pages/OffersPage';
+import EmergencySupportPage from './pages/EmergencySupportPage';
+import BlockBookingPage from './pages/BlockBookingPage';
+import ConfirmationLetterPage from './pages/ConfirmationLetterPage';
 
 export default function App() {
   const [token, setToken] = useState(null);
@@ -82,6 +85,24 @@ export default function App() {
                 💰 Commissions
               </button>
               <button
+                className={`nav-btn ${currentPage === 'letters' ? 'active' : ''}`}
+                onClick={() => setCurrentPage('letters')}
+              >
+                📄 Confirmation Letters
+              </button>
+              <button
+                className={`nav-btn ${currentPage === 'blockbooking' ? 'active' : ''}`}
+                onClick={() => setCurrentPage('blockbooking')}
+              >
+                📦 Block Bookings
+              </button>
+              <button
+                className={`nav-btn ${currentPage === 'support' ? 'active' : ''}`}
+                onClick={() => setCurrentPage('support')}
+              >
+                🚨 Emergency Support
+              </button>
+              <button
                 className={`nav-btn ${currentPage === 'offers' ? 'active' : ''}`}
                 onClick={() => setCurrentPage('offers')}
               >
@@ -138,6 +159,9 @@ export default function App() {
         {userRole === 'agent' && currentPage === 'booking' && <BookingForm token={token} user={user} />}
         {userRole === 'agent' && currentPage === 'calendar' && <CalendarView token={token} user={user} />}
         {userRole === 'agent' && currentPage === 'commissions' && <CommissionsPage token={token} user={user} />}
+        {userRole === 'agent' && currentPage === 'letters' && <ConfirmationLetterPage token={token} user={user} />}
+        {userRole === 'agent' && currentPage === 'blockbooking' && <BlockBookingPage token={token} user={user} />}
+        {userRole === 'agent' && currentPage === 'support' && <EmergencySupportPage token={token} user={user} />}
         {userRole === 'agent' && currentPage === 'offers' && <OffersPage token={token} user={user} />}
 
         {userRole === 'admin' && currentPage === 'dashboard' && <AdminDashboard token={token} user={user} />}

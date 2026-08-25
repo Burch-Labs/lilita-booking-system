@@ -1,0 +1,297 @@
+.emergency-support-container {
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.emergency-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, #ff4444 0%, #dd0000 100%);
+  color: white;
+  border-radius: 10px;
+}
+
+.emergency-header h2 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.emergency-header p {
+  margin: 0.5rem 0 0 0;
+  opacity: 0.9;
+}
+
+.btn-emergency {
+  display: block;
+  width: 100%;
+  padding: 1.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background: #ff4444;
+  color: white;
+  border: 3px solid #dd0000;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 2rem 0;
+  transition: all 0.3s ease;
+  animation: pulse 2s infinite;
+}
+
+.btn-emergency:hover {
+  background: #dd0000;
+  transform: scale(1.02);
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 68, 68, 0.7); }
+  50% { box-shadow: 0 0 0 10px rgba(255, 68, 68, 0); }
+}
+
+.emergency-form {
+  background: #f9f9f9;
+  padding: 2rem;
+  border-radius: 10px;
+  border-left: 5px solid #ff4444;
+  margin-bottom: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.btn-primary, .btn-secondary {
+  flex: 1;
+  padding: 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: #ff4444;
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #dd0000;
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: #ddd;
+  color: #333;
+}
+
+.btn-secondary:hover {
+  background: #ccc;
+}
+
+.tickets-section {
+  margin-top: 3rem;
+}
+
+.tickets-section h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 2rem;
+  background: #f0f0f0;
+  border-radius: 10px;
+  color: #666;
+}
+
+.tickets-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.ticket-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  border-left: 4px solid #ddd;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.ticket-card.status-open {
+  border-left-color: #ff4444;
+}
+
+.ticket-card.status-in_progress {
+  border-left-color: #ffaa00;
+}
+
+.ticket-card.status-resolved {
+  border-left-color: #00aa00;
+}
+
+.ticket-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: 1rem;
+}
+
+.ticket-header h4 {
+  margin: 0;
+  flex: 1;
+}
+
+.status-badge {
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.status-badge.priority-urgent {
+  background: #ff4444;
+  color: white;
+}
+
+.status-badge.priority-high {
+  background: #ffaa00;
+  color: white;
+}
+
+.status-badge.priority-normal {
+  background: #0099ff;
+  color: white;
+}
+
+.status-badge.priority-low {
+  background: #00aa00;
+  color: white;
+}
+
+.ticket-category {
+  font-size: 0.9rem;
+  color: #666;
+  text-transform: uppercase;
+  margin: 0.5rem 0;
+}
+
+.ticket-description {
+  margin: 1rem 0;
+  line-height: 1.5;
+  color: #555;
+}
+
+.ticket-date {
+  font-size: 0.85rem;
+  color: #999;
+}
+
+.support-info {
+  margin-top: 3rem;
+  padding: 2rem;
+  background: #f9f9f9;
+  border-radius: 10px;
+}
+
+.support-info h3 {
+  margin-top: 0;
+}
+
+.info-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.info-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.info-card h4 {
+  margin-top: 0;
+  color: #ff4444;
+}
+
+.info-card p {
+  margin: 0;
+  color: #666;
+}
+
+.error-message {
+  background: #ffebee;
+  color: #c62828;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  border-left: 4px solid #c62828;
+}
+
+.success-message {
+  background: #e8f5e9;
+  color: #2e7d32;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  border-left: 4px solid #2e7d32;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.loading {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+}
