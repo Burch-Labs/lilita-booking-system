@@ -52,8 +52,8 @@ export default function App() {
     <div className="app">
       <nav className="navbar">
         <div className="navbar-brand">
-          <h1>🏨 Lilita Keper</h1>
-          <p className="tagline">{userRole === 'admin' ? 'Admin Panel' : 'Agent Portal'}</p>
+          <h1>🏨 Burch Agent Portal</h1>
+          <p className="tagline">{userRole === 'admin' ? 'Admin Panel' : 'Mara Meguarra Sanctuary'}</p>
         </div>
 
         <div className="navbar-menu">
@@ -173,7 +173,7 @@ export default function App() {
       </main>
 
       <footer className="footer">
-        <p>© 2026 Lilita Keper Lodge - Maasai Mara, Kenya</p>
+        <p>© 2026 Burch Agent Portal - Powered by Mara Meguarra Sanctuary</p>
       </footer>
     </div>
   );
