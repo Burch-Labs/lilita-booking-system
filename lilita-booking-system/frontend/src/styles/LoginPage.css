@@ -1,6 +1,6 @@
 .login-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #2c5f8d 0%, #1e4b6f 100%);
+  background: linear-gradient(135deg, #7A1E12 0%, #5c1610 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -34,7 +34,7 @@
 
 .logo-link:hover {
   transform: scale(1.05);
-  box-shadow: 0 4px 16px rgba(44, 95, 141, 0.2);
+  box-shadow: 0 4px 16px rgba(122, 30, 18, 0.2);
 }
 
 .property-logo {
@@ -53,12 +53,12 @@
 
 .property-header h2 {
   font-size: 2rem;
-  color: #2c5f8d;
+  color: #7A1E12;
   margin: 0.5rem 0;
 }
 
 .property-header .location {
-  color: #d4a574;
+  color: #E0A034;
   font-weight: 600;
   margin: 0;
   font-size: 0.95rem;
@@ -66,7 +66,7 @@
 
 .property-details .tagline {
   font-size: 1.1rem;
-  color: #2c5f8d;
+  color: #7A1E12;
   font-weight: 600;
   margin-bottom: 1rem;
   font-style: italic;
@@ -104,7 +104,7 @@
   display: block;
   font-size: 1.3rem;
   font-weight: 600;
-  color: #2c5f8d;
+  color: #7A1E12;
 }
 
 .amenities {
@@ -115,7 +115,7 @@
 }
 
 .amenities h4 {
-  color: #2c5f8d;
+  color: #7A1E12;
   margin-top: 0;
   margin-bottom: 1rem;
   font-size: 0.95rem;
@@ -150,7 +150,7 @@
 
 .login-header h1 {
   font-size: 2.5rem;
-  color: #2c5f8d;
+  color: #7A1E12;
   margin-bottom: 0.5rem;
 }
 
@@ -162,7 +162,7 @@
 
 .login-header .subtitle {
   font-size: 0.9rem;
-  color: #d4a574;
+  color: #E0A034;
 }
 
 .login-header .powered-by {
@@ -252,7 +252,7 @@
 .link-btn {
   background: none;
   border: none;
-  color: #2c5f8d;
+  color: #7A1E12;
   cursor: pointer;
   font-weight: 600;
   font-size: 0.95rem;
@@ -282,7 +282,7 @@
 }
 
 .login-features h3 {
-  color: #2c5f8d;
+  color: #7A1E12;
   margin-bottom: 1rem;
   font-size: 1rem;
 }

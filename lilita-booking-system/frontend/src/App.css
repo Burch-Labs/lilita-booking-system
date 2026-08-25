@@ -5,13 +5,17 @@
 }
 
 :root {
-  --primary: #2c5f8d;
-  --primary-dark: #1e4b6f;
-  --primary-light: #4a8bc2;
-  --secondary: #d4a574;
+  --primary: #7A1E12;
+  --primary-dark: #5c1610;
+  --primary-light: #a02818;
+  --secondary: #E0A034;
+  --secondary-dark: #9A6A16;
   --success: #27ae60;
   --danger: #e74c3c;
   --warning: #f39c12;
+  --bone: #F6F3EC;
+  --bone-dim: #EDE8DE;
+  --warm-black: #14120E;
   --gray-50: #f8f9fa;
   --gray-100: #f0f1f3;
   --gray-200: #e0e1e5;
@@ -26,8 +30,8 @@
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
-  color: var(--gray-800);
+  background: linear-gradient(135deg, var(--bone) 0%, var(--bone-dim) 100%);
+  color: var(--warm-black);
   line-height: 1.6;
   min-height: 100vh;
 }
@@ -42,11 +46,11 @@ body {
 .navbar {
   background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
   color: white;
-  padding: 1rem 2rem;
+  padding: 1.2rem 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: var(--box-shadow-lg);
+  box-shadow: 0 2px 12px rgba(122, 30, 18, 0.15);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -96,8 +100,9 @@ body {
 
 .nav-btn.active {
   background: var(--secondary);
-  color: var(--primary);
+  color: white;
   border-color: var(--secondary);
+  font-weight: 600;
 }
 
 .navbar-user {
@@ -148,8 +153,8 @@ body {
 
 /* Footer */
 .footer {
-  background: var(--gray-800);
-  color: white;
+  background: var(--warm-black);
+  color: var(--bone);
   text-align: center;
   padding: 1.5rem;
   margin-top: auto;
