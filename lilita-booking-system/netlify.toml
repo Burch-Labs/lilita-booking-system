@@ -1,6 +1,7 @@
 [build]
-  command = "cd lilita-booking-system/frontend && npm run build"
-  publish = "lilita-booking-system/frontend/dist"
+  base = "lilita-booking-system"
+  command = "cd frontend && npm run build"
+  publish = "frontend/dist"
 
 [[redirects]]
   from = "/*"
