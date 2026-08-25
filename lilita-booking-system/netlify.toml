@@ -3,6 +3,7 @@
   command = "cd frontend && npm run build"
   publish = "frontend/dist"
 
+# SPA routing - redirect to index.html for client-side routing
 [[redirects]]
   from = "/*"
   to = "/index.html"
