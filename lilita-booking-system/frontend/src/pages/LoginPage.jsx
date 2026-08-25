@@ -95,51 +95,10 @@ export default function LoginPage({ onLogin }) {
 
   return (
     <div className="login-container">
-      <div className="property-info">
-        <div className="property-header">
-          <a href="https://lilitakeper.com/" target="_blank" rel="noopener noreferrer" className="logo-link">
-            <img src="/logo.avif" alt="Lilita Keper Logo" className="property-logo" />
-          </a>
-          <h2>Lilita Keper</h2>
-          <p className="location">Enonkishu Conservancy</p>
-        </div>
-        <div className="property-details">
-          <p className="tagline">A safari experience like no other</p>
-          <p className="description">
-            Intimate, exclusive and connected to the landscape. With just 5 tented suites in the heart of the Maasai Mara ecosystem.
-          </p>
-          <div className="property-highlights">
-            <div className="highlight">
-              <span className="label">Suites</span>
-              <span className="value">6</span>
-            </div>
-            <div className="highlight">
-              <span className="label">Destination</span>
-              <span className="value">Year-round</span>
-            </div>
-            <div className="highlight">
-              <span className="label">Game Viewing</span>
-              <span className="value">24/7</span>
-            </div>
-          </div>
-          <div className="amenities">
-            <h4>What's Included:</h4>
-            <ul>
-              <li>✓ Full board accommodation with all meals</li>
-              <li>✓ Conservancy bednight fee</li>
-              <li>✓ House drinks (excluding premium alcohol)</li>
-              <li>✓ Game drives with expert guides</li>
-              <li>✓ Walking safari</li>
-              <li>✓ Transfers to/from nearest airstrip</li>
-              <li>✓ Emergency medical evacuation cover</li>
-            </ul>
-          </div>
-        </div>
-      </div>
       <div className="login-box">
         <div className="login-header">
-          <p>Luxury Safari Lodge Booking System</p>
-          <p className="subtitle">Travel Agent Portal</p>
+          <h1>Mara Meguarra Sanctuary Agent Portal</h1>
+          <p className="powered-by">powered by Burch</p>
         </div>
 
         {error && <div className="error-message">{error}</div>}

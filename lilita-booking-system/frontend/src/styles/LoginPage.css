@@ -163,6 +163,13 @@
 .login-header .subtitle {
   font-size: 0.9rem;
   color: #d4a574;
+}
+
+.login-header .powered-by {
+  font-size: 0.75rem;
+  color: #999;
+  font-weight: 400;
+  margin-top: 0.5rem;
   font-weight: 600;
 }
 

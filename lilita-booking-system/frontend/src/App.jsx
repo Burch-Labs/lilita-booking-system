@@ -52,8 +52,8 @@ export default function App() {
     <div className="app">
       <nav className="navbar">
         <div className="navbar-brand">
-          <h1>🏨 Burch Agent Portal</h1>
-          <p className="tagline">{userRole === 'admin' ? 'Admin Panel' : 'Mara Meguarra Sanctuary'}</p>
+          <h1>🏨 Mara Meguarra Sanctuary Agent Portal</h1>
+          <p className="tagline">powered by Burch</p>
         </div>
 
         <div className="navbar-menu">
@@ -173,7 +173,7 @@ export default function App() {
       </main>
 
       <footer className="footer">
-        <p>© 2026 Burch Agent Portal - Powered by Mara Meguarra Sanctuary</p>
+        <p>© 2026 Mara Meguarra Sanctuary Agent Portal - Powered by Burch</p>
       </footer>
     </div>
   );
