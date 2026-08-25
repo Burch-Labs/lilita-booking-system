@@ -177,7 +177,7 @@ export default function EmergencySupportPage({ user }) {
           </div>
           <div className="info-card">
             <h4>📱 24/7 Availability</h4>
-            <p>Contact: sales@marameguarrasanctuary.com / +25414229870
+            <p>Contact: sales@marameguarrasanctuary.com / +25414229870</p>
           </div>
         </div>
       </div>
