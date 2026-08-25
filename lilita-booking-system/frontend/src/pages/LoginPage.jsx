@@ -67,16 +67,32 @@ export default function LoginPage({ onLogin }) {
         return;
       }
 
-      // Get the default property (Mara Meguarra Sanctuary)
-      const { data: propertyData, error: propError } = await supabase
+      // Get or create the default property (Mara Meguarra Sanctuary)
+      let { data: propertyData, error: propError } = await supabase
         .from('properties')
         .select('id')
         .eq('name', 'Mara Meguarra Sanctuary')
         .single();
 
-      if (propError || !propertyData?.id) {
-        setError('Property not found. Please contact admin.');
-        return;
+      // If property doesn't exist, create it
+      if (!propertyData?.id) {
+        const { data: newProperty, error: createError } = await supabase
+          .from('properties')
+          .insert([{
+            name: 'Mara Meguarra Sanctuary',
+            location: 'Kenya',
+            description: 'Exclusive wildlife sanctuary with premium accommodations',
+            brand_color_primary: '#8B4513',
+            brand_color_secondary: '#D4A574',
+          }])
+          .select('id')
+          .single();
+
+        if (createError || !newProperty?.id) {
+          setError('Unable to setup property. Please contact admin.');
+          return;
+        }
+        propertyData = newProperty;
       }
 
       const { error: insertError } = await supabase
