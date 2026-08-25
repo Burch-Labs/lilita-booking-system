@@ -74,8 +74,11 @@ export default function LoginPage({ onLogin }) {
         .eq('name', 'Mara Meguarra Sanctuary')
         .single();
 
+      console.log('Property lookup result:', { propertyData, propError });
+
       // If property doesn't exist, create it
       if (!propertyData?.id) {
+        console.log('Creating new property...');
         const { data: newProperty, error: createError } = await supabase
           .from('properties')
           .insert([{
@@ -88,11 +91,18 @@ export default function LoginPage({ onLogin }) {
           .select('id')
           .single();
 
+        console.log('Property creation result:', { newProperty, createError });
+
         if (createError || !newProperty?.id) {
-          setError('Unable to setup property. Please contact admin.');
+          setError(`Unable to setup property: ${createError?.message || 'Unknown error'}`);
           return;
         }
         propertyData = newProperty;
+      }
+
+      if (!propertyData?.id) {
+        setError('Property ID is missing. Please contact admin.');
+        return;
       }
 
       const { error: insertError } = await supabase
