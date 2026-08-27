@@ -14,33 +14,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
-      - name: Debug - Check environment
-        run: |
-          echo "Current directory: $(pwd)"
-          echo "Node version: $(node --version)"
-          echo "NPM version: $(npm --version)"
-          ls -la lilita-booking-system/frontend/
-
-      - name: Install dependencies
-        working-directory: lilita-booking-system/frontend
-        run: |
-          echo "Installing from $(pwd)"
-          npm ci
-
-      - name: Build the app
-        working-directory: lilita-booking-system/frontend
-        run: |
-          echo "Building from $(pwd)"
-          npm run build
+        uses: actions/checkout@v4
 
       - name: Deploy to Vercel
         uses: amondnet/vercel-action@v25
@@ -48,12 +22,11 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          working-directory: lilita-booking-system/frontend
           scope: ${{ secrets.VERCEL_ORG_ID }}
 
       - name: Comment PR with deployment URL
         if: github.event_name == 'pull_request'
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           script: |
             github.rest.issues.createComment({
