@@ -11,7 +11,7 @@ import EmergencySupportPage from './pages/EmergencySupportPage';
 import BlockBookingPage from './pages/BlockBookingPage';
 import ConfirmationLetterPage from './pages/ConfirmationLetterPage';
 
-export default function App() {
+export default function App({ onSwitchMode }) {
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
   const [userRole, setUserRole] = useState('agent'); // 'agent' or 'admin'
@@ -150,6 +150,11 @@ export default function App() {
         <div className="navbar-user">
           <span className="user-name">{user?.first_name} {user?.last_name}</span>
           <span className="user-company">{user?.company}</span>
+          {onSwitchMode && (
+            <button className="switch-mode-btn" onClick={onSwitchMode} title="Switch to Guest App">
+              🧳
+            </button>
+          )}
           <button className="logout-btn" onClick={handleLogout}>Logout</button>
         </div>
       </nav>
