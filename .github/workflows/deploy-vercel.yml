@@ -23,13 +23,24 @@ jobs:
         with:
           node-version: '18'
 
+      - name: Debug - Check environment
+        run: |
+          echo "Current directory: $(pwd)"
+          echo "Node version: $(node --version)"
+          echo "NPM version: $(npm --version)"
+          ls -la lilita-booking-system/frontend/
+
       - name: Install dependencies
         working-directory: lilita-booking-system/frontend
-        run: npm ci
+        run: |
+          echo "Installing from $(pwd)"
+          npm ci
 
       - name: Build the app
         working-directory: lilita-booking-system/frontend
-        run: npm run build
+        run: |
+          echo "Building from $(pwd)"
+          npm run build
 
       - name: Deploy to Vercel
         uses: amondnet/vercel-action@v25
