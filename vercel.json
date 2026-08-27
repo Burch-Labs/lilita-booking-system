@@ -1,4 +1,13 @@
 {
-  "version": 2,
-  "cleanUrls": true
+  "buildCommand": "cd lilita-booking-system/frontend && npm install && npm run build",
+  "outputDirectory": "lilita-booking-system/frontend/dist",
+  "env": {
+    "VITE_API_URL": "@vite_api_url"
+  },
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
 }
