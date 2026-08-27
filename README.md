@@ -1,4 +1,4 @@
-# Contacts App
+# Hotel Agents App
 
 A local contacts management application for managing up to 70,000+ contacts with search, create, update, and delete functionality.
 
