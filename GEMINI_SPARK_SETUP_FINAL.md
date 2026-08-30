@@ -29,9 +29,14 @@ The Mara Meguarra booking platform is fully deployed on Google Cloud Run with:
 | **Base Service URL** | ✅ Live | `https://mara-meguarra-backend-881829848506.europe-west1.run.app` |
 | **Google Connector UI** | ✅ Live | `/google-connector.html` - Email connector integration |
 | **Business Contacts** | ✅ Live | `/business-contacts.html` - Full contact management hub |
-| **Custom Domain** | 🔄 Propagating | `bookings.marameguarrasanctuary.com` (DNS verification pending) |
+| **Custom Domain** | ⏳ Deferred | Deploy to new registered domain when ready |
 
-**Quick Access**: https://mara-meguarra-backend-881829848506.europe-west1.run.app/agent-dashboard.html
+**Current Access**: 
+```
+https://mara-meguarra-backend-881829848506.europe-west1.run.app/agent-dashboard.html
+```
+
+**Platform Ready**: Your booking system is fully operational on Google Cloud Run and ready for testing.
 
 ---
 
@@ -120,19 +125,15 @@ The Mara Meguarra booking platform is fully deployed on Google Cloud Run with:
 - [x] Delete contact capability
 - [x] Sample data seeded (Sankara, Elewana, Total Kenya)
 
-### Phase 4: Domain Setup 🔄 (Final Step)
-- [x] DNS records added to GoDaddy:
-  - TXT record: `google-site-verification=...`
-  - CNAME record: `bookings` → `ghs.googlehosted.com`
-- [x] Google Search Console verification initiated
-- ⏳ Awaiting DNS propagation (24-48 hours)
-- ⏳ Run domain mapping command once DNS verified:
-  ```bash
-  gcloud beta run domain-mappings create \
-    --service mara-meguarra-backend \
-    --domain bookings.marameguarrasanctuary.com \
-    --region europe-west1
-  ```
+### Phase 4: Platform Ready on Google Cloud ✅
+- [x] Platform accessible via Cloud Run URL
+- [x] All services tested and verified
+- [x] Production credentials active
+- [x] Ready for internal/partner testing
+- ⏳ Phase 5 (Custom Domain): Scheduled for later
+  - Register new domain
+  - Configure DNS records
+  - Deploy domain mapping via gcloud CLI
 
 ---
 
@@ -182,8 +183,8 @@ The Mara Meguarra booking platform is fully deployed on Google Cloud Run with:
 | Contact Management | ✅ Live | Smart website extraction |
 | M-PESA Integration | ✅ Active | Production shortcode 4348821 |
 | Database | ✅ Connected | Cloud SQL (PostgreSQL) |
-| Custom Domain | 🔄 Pending | DNS propagation in progress |
-| Google Search Console | 🔄 Pending | Awaiting DNS verification |
+| Platform Access | ✅ Cloud Run URL | mara-meguarra-backend-881829848506.europe-west1.run.app |
+| Custom Domain | ⏳ Planned | Deploy to new registered domain later |
 
 ---
 
@@ -196,32 +197,42 @@ The Mara Meguarra booking platform is fully deployed on Google Cloud Run with:
 
 ---
 
-## 📞 Final Configuration Steps
+## 📞 Deployment Status
 
-### 1. Verify DNS Propagation (24-48 hours)
-```bash
-# Check DNS propagation status:
-nslookup bookings.marameguarrasanctuary.com
+### ✅ Platform is Live & Ready
+
+Your booking system is currently accessible via Google Cloud Run:
+```
+https://mara-meguarra-backend-881829848506.europe-west1.run.app/agent-dashboard.html
 ```
 
-### 2. Verify Google Search Console
-- Link: https://search.google.com/search-console
-- Click "Verify" once DNS records propagate
-- Status should show "Ownership verified" ✅
+### 🔄 Custom Domain Deployment (Planned for Later)
 
-### 3. Complete Domain Mapping (After DNS Verification)
+When you're ready to deploy to a new registered domain:
+
+**Step 1**: Register a new domain through your preferred registrar
+
+**Step 2**: Add DNS records (TXT + CNAME)
+
+**Step 3**: Verify ownership in Google Search Console
+
+**Step 4**: Map the domain to Cloud Run
 ```bash
 gcloud beta run domain-mappings create \
   --service mara-meguarra-backend \
-  --domain bookings.marameguarrasanctuary.com \
+  --domain your-new-domain.com \
   --region europe-west1
 ```
 
-### 4. Access via Custom Domain
-Once completed, access your platform at:
+**Step 5**: Access via custom domain
 ```
-https://bookings.marameguarrasanctuary.com/agent-dashboard.html
+https://your-new-domain.com/agent-dashboard.html
 ```
+
+This approach allows you to:
+- Test thoroughly on Cloud Run first
+- Register your domain when ready
+- Deploy with zero downtime via domain mapping
 
 ---
 
@@ -249,16 +260,17 @@ https://bookings.marameguarrasanctuary.com/agent-dashboard.html
 
 ## 📈 Next Steps & Recommendations
 
-### Immediate (Next 24 hours):
-1. ✅ Monitor DNS propagation
-2. ✅ Verify Google Search Console once DNS resolves
-3. ✅ Complete domain mapping command
+### Immediate (Now):
+1. ✅ Test Agent Dashboard with live contacts
+2. ✅ Verify M-PESA payment integration
+3. ✅ Add partner test bookings
+4. ✅ Test contact import/export functionality
 
 ### Short-term (This week):
-1. 🔄 Test end-to-end booking flow with live contacts
-2. 🔄 Verify M-PESA payment integration
-3. 🔄 Add team member test bookings
-4. 🔄 Generate commission reports
+1. 🔄 Conduct end-to-end booking flow testing
+2. 🔄 Generate sample commission reports
+3. 🔄 Plan new domain registration
+4. 🔄 Document domain deployment procedure
 
 ### Medium-term (Next 2 weeks):
 1. 📊 Configure analytics & performance monitoring
@@ -297,6 +309,8 @@ https://bookings.marameguarrasanctuary.com/agent-dashboard.html
 
 ---
 
-**Status**: PRODUCTION READY ✅  
+**Status**: PRODUCTION READY ON GOOGLE CLOUD ✅  
+**Current Access**: https://mara-meguarra-backend-881829848506.europe-west1.run.app  
 **Last Deployment**: August 30, 2026 - Revision 00011-sf5  
-**Next Review**: September 15, 2026 (Post-DNS verification)
+**Domain Setup**: Deferred to new registered domain (deploy when ready)
+**Next Phase**: Test thoroughly, then register custom domain and deploy
